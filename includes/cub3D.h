@@ -6,21 +6,20 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/04/26 14:13:35 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:27:05 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
-# include "get_next_line.h"
 # include "../minilibx-linux/mlx.h"
-
-# include<stdio.h> /* for printf , open, read, write */
-# include<stdlib.h> /*for malloc, free, exit */
-# include<errno.h> /*for perror strerror */
-# include<math.h> /*for sin, cos, aqrt, etc...*/
+# include "get_next_line.h"
+# include "libft.h"
+# include <errno.h>  /*for perror strerror */
+# include <math.h>   /*for sin, cos, aqrt, etc...*/
+# include <stdio.h>  /* for printf , open, read, write */
+# include <stdlib.h> /*for malloc, free, exit */
 
 # define K_A 0
 # define K_B 11
@@ -66,15 +65,15 @@
 # define K_NP_MUL 67
 # define K_NP_MIN 78
 # define K_NP_PLU 69
-# define K_NP_1	83
-# define K_NP_2	84
-# define K_NP_3	85
-# define K_NP_4	86
-# define K_NP_5	87
-# define K_NP_6	88
-# define K_NP_7	89
-# define K_NP_8	91
-# define K_NP_9	92
+# define K_NP_1 83
+# define K_NP_2 84
+# define K_NP_3 85
+# define K_NP_4 86
+# define K_NP_5 87
+# define K_NP_6 88
+# define K_NP_7 89
+# define K_NP_8 91
+# define K_NP_9 92
 
 /*
 ** Keyboard MISC
@@ -94,13 +93,93 @@
 # define M_SCR_U 4
 # define M_SCR_D 5
 
-typedef struct s_data 
+typedef struct s_img
 {
-    void    *img;
-    char    *addr;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
-}   t_data;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+    int		img_width;
+	int		img_height;
+}			t_img;
 
+typedef struct s_map
+{
+	int		fd;
+    int     line_count;
+    char    *path;
+    char    **file;
+    int     height;
+    int     width;
+}   t_map;
+
+typedef struct s_player
+{
+    char    dir;
+    double  pos_x;
+    double  pos_y;
+    double  dir_x;
+    double  dir_y;
+    double  plane_x;
+    double  plane_y;
+    int     has_moved;
+    int     move_x;
+    int     move_y;
+    int     rotation;
+}   t_player;
+
+typedef struct s_ray
+{
+    double  camera_x;
+    double  dir_x;
+    double  dir_y;
+    int     map_x;
+    int     map_y;
+    int     step_x;
+    int     step_y;
+    double  sidedist_x;
+    double  sidedist_y;
+    double  deltadist_x;
+    double  deltadist_y;
+    double  wall_dist;
+    double  wall_x;
+    int     side;
+    int     line_height;
+    int     draw_start;
+    int     draw_end;
+}   t_ray;
+
+typedef struct  s_tex
+{
+    char    *north;
+    char    *south;
+    char    *west;
+    char    *east;
+    int     *floor;
+    int     *ceiling;
+    unsigned long   hex_floor;
+    unsigned long   hex_ceiling;
+    int     size;
+    int     index;
+    double  step;
+    double  pos;
+    int     x;
+    int     y;
+}   t_tex;
+
+typedef struct s_data
+{
+    void    *mlx;
+    void    *win;
+    int     win_height;
+    int     win_width;
+    t_map   map;
+    char    **map;
+    t_player    player;
+    t_ray       ray;
+    int     **tex_pixl;
+    int     **textures;
+    t_tex   tex; 
+}
 #endif
