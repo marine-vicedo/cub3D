@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/02 14:59:53 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:20:16 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@
 # define K_AR_R 65363
 # define K_AR_U 65362
 # define K_AR_D 65364
-
 /*
-
-** Keyboard MISC
+**Keyboard MISC
 */
 
 # define K_SP 32
@@ -79,7 +77,15 @@
 # define M_SCR_U 4
 # define M_SCR_D 5
 
-typedef struct s_img
+/* MINIMAP MACROS */
+# define MMAP_PIXEL_SIZE 128
+# define MMAP_VIEW_DIST 4
+# define MMAP_COLOR_PLAYER 0x00FF00
+# define MMAP_COLOR_WALL 0x808080
+# define MMAP_COLOR_FLOOR 0xE6E6E6
+# define MMAP_COLOR_SPACE 0x404040
+
+	typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -165,4 +171,10 @@ typedef struct s_data
 	t_ray		ray;
 	t_move		move;
 }				t_data;
+
+//move/
+//keypress
+int				handle_keypress(int keysym, t_data *data);
+int				handle_keyrelease(int keysym, void *data);
+int				exit_game(t_data *data);
 #endif

@@ -6,7 +6,7 @@
 #    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/05/02 11:07:48 by pmaimait         ###   ########.fr        #
+#    Updated: 2023/05/05 11:42:33 by pmaimait         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,13 +55,15 @@ MLX_FLAGS	= -L./mlx -lmlx -lm -lX11 -lXext
 # List of all .c source files
 ROOT_FILE = main
 INIT_FOLDER = init/
-MOVE_FOLDER = mobe/
+MOVE_FILES = keypress
+MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
 UTILS_FOLDER = utils/
 
 
 SRCS_PATH = srcs/
-SRCS_NAMES 	= $(addsuffix .c,$(ROOT_FILE)) 
+SRCS_NAMES 	= $(addsuffix .c,$(ROOT_FILE) \
+				$(addprefix $(MOVE_FOLDER), $(MOVE_FILES))) 
 
 # All .o files go to objs directory
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
@@ -83,7 +85,7 @@ all:	header $(NAME)
 # Actual target of the binary - depends on all .o files
 $(NAME): lib mlib $(HEADERS) $(OBJS)
 # Link all the object files
-	@$(CC) $(FLAGS) $(MLX_FLAGS) $(HEADERS_INC) $(OBJS) $(LIB) $(MLIB) -lm -o $(NAME) -lmlx -lm -lX11 -lXext
+	@$(CC) $(FLAGS) $(MLX_FLAGS) $(HEADERS_INC) $(OBJS) $(LIB) $(MLIB) -lm -o $(NAME) -lmlx -lm -lX11 -lXext 
 # Build target for every single object file
 # The potential dependency on header files is covered
 # by calling `-include $(DEPS)`
