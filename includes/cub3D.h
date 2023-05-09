@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/05 13:20:16 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:40:25 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "get_next_line.h"
 # include "libft.h"
+# include <fcntl.h>  /*for open */
 # include <errno.h>  /*for perror strerror */
 # include <math.h>   /*for sin, cos, aqrt, etc...*/
 # include <stdio.h>  /* for printf , open, read, write */
@@ -161,6 +162,16 @@ typedef struct s_ray
 	int			draw_end;
 }				t_ray;
 
+typedef struct s_minimap
+{
+	char	**map;
+	int		size;
+	int		offset_x;
+	int		offset_y;
+	int		view_dist;
+	int		tile_size;
+}	t_minimap;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -170,6 +181,7 @@ typedef struct s_data
 	t_player	player;
 	t_ray		ray;
 	t_move		move;
+	t_minimap	minimap;
 }				t_data;
 
 //move/
@@ -177,4 +189,16 @@ typedef struct s_data
 int				handle_keypress(int keysym, t_data *data);
 int				handle_keyrelease(int keysym, void *data);
 int				exit_game(t_data *data);
+
+//init/
+//init_img
+void			init_img(t_data *data);
+
+//render/
+//minimap_image;
+void    		render_minimap(t_data *data);
+
+//utils/
+//position
+void    		get_position_player(t_data *data, char *map);
 #endif

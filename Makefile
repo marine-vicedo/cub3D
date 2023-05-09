@@ -6,7 +6,7 @@
 #    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/05/05 11:42:33 by pmaimait         ###   ########.fr        #
+#    Updated: 2023/05/09 14:10:00 by pmaimait         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,20 +54,28 @@ MLX_FLAGS	= -L./mlx -lmlx -lm -lX11 -lXext
 
 # List of all .c source files
 ROOT_FILE = main
+INIT_FILES = init_img
 INIT_FOLDER = init/
+RENDER_FILES = minimap_image
+RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
+UTILS_FILES = position
 UTILS_FOLDER = utils/
 
 
 SRCS_PATH = srcs/
 SRCS_NAMES 	= $(addsuffix .c,$(ROOT_FILE) \
-				$(addprefix $(MOVE_FOLDER), $(MOVE_FILES))) 
+				$(addprefix $(MOVE_FOLDER), $(MOVE_FILES)) \
+				$(addprefix $(INIT_FOLDER), $(INIT_FILES)) \
+				$(addprefix $(RENDER_FOLDER), $(RENDER_FILES)) \
+				$(addprefix $(UTILS_FOLDER), $(UTILS_FILES))) 
 
 # All .o files go to objs directory
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
-OBJS_FOLDERS = $(addprefix $(OBJS_PATH), $(PARSING_FOLDER) $(INIT_FOLDER) $(MOVE_FOLDER) $(PARSING_FOLDER) $(UTILS_FOLDER)) 
+OBJS_FOLDERS = $(addprefix $(OBJS_PATH), $(PARSING_FOLDER) $(INIT_FOLDER) \
+			   $(RENDER_FOLDER) $(MOVE_FOLDER) $(PARSING_FOLDER) $(UTILS_FOLDER)) 
 OBJS_PATH 	= objs/
 OBJS		= $(addprefix $(OBJS_PATH), $(OBJS_NAMES))
 
