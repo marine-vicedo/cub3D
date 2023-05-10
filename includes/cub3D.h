@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/09 15:40:25 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:06:13 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void			init_img(t_data *data);
 
 //render/
 //minimap_image;
-void    		render_minimap(t_data *data);
+void    		draw_minimap(t_data *data);
 
 //utils/
 //position

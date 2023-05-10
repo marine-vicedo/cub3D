@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:07:48 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/09 15:39:59 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:28:48 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ char	**read_map(t_data *data, char *map)
 		data->map.height++;
 	}
 	close(fd);
+	
     return (ft_split(str, '\n'));
 }
 
-void    get_position_player(t_data *data, char **map)
+void    get_position_player(t_data *data, char *map)
 {
     t_player    *player;
     t_minimap       *minimap;
@@ -89,19 +90,20 @@ void    get_position_player(t_data *data, char **map)
     player = &data->player;
     minimap = &data->minimap;
     minimap->map = read_map(data, map);
-    while (minimap->map[j][i])
+    while (j < data->map.height )
     {
         i = 0;
-        while (minimap->map[j][i])
+        while (i < data->map.width)
         {
-            if (minimap->map[j][i] == 5)
+			//printf("%c", minimap->map[j][i]);
+            if (minimap->map[j][i] == 'P')
             {
                 player->pos_x = i;
-                player->plane_y = j;
-                break;
+                player->pos_y = j;
             }
             i++;
         }
+		//printf("\n");
         j++;
     }
 }
