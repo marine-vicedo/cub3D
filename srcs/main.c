@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/10 15:22:46 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:14:16 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int ac, char **av)
 	get_position_player(&data, av[1]);
 	
    
-	data.win = mlx_new_window(data.mlx, (data.img.img_width * 50), (data.img.img_height * 50), "My test window!");
+	data.win = mlx_new_window(data.mlx, (data.map.width * 50), (data.map.height * 50), "My test window!");
 	if (data.win == NULL)
 	{
 		free(data.win);

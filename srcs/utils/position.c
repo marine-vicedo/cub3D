@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:07:48 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/10 11:28:48 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/12 23:04:01 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ char	**read_map(t_data *data, char *map)
 {
 	int		fd;
 	char	*line;
-    t_minimap   *minimap;
     char    *str;
 
-    minimap = &data->minimap;
 	fd = open(map, O_RDONLY);
 	if (fd <= 0)
 	{
