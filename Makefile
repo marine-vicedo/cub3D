@@ -6,7 +6,7 @@
 #    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/05/09 14:10:00 by pmaimait         ###   ########.fr        #
+#    Updated: 2023/05/23 15:39:31 by pmaimait         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
-UTILS_FILES = position
+UTILS_FILES = position draw_pixel
 UTILS_FOLDER = utils/
 
 

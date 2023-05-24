@@ -6,9 +6,11 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:15:09 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/17 15:15:12 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:28:16 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/cub3D.h"
 
 #define WIN_WIDTH 230
 #define WIN_HEIGHT 200
