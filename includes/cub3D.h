@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/24 15:02:05 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:11:13 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,10 @@
 # define SCWIDTH 960
 
 # define K_A 97
-# define K_B 98
-# define K_C 99
 # define K_D 100
-# define K_E 101
-# define K_F 102
-# define K_G 103
-# define K_H 104
-# define K_I 105
-# define K_J 106
-# define K_K 107
-# define K_L 108
-# define K_M 109
-# define K_N 110
-# define K_O 111
-# define K_P 112
-# define K_Q 113
-# define K_R 114
 # define K_S 115
-# define K_T 116
-# define K_U 117
-# define K_V 118
 # define K_W 119
-# define K_X 120
-# define K_Y 121
-# define K_Z 124
+
 
 /*
 ** Keyboard ARROWS
@@ -64,9 +43,7 @@
 **Keyboard MISC
 */
 
-# define K_SP 32
 # define K_ESC 65307
-# define K_TAB 65289
 
 /*
 ** Mouse
@@ -144,14 +121,12 @@ typedef struct s_player
 	//int			move_x;
 	//int			move_y;
 	//int			rotation;
-	double		newPlayerX;
-	double		newplayerY;
 	int			radius;
 	int			turnDirection;
 	int			walkDirection;
-	int			rotationAngle;
+	double		rotationAngle;
 	int			moveSpeed;
-	int			rotationSpeed;
+	double		rotationSpeed;
 }				t_player;
 
 typedef struct s_ray
@@ -212,6 +187,7 @@ int				hasWallAt(t_data *data, double x, double y);
 //init_img
 void			init_img(t_data *data);
 void    		init_player(t_data *data);
+void    		init_newPosition(t_data *data);
 
 //render/
 //minimap_image;

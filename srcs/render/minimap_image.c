@@ -6,16 +6,14 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:28:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/24 14:31:03 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:32:34 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub3D.h"
 void	put_img(t_data *data, int x, int y)
 {
-	if (data->minimap.map[y][x] == 'P')
-		 draw_circle(data, (x * 50) + 25, (y * 50) + 25, 10, 0xFF0000); // Red color;
-	else if (data->minimap.map[y][x] == '1' || data->minimap.map[y][x] == '2' || data->minimap.map[y][x] == '3'|| data->minimap.map[y][x] == '4')
+	if (data->minimap.map[y][x] == '1')
 		mlx_put_image_to_window(data->mlx, data->win, data->minimap.wall, x * 50, y * 50);
 }
 
@@ -41,7 +39,9 @@ void	setting_img(t_data *data)
 
 void    draw_minimap(t_data *data)
 {
+	mlx_clear_window(data->mlx, data->win);
     setting_img(data);
-	init_player(data);
+	draw_circle(data, data->player.pos_x, data->player.pos_y, 10, 0xFF0000); // Red color;
+	//init_newPosition(data);
 }
 

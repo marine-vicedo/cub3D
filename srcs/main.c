@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/24 15:26:50 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:07:43 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int main(int ac, char **av)
 		free(data.win);
 		return (1);
 	}
-	updata(&data);
+	init_player(&data);
 	draw_minimap(&data);
+
+	
 	/* Setup hooks */ 
 	//mlx_loop_hook(data.mlx, &handle_no_event, &data);
 	mlx_hook(data.win, 2, 1L << 0, &handle_keypress, &data); 
-	mlx_hook(data.win, 3, 1L << 0, &handle_keyrelease, &data);
 	mlx_hook(data.win, 17, 1L << 0, &exit_game, &data);
 	mlx_loop(data.mlx);
 

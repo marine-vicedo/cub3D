@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/24 15:34:28 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:10:07 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	handle_keypress(int keysym, t_data *data)
 {
-	if (keysym == K_AR_U) {
-    	data->player.walkDirection = +1;
-    } else if (keysym == K_AR_D) {
+	
+	if (keysym == K_W) {
     	data->player.walkDirection = -1;
+    } else if (keysym == K_S) {
+    	data->player.walkDirection = +1;
     } else if (keysym == K_AR_R) {
     	data->player.turnDirection = +1;
     } else if (keysym == K_AR_L) {
@@ -33,9 +34,9 @@ int	handle_keypress(int keysym, t_data *data)
 
 int	handle_keyrelease(int keysym, t_data *data)
 {
-    if (keysym == K_AR_U) {
+    if (keysym == K_W) {
     	data->player.walkDirection = 0;
-    } else if (keysym == K_AR_D) {
+    } else if (keysym == K_S) {
     	data->player.walkDirection = 0;
     } else if (keysym == K_AR_R) {
     	data->player.turnDirection = 0;
@@ -64,7 +65,9 @@ void	updata(t_data *data)
 	double		newPlayerY;
 
 	player = &data->player;
-	player->rotationAngle += player->turnDirection * player->rotationSpeed;
+	player->rotationAngle += (player->turnDirection * player->rotationSpeed);
+	printf("rotationSpeed = %d\n", player->rotationSpeed);
+	printf("turnDirection = %d, rotationAngle = %f, walkDirection = %d\n", player->turnDirection, player->rotationAngle, player->walkDirection);
 	movestep = player->walkDirection * player->moveSpeed;
 	newPlayerX = player->pos_x + cos(player->rotationAngle) * movestep;
 	newPlayerY = player->pos_y + sin(player->rotationAngle) * movestep;
@@ -86,7 +89,7 @@ int	hasWallAt(t_data *data, double x, double y)
     	return (1);
 	mapGridIndexX = floor(x / TILE_SIZE);
 	mapGridIndexY = floor(y / TILE_SIZE);
-	if (data->minimap.map[mapGridIndexY][mapGridIndexX] != 0)
+	if (data->minimap.map[mapGridIndexY][mapGridIndexX] == '1')
 		return (1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:07:48 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/12 23:04:01 by parida           ###   ########.fr       */
+/*   Updated: 2023/05/25 10:41:41 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void    get_position_player(t_data *data, char *map)
 			//printf("%c", minimap->map[j][i]);
             if (minimap->map[j][i] == 'P')
             {
-                player->pos_x = i;
-                player->pos_y = j;
+                player->pos_x = (i * TILE_SIZE) + TILE_SIZE / 2;
+                player->pos_y = (j * TILE_SIZE) + TILE_SIZE / 2;
             }
             i++;
         }
