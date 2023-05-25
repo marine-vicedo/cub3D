@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/25 15:10:07 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:05:35 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	handle_keypress(int keysym, t_data *data)
     }
 	if (keysym == K_ESC)
 		exit_game(data);
-	printf("Keypress: %d\n", keysym);
-	updata(data);
-	draw_minimap(data);
+	//printf("Keypress: %d\n", keysym);
 	return (0);
 }
 
@@ -66,7 +64,7 @@ void	updata(t_data *data)
 
 	player = &data->player;
 	player->rotationAngle += (player->turnDirection * player->rotationSpeed);
-	printf("rotationSpeed = %d\n", player->rotationSpeed);
+	printf("rotationSpeed = %f\n", player->rotationSpeed);
 	printf("turnDirection = %d, rotationAngle = %f, walkDirection = %d\n", player->turnDirection, player->rotationAngle, player->walkDirection);
 	movestep = player->walkDirection * player->moveSpeed;
 	newPlayerX = player->pos_x + cos(player->rotationAngle) * movestep;
