@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:28:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/25 14:32:34 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:46:50 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void    draw_minimap(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->win);
     setting_img(data);
-	draw_circle(data, data->player.pos_x, data->player.pos_y, 10, 0xFF0000); // Red color;
-	//init_newPosition(data);
+	//draw_circle(data); // Red color;
+	draw_line(data, data->player.rotationAngle, data->player.pos_x, data->player.pos_y);
+	init_newPosition(data);
 }
 

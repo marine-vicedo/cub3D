@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/25 15:11:13 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:44:19 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>   /*for sin, cos, aqrt, etc...*/
 # include <stdio.h>  /* for printf , open, read, write */
 # include <stdlib.h> /*for malloc, free, exit */
+# include <limits.h>
 
 # define SCHEIGHT 720
 # define SCWIDTH 960
@@ -197,5 +198,7 @@ void    		draw_minimap(t_data *data);
 //position
 void    		get_position_player(t_data *data, char *map);
 //draw_pixel
-void			draw_circle(t_data *tata, int center_x, int center_y, int diameter, int color);
+void			draw_circle(t_data *data);
+void			draw_line(t_data *data, double angle, double x, double y);
+void			draw_ray(t_data *data);
 #endif

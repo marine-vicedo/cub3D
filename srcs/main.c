@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/25 19:07:46 by parida           ###   ########.fr       */
+/*   Updated: 2023/05/26 11:54:05 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int main(int ac, char **av)
 	updata(&data);
 
 	
+	
 	/* Setup hooks */ 
-	mlx_loop_hook(data.mlx, &render, &data);
+	//mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, 2, 1L << 0, &handle_keypress, &data);
 	mlx_hook(data.win, 17, 1L << 0, &exit_game, &data);
 	mlx_loop(data.mlx);

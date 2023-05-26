@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/25 19:05:35 by parida           ###   ########.fr       */
+/*   Updated: 2023/05/26 15:17:40 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ int	handle_keypress(int keysym, t_data *data)
     	data->player.turnDirection = +1;
     } else if (keysym == K_AR_L) {
     	data->player.turnDirection = -1;
-    }
+    } else if (keysym == K_D) {
+    	data->player.walkDirection = -3;
+    } else if (keysym == K_A) {
+    	data->player.walkDirection = +3;
+	}
 	if (keysym == K_ESC)
 		exit_game(data);
 	//printf("Keypress: %d\n", keysym);
+	updata(data);
+	draw_minimap(data);
 	return (0);
 }
 
@@ -64,11 +70,17 @@ void	updata(t_data *data)
 
 	player = &data->player;
 	player->rotationAngle += (player->turnDirection * player->rotationSpeed);
-	printf("rotationSpeed = %f\n", player->rotationSpeed);
-	printf("turnDirection = %d, rotationAngle = %f, walkDirection = %d\n", player->turnDirection, player->rotationAngle, player->walkDirection);
-	movestep = player->walkDirection * player->moveSpeed;
+	// printf("rotationSpeed = %f\n", player->rotationSpeed);
+	// printf("turnDirection = %d, rotationAngle = %f, walkDirection = %d\n", player->turnDirection, player->rotationAngle, player->walkDirection);
+	movestep = (player->walkDirection  % 2) * player->moveSpeed;
 	newPlayerX = player->pos_x + cos(player->rotationAngle) * movestep;
 	newPlayerY = player->pos_y + sin(player->rotationAngle) * movestep;
+	if (abs(player->walkDirection) == 3)
+	{
+		newPlayerX = player->pos_x + cos(player->rotationAngle + PI / 2) * movestep;
+		newPlayerY = player->pos_y + sin(player->rotationAngle + PI / 2) * movestep;
+		printf("movesstep = %d\n", movestep);	
+	}
 	if(!hasWallAt(data, newPlayerX, newPlayerY))
 	{
 		player->pos_x = newPlayerX;
