@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 15:17:40 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:58:05 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ void	updata(t_data *data)
 	if (abs(player->walkDirection) == 3)
 	{
 		newPlayerX = player->pos_x + cos(player->rotationAngle + PI / 2) * movestep;
-		newPlayerY = player->pos_y + sin(player->rotationAngle + PI / 2) * movestep;
-		printf("movesstep = %d\n", movestep);	
+		newPlayerY = player->pos_y + sin(player->rotationAngle + PI / 2) * movestep;	
 	}
 	if(!hasWallAt(data, newPlayerX, newPlayerY))
 	{

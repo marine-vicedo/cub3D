@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 15:47:15 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:18:02 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ void	draw_line(t_data *data, double angle, double x, double y)
 void	draw_ray(t_data *data)
 {
 	double	ray_angle;
-	double	distance;
 	
-	distance = 0;
-	ray_angle = data->player.rotationAngle - 30 / PI;
-	while (ray_angle <= (data->player.rotationAngle + 30 / PI))
+	ray_angle = (data->player.rotationAngle - 30 * (PI / 180));
+	while (ray_angle <= (data->player.rotationAngle + 30 * (PI / 180)))
 	{
 		draw_line(data, ray_angle, data->player.pos_x, data->player.pos_y);
-		ray_angle += PI / 2;
+		ray_angle += 1 * (PI / 180);
 	}
 }
