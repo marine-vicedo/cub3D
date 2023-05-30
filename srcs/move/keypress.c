@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 18:58:05 by parida           ###   ########.fr       */
+/*   Updated: 2023/05/30 09:56:57 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	handle_keyrelease(int keysym, t_data *data)
     } else if (keysym == K_AR_L) {
     	data->player.turnDirection = 0;
     }
-	printf("Keyrelease: %d\n", keysym);
+	//printf("Keyrelease: %d\n", keysym);
 	return (0);
 }
 

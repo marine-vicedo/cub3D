@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 19:18:02 by parida           ###   ########.fr       */
+/*   Updated: 2023/05/30 15:38:12 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_line(t_data *data, double angle, double x, double y)
 	
 	while (i < INT_MAX)
 	{
-		mlx_pixel_put(data->mlx, data->win, x, y, MMAP_COLOR_PLAYER);
+		mlx_pixel_put(data->mlx, data->win_mini, x, y, MMAP_COLOR_PLAYER);
 		x = x + cos(angle);
 		y = y + sin(angle);
 		if (hasWallAt(data, x, y))

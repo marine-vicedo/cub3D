@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 15:44:19 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:32:01 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
+	void		*win_mini;
 	t_map		map;
 	t_img		img;
 	t_player	player;

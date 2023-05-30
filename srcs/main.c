@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 11:54:05 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:41:18 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ int main(int ac, char **av)
 	init_img(&data);
 	get_position_player(&data, av[1]);
 	
-   
-	data.win = mlx_new_window(data.mlx, (data.map.width * TILE_SIZE), (data.map.height * TILE_SIZE), "My test window!");
-	if (data.win == NULL)
+    data.win = mlx_new_window(data.mlx, 960, 600, "cub3D");
+	data.win_mini = mlx_new_window(data.mlx, (data.map.width * TILE_SIZE), (data.map.height * TILE_SIZE), "mini_map");
+	if (data.win_mini == NULL || data.win == NULL)
 	{
+		free(data.win_mini);
 		free(data.win);
 		return (1);
 	}
@@ -44,8 +45,9 @@ int main(int ac, char **av)
 	
 	/* Setup hooks */ 
 	//mlx_loop_hook(data.mlx, &render, &data);
-	mlx_hook(data.win, 2, 1L << 0, &handle_keypress, &data);
-	mlx_hook(data.win, 17, 1L << 0, &exit_game, &data);
+	mlx_hook(data.win_mini, 2, 1L << 0, &handle_keypress, &data);
+	//mlx_hook(data.win_mini, 3, 1L << 0, &handle_keyrelease, &data);
+	mlx_hook(data.win_mini, 17, 1L << 0, &exit_game, &data);
 	mlx_loop(data.mlx);
 
 	/* we will exit the loop if there's no window left, and execute this code */

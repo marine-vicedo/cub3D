@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:28:07 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/23 12:05:37 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:28:13 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,5 +190,25 @@ class Map {
                 rect(tileX, tileY, TILE_SIZE, TILE_SIZE);
             }
         }
+    }
+}
+
+
+function render3DProjectedWall()
+{
+    for (var i = 0; i < NUM_RAYS; i++;)
+    {
+        var ray = ray[i];
+        var correctionWallDistance =  = ray.distance * cos(rayAngle - player->rotationAngle);
+        var distanceProjectionPlane = (WINDOW_WIDTH / 2) / Math.tan(FOV_ANGLE / 2);
+        var wallStripHeight  = (TILE_SIZE / correctionWallDistance) * distanceProjectionPlane;
+        fill("rgba(255, 255, 255, 1.0)");
+        noStroke();
+        rect(
+            i * Wall_STRIP_WIDTH,
+            (WINDTH_HEIGHT / 2) - (wallStripHeight / 2),
+            WALL_STRIP_WIDTH,
+            wallStripHeight
+        );
     }
 }
