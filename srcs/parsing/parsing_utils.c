@@ -7,6 +7,16 @@ int	ft_isspace(char c)
 	return (0);
 }
 
+// static int ft_strlen_no_nl(char *s)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while(s && s[i] && s[i] != '\n')
+// 		i++;
+// 	return (i);
+// }
+
 char	*ft_strdup_no_nl(const char *s)
 {
 	size_t	i;
@@ -15,7 +25,7 @@ char	*ft_strdup_no_nl(const char *s)
 
 	i = 0;
 	len = ft_strlen((char *)s);
-	dest = (char *)malloc ((len + 1) * sizeof(char));
+	dest = malloc(sizeof(char) * (len + 1));
 	if (dest == 0)
 		return (NULL);
 	while (s[i] && s[i] != '\n')
@@ -35,6 +45,7 @@ void	ft_free_map(char **tab)
 	while (tab && tab[i])
 	{
 		free(tab[i]);
+		tab[i] = NULL;
 		i++;
 	}
 	free(tab);
@@ -42,11 +53,8 @@ void	ft_free_map(char **tab)
 
 void	ft_free_data(t_data *data)
 {
-	printf("map->map : \n");
 	if (data->map.map)
 		ft_free_map(data->map.map);
-	printf("\n\n\n\n\n");
-	printf("file->content : \n");
 	if (data->file.content)
 		ft_free_map(data->file.content);
 	if (data->file.north)

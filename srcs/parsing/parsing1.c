@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/05/31 17:03:08 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:41:56 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	ft_count_lines(char *av)
 	return ((int)i);
 }
 
+//trouver soluce pour le \n a la fin de la map
+
 void	ft_copy_fileinfo(char *av, t_file *file)
 {
 	int		fd;
@@ -76,9 +78,12 @@ void	ft_copy_fileinfo(char *av, t_file *file)
 		return ;
 	while (line)
 	{
-		file->content[i++] = ft_strdup_no_nl(line);
+		file->content[i] = ft_strdup_no_nl(line);
+		if (!file->content[i])
+			return;
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	file->content[i] = NULL;
 	free(line);
