@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:28:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/30 15:37:53 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:04:00 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub3D.h"
 void	put_img(t_data *data, int x, int y)
 {
-	if (data->minimap.map[y][x] == '1')
+	if (data->map.map[y][x] == '1')
 		mlx_put_image_to_window(data->mlx, data->win_mini, data->minimap.wall, x * 50, y * 50);
 }
 

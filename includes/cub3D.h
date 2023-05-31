@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/30 15:32:01 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:35:23 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdio.h>  /* for printf , open, read, write */
 # include <stdlib.h> /*for malloc, free, exit */
 # include <limits.h>
+# include <unistd.h>
+# include <string.h>
 
 # define SCHEIGHT 720
 # define SCWIDTH 960
@@ -68,8 +70,21 @@
 # define PI 3.14159
 # define TILE_SIZE 50
 
+#define ERR_FILE_NOT_CUB "Extension file is not .cub"
+#define ERR_FILE_TOO_BIG "File is too big"
+#define ERR_FILE_TOO_SMALL "Not enough informations to start"
+#define ERR_MAP_WALLS "Map is not surrounded by walls"
 
-	typedef struct s_img
+#define FREE 1
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_rgb;
+
+typedef struct s_img
 {
 	void		*img;
 	char		*addr;
@@ -92,10 +107,10 @@ typedef struct s_move
 	int			arr_r;
 }				t_move;
 
-typedef struct s_map
+typedef struct s_file
 {
 	int			line_count;
-	char		**file;
+	char		**content;
 	int			height;
 	int			width;
 	char		*north;
@@ -103,14 +118,25 @@ typedef struct s_map
 	char		*west;
 	char		*east;
 	int			floor;
-	int			celling;
-	int			mcount;
-	int			start;
-	int			ret;
+	int			ceiling;
+	//int			mcount;
+	//int			start;
+	int			flag;
+}				t_file;
+
+typedef struct s_map
+{
+	char	**map;
+	int		size;
+	int		x;
+	int		y;
+	int		width;
+	int 	height;
 }				t_map;
 
 typedef struct s_player
 {
+	int			status;
 	//char		dir;
 	double		pos_x;
 	double		pos_y;
@@ -168,7 +194,9 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	void		*win_mini;
+	t_file		file;
 	t_map		map;
+	t_rgb		rgb;
 	t_img		img;
 	t_player	player;
 	t_ray		ray;
@@ -197,9 +225,46 @@ void    		draw_minimap(t_data *data);
 
 //utils/
 //position
-void    		get_position_player(t_data *data, char *map);
+void    		get_position_player(t_data *data);
 //draw_pixel
 void			draw_circle(t_data *data);
 void			draw_line(t_data *data, double angle, double x, double y);
 void			draw_ray(t_data *data);
+
+
+//parsing/
+int	ft_parsing_map(char *av, t_data *data);
+void	ft_copy_fileinfo(char *av, t_file *file);
+int	ft_file_content(t_data *data, t_file *file);
+int	ft_count_lines(char *file);
+int	ft_check_fileinfo(t_data *data, t_file *file, char *str);
+int	get_map(t_data *data, t_file *file);
+void	ft_fd_error(void);
+void	ft_str_error(void);
+int	ft_color_check(t_file *file, char *str, char c);
+int set_rgb(char **line);
+int	check_format_numbers(char *str);
+size_t ft_strcspn(const char *s, const char *reject);
+char	*ft_strdup_no_nl(const char *s);
+int	ft_check_mapfile(t_data *data, t_file *file, char *str);
+int	ft_is_valid_minimap(t_data *data, t_player *p, char *line);
+int	ft_fill_map(t_map *map, char **map_file, int index);
+void	ft_free_data(t_data *data);
+void	ft_free_map(char **tab);
+int ft_check_walls(t_map *map, char **map_m);
+int	ft_check_empty_space(t_map *map, char **map_m);
+void	err_msg(char *msg);
+int exit_clean(t_data *data, char *msg, int code);
+
+//libft
+// char	*get_next_line(int fd);
+// char	*ft_strdup(const char *s);
+// int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int 	ft_isspace(char c);
+int 	ft_isdigit(int c);
+// int		ft_atoi(const char *str);
+// size_t	ft_strlen(const char *s);
+void	ft_print_map(char **tab);
+// void	ft_putstr_fd(char *s, int fd);
+
 #endif

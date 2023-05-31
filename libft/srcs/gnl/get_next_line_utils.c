@@ -3,64 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 15:08:15 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/04/18 13:50:17 by pmaimait         ###   ########.fr       */
+/*   Created: 2022/06/24 12:20:47 by mvicedo           #+#    #+#             */
+/*   Updated: 2023/05/31 15:01:04 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include "get_next_line.h"
 
-size_t	ft_strlen_gnl(char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin_gnl(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *stash, char *buffer)
 {
 	char	*str;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
+	int		len;
 
-	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
-	if (!str)
+	i = 0;
+	len = ft_strlen(stash) + ft_strlen(buffer);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
 		return (NULL);
-	i = 0;
-	j = 0;
-	if (s1)
+	while (stash && stash[i] != '\0')
 	{
-		while (s1[i])
-			str[j++] = s1[i++];
-	}
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = '\0';
-	return (str);
-}
-
-char	*ft_strchr_gnl( const char *s, int c)
-{
-	unsigned int	i;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
+		str[i] = stash[i];
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
+	j = 0;
+	while (buffer && buffer[j] != '\0')
+		str[i++] = buffer[j++];
+	str[i] = '\0';
+	free (stash);
+	return (str);
 }

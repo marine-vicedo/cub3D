@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 15:09:00 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/04/18 13:47:44 by pmaimait         ###   ########.fr       */
+/*   Created: 2022/06/24 12:20:57 by mvicedo           #+#    #+#             */
+/*   Updated: 2023/05/31 15:01:25 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# define BUFFER_SIZE 42
+
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <string.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+# include <stddef.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
-char	*generate_line(char *stash);
-char	*read_file(int fd, char *stash);
-char	*ft_free(char *stash, char *buf);
-size_t	ft_strlen_gnl(char *str);
+size_t	ft_strlen(const char *s);
 char	*ft_strjoin_gnl(char *s1, char *s2);
-char	*ft_strchr_gnl(const char *s, int c);
-char	*next_stash(char *stash);
+int		ft_search_newline(char *s);
+char	*ft_getline(char *stash);
+char	*ft_save_stash(char *tmp);
+
 #endif
