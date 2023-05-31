@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
+#    By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/05/23 15:39:31 by pmaimait         ###   ########.fr        #
+#    Updated: 2023/05/31 14:38:49 by mvicedo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
+PARSING_FILES = parsing1 parsing2 parsing3 parsing4 parsing5 parsing_utils
 UTILS_FILES = position draw_pixel
 UTILS_FOLDER = utils/
 
@@ -70,12 +71,13 @@ SRCS_NAMES 	= $(addsuffix .c,$(ROOT_FILE) \
 				$(addprefix $(MOVE_FOLDER), $(MOVE_FILES)) \
 				$(addprefix $(INIT_FOLDER), $(INIT_FILES)) \
 				$(addprefix $(RENDER_FOLDER), $(RENDER_FILES)) \
-				$(addprefix $(UTILS_FOLDER), $(UTILS_FILES))) 
+				$(addprefix $(UTILS_FOLDER), $(UTILS_FILES)) \
+				$(addprefix $(PARSING_FOLDER), $(PARSING_FILES)))
 
 # All .o files go to objs directory
 OBJS_NAMES	= $(SRCS_NAMES:.c=.o)
 OBJS_FOLDERS = $(addprefix $(OBJS_PATH), $(PARSING_FOLDER) $(INIT_FOLDER) \
-			   $(RENDER_FOLDER) $(MOVE_FOLDER) $(PARSING_FOLDER) $(UTILS_FOLDER)) 
+			   $(RENDER_FOLDER) $(MOVE_FOLDER) $(PARSING_FOLDER) $(UTILS_FOLDER) $(PARSING_FOLDER)) 
 OBJS_PATH 	= objs/
 OBJS		= $(addprefix $(OBJS_PATH), $(OBJS_NAMES))
 

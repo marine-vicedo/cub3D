@@ -3,112 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 15:07:41 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/04/18 13:49:41 by pmaimait         ###   ########.fr       */
+/*   Created: 2022/06/24 12:20:51 by mvicedo           #+#    #+#             */
+/*   Updated: 2023/05/31 15:01:00 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include "get_next_line.h"
 
-char	*ft_free(char *stash, char *buf)
+int	ft_search_newline(char *s)
 {
-	char	*to_free;
+	unsigned int	i;
 
-	to_free = ft_strjoin_gnl(stash, buf);
-	free(stash);
-	return (to_free);
-}
-
-char	*next_stash(char *stash)
-{
-	char	*new_stash;
-	int		len;
-	int		i;
-
-	if (!stash || ft_strchr_gnl(stash, '\n') == NULL)
-		return (free(stash), NULL);
-	len = 0;
-	while (stash[len] && stash[len] != '\n')
-		len++;
-	new_stash = malloc(sizeof(char) * (ft_strlen_gnl(stash) - len + 1));
-	if (!new_stash)
-		return (NULL);
-	len++;
 	i = 0;
-	while (stash[len])
-		new_stash[i++] = stash[len++];
-	new_stash[i] = '\0';
-	free(stash);
-	return (new_stash);
+	while (s && s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-char	*generate_line(char *stash)
+char	*ft_getline(char *stash)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	while (stash[i] && stash[i] != '\n')
-		i++;
-	if (ft_strchr_gnl(stash, '\n') == NULL)
-		line = malloc(sizeof(char) * i + 1);
-	else
-		line = malloc(sizeof(char) * i + 2);
+	if (!stash || stash[0] == '\0')
+		return (NULL);
+	line = malloc(sizeof(char) * ft_strlen(stash) + 1);
 	if (!line)
 		return (NULL);
-	i = 0;
 	while (stash[i] && stash[i] != '\n')
 	{
 		line[i] = stash[i];
 		i++;
 	}
 	if (stash[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
 
-char	*read_file(int fd, char *stash)
+char	*ft_save_stash(char *stash)
 {
-	char	*buf;
-	int		read_size;
+	char	*save;
+	int		i;
+	int		j;
 
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (NULL);
-	read_size = 1;
-	while (read_size != 0)
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\0')
+		return (free (stash), NULL);
+	if (stash[i])
+		i++;
+	save = malloc(sizeof(char) * ((ft_strlen(stash + i) + 1)));
+	if (!save)
 	{
-		read_size = read(fd, buf, BUFFER_SIZE);
-		if (read_size < 0 || (!stash && !read_size))
-			return (free(buf), NULL);
-		buf[read_size] = '\0';
-		stash = ft_free(stash, buf);
-		if (ft_strchr_gnl(buf, '\n'))
-			break ;
+		free (stash);
+		return (NULL);
 	}
-	free(buf);
-	return (stash);
+	j = 0;
+	while (stash[i] != '\0')
+		save[j++] = stash[i++];
+	save[j] = '\0';
+	free (stash);
+	return (save);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
-	char		*line;
+	static char		*stash;
+	char			*line;
+	char			*buffer;
+	int				i_read;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	i_read = 1;
+	buffer = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0 || (read(fd, 0, 0) == -1))
 		return (NULL);
-	stash = read_file(fd, stash);
-	if (!stash)
-		return (free(stash), NULL);
-	line = generate_line(stash);
-	if (line[0] == '\0')
-		return (free(stash), free(line), NULL);
-	stash = next_stash(stash);
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	while (i_read > 0 && (ft_search_newline(stash) == 0))
+	{
+		i_read = read(fd, buffer, BUFFER_SIZE);
+		if (i_read == -1)
+			return (NULL);
+		buffer[i_read] = '\0';
+		stash = ft_strjoin_gnl(stash, buffer);
+	}
+	free (buffer);
+	line = ft_getline(stash);
+	stash = ft_save_stash(stash);
 	return (line);
 }

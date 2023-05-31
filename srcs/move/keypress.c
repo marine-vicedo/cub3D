@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/30 09:56:57 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:05:17 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	hasWallAt(t_data *data, double x, double y)
     	return (1);
 	mapGridIndexX = floor(x / TILE_SIZE);
 	mapGridIndexY = floor(y / TILE_SIZE);
-	if (data->minimap.map[mapGridIndexY][mapGridIndexX] == '1')
+	if (data->map.map[mapGridIndexY][mapGridIndexX] == '1')
 		return (1);
 	return (0);
 }
