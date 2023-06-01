@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/05/31 18:39:03 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/01 17:17:12 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,32 @@ int	ft_direction_check(t_file *file, char *str)
 
 int	ft_check_fileinfo(t_data *data, t_file *file, char *str)
 {
-	while (ft_isspace(*str))
-		str++;
-	if (!ft_strncmp("NO ", str, 3) || !ft_strncmp("SO ", str, 3)
-		|| !ft_strncmp("WE ", str, 3) || !ft_strncmp("EA ", str, 3))
-		return(ft_direction_check(file, str));
-	else if (!ft_strncmp("F ", str, 2) || !ft_strncmp("C ", str, 2))
+	int	i;
+	char *ptr;
+
+	i = 0;
+	ptr = ft_strdup(str);
+	while (ft_isspace(*ptr))
+		ptr++;
+	if (!ft_strncmp("NO ", ptr, 3) || !ft_strncmp("SO ", ptr, 3)
+		|| !ft_strncmp("WE ", ptr, 3) || !ft_strncmp("EA ", ptr, 3))
+		return(ft_direction_check(file, ptr));
+	else if (!ft_strncmp("F ", ptr, 2) || !ft_strncmp("C ", ptr, 2))
 		return(ft_color_check(file, str, str[0]));
-	else if (str[0] == '\0' && file->flag != 0)
+	else if (ptr[0] == '\0' && file->flag != 0)
 		return (printf("Error\nEmpty line in map descriptor"), 1);
-	else if (ft_check_mapfile(data, file, str))
+	else if (ft_check_mapfile(data, file, ptr))
 		return (1);
-	while(*str)
+	while(*ptr)
 	{
-		if (*str != ' ' && *str != '0' && *str != '1' && *str != 'W'
-			&& *str != 'N' && *str != 'S' && *str != 'E' && *str != 'F' && *str != 'C')
+		if (*ptr != ' ' && *ptr != '0' && *ptr != '1' && *ptr != 'W'
+			&& *ptr != 'N' && *ptr != 'S' && *ptr != 'E' && *ptr != 'F' && *ptr != 'C')
 		{
 			return(printf("Error\nInvalid character in the map\n"), 1);
 		}
-		str++;
+		ptr++;
 	}
+	free(ptr);
 	return (0);
 }
 
@@ -104,8 +110,8 @@ int	get_map(t_data *data, t_file *file)
 	i = 0;
 	while (file->content[i])
 	{
-		while (ft_isspace(*file->content[i]))
-			file->content[i]++;
+		// while (ft_isspace(*file->content[i]))
+		// 	file->content[i]++;
 		if (!ft_strncmp("NO ", file->content[i], 3) || !ft_strncmp("SO ", file->content[i], 3)
 			|| !ft_strncmp("WE ", file->content[i], 3) || !ft_strncmp("EA ", file->content[i], 3))
 			i++;
@@ -128,12 +134,12 @@ int	ft_file_content(t_data *data, t_file *file)
 	i = 0;
 	if (!file->content)
 		return (1);
-	while (file->content[i])
-		if (ft_check_fileinfo(data, &data->file, file->content[i++]))
-			return (1);
-	ft_print_map(data->file.content);
-	if (!data->player.status)
-		return (printf("No player\n"), 1);
+	// while (file->content[i])
+	// 	if (ft_check_fileinfo(data, &data->file, file->content[i++]))
+	// 		return (1);
+	// ft_print_map(data->file.content);
+	// if (!data->player.status)
+	// 	return (printf("No player\n"), 1);
 	if (get_map(data, file))
 			return (1);
 	return (0);

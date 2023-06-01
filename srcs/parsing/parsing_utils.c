@@ -17,15 +17,25 @@ int	ft_isspace(char c)
 // 	return (i);
 // }
 
+static int ft_strlen_m(const char *s)
+{
+	int i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
 char	*ft_strdup_no_nl(const char *s)
 {
-	size_t	i;
-	size_t	len;
+	int	i;
+	int	len;
 	char	*dest;
 
 	i = 0;
-	len = ft_strlen((char *)s);
-	dest = malloc(sizeof(char) * (len + 1));
+	// while(ft_isspace(*s))
+	// 	s++;
+	len = ft_strlen_m((char *)s);
+	dest = malloc(sizeof(char) * (len));
 	if (dest == 0)
 		return (NULL);
 	while (s[i] && s[i] != '\n')

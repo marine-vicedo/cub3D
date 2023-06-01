@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/05/31 18:41:56 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/01 17:12:33 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_print_map(char **tab)
 		j = 0;
 		i++;
 	}
-	write(1, "\n", 1);
+	//write(1, "\n", 1);
 }
 
 int	ft_count_lines(char *av)
@@ -79,8 +79,6 @@ void	ft_copy_fileinfo(char *av, t_file *file)
 	while (line)
 	{
 		file->content[i] = ft_strdup_no_nl(line);
-		if (!file->content[i])
-			return;
 		free(line);
 		line = get_next_line(fd);
 		i++;
@@ -100,17 +98,18 @@ int	ft_parsing_map(char *av, t_data *data)
 	ft_copy_fileinfo(av, &data->file);
 	if (ft_file_content(data, &data->file))
 		return (ft_free_data(data), 1);
-	if (ft_check_walls(&data->map, data->map.map))
-	{
-		return(exit_clean(data, ERR_MAP_WALLS, FREE));
-		//err_msg(ERR_MAP_WALLS, 1);
-		//return (ft_free_map(data->map.map), 1);
-	}
-	if (ft_check_empty_space(&data->map, data->map.map))
-	{
-		return(exit_clean(data, ERR_MAP_WALLS, FREE));
-		// err_msg(ERR_MAP_WALLS, 1);
-		// return (ft_free_map(data->map.map), 1);
-	}
+	exit_clean(data, NULL, FREE);
+	// if (ft_check_walls(&data->map, data->map.map))
+	// {
+	// 	return(exit_clean(data, ERR_MAP_WALLS, FREE));
+	// 	//err_msg(ERR_MAP_WALLS, 1);
+	// 	//return (ft_free_map(data->map.map), 1);
+	// }
+	// if (ft_check_empty_space(&data->map, data->map.map))
+	// {
+	// 	return(exit_clean(data, ERR_MAP_WALLS, FREE));
+	// 	// err_msg(ERR_MAP_WALLS, 1);
+	// 	// return (ft_free_map(data->map.map), 1);
+	// }
 	return (0);
 }
