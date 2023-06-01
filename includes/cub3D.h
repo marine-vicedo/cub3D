@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/31 14:35:23 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:10:16 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # include <stdlib.h> /*for malloc, free, exit */
 # include <limits.h>
 # include <unistd.h>
-# include <string.h>
+# include <string.h> 
 
-# define SCHEIGHT 720
+# define SCHEIGHT 600
 # define SCWIDTH 960
+# define Wall_STRIP_WIDTH 1
 
 # define K_A 97
 # define K_D 100
@@ -158,23 +159,28 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double		camera_x;
-	double		dir_x;
-	double		dir_y;
-	int			map_x;
-	int			map_y;
-	int			step_x;
-	int			step_y;
-	double		sidedist_x;
-	double		sidedist_y;
-	double		deltadist_x;
-	double		deltadist_y;
-	double		wall_dist;
-	double		wall_x;
-	int			side;
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
+	// double		camera_x;
+	// double		dir_x;
+	// double		dir_y;
+	// int			map_x;
+	// int			map_y;
+	// int			step_x;
+	// int			step_y;
+	// double		sidedist_x;
+	// double		sidedist_y;
+	// double		deltadist_x;
+	// double		deltadist_y;
+	// double		wall_dist;
+	// double		wall_x;
+	// int			side;
+	// int			line_height;
+	// int			draw_start;
+	// int			draw_end;
+	double			ray_x;
+	double			ray_y;
+	double			ray_angle;
+	double			ray_distance;
+	
 }				t_ray;
 
 typedef struct s_minimap
@@ -227,9 +233,9 @@ void    		draw_minimap(t_data *data);
 //position
 void    		get_position_player(t_data *data);
 //draw_pixel
-void			draw_circle(t_data *data);
-void			draw_line(t_data *data, double angle, double x, double y);
+void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
 void			draw_ray(t_data *data);
+void			render3DProjectWall(t_data *data, int ray_id);
 
 
 //parsing/

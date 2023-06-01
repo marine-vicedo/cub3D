@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/26 10:55:34 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:05:45 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void    init_img(t_data *data)
     t_img   *img;
 
     img = &data->img;
-    img->img_width = 24;
-    img->img_height = 24;
+    // img->img_width = 24;
+    // img->img_height = 24;
 }
 
 void    init_player(t_data *data)

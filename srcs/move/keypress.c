@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/31 15:05:17 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/01 12:32:00 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	exit_game(t_data *data)
 	mlx_destroy_display(data->mlx);
 	mlx_destroy_window(data->mlx, data->win);
 	free(data->mlx);
+	free(data);
 	exit (0);
 	return (0);
 }

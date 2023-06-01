@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/05/31 14:37:13 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/01 15:21:35 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ int	ft_file_content(t_data *data, t_file *file)
 		return (printf("No player\n"), 1);
 	if (get_map(data, file))
 			return (1);
-	ft_print_map(data->map.map);
+	//ft_print_map(data->map.map);
 	return (0);
 }
