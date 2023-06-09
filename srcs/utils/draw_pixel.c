@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/01 15:33:28 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:03:32 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,21 @@ void	render3DProjectWall(t_data *data, int ray_id)
 	double correctionWallDistance;
 	double distanceProjectionPlane;
 	double	wallStripHeight;
-	int	i;
-	int j = 0;
+	double	Wall_STRIP_WIDTH;
+	double	i;
+	double	j;
 	
 	correctionWallDistance = data->ray.ray_distance * cos(data->ray.ray_angle - data->player.rotationAngle);
-    distanceProjectionPlane = (SCWIDTH / 2) / tan(30 * (PI / 180));
+    distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
     wallStripHeight  = (TILE_SIZE / correctionWallDistance) * distanceProjectionPlane;
-	while (j <= (SCHEIGHT / 2) - (wallStripHeight / 2))
+	j = (SCHEIGHT / 2) - (wallStripHeight / 2);
+	Wall_STRIP_WIDTH = 1.7;
+	while (j <= wallStripHeight)
 	{
-		i = 0;
-		while (i <= (ray_id * Wall_STRIP_WIDTH))
+		i = ray_id * Wall_STRIP_WIDTH;
+		while (i <= (ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
 		{
-			mlx_pixel_put(data->mlx, data->win, (i * Wall_STRIP_WIDTH), j, MMAP_COLOR_WALL);
+			mlx_pixel_put(data->mlx, data->win, i, j, MMAP_COLOR_WALL);
 			i++;
 		}
 		j++;
@@ -77,13 +80,13 @@ void	draw_ray(t_data *data)
 {
 	int	ray_id = 0;
 	
-	data->ray.ray_angle = (data->player.rotationAngle - 30 * (PI / 180));
-	while (data->ray.ray_angle <= (data->player.rotationAngle + 30 * (PI / 180)))
+	data->ray.ray_angle = (data->player.rotationAngle - FOV_ANGLE / 2);
+	while (data->ray.ray_angle <= (data->player.rotationAngle + FOV_ANGLE / 2))
 	{
 		data->ray.ray_x = data->player.pos_x;
 		data->ray.ray_y = data->player.pos_y;
 		draw_line(data, data->ray.ray_angle, data->ray.ray_x, data->ray.ray_y, ray_id);
-		data->ray.ray_angle += 1 * (PI / 180);
+		data->ray.ray_angle += 0.1 * (PI / 180);
 		ray_id++;
 	}
 }

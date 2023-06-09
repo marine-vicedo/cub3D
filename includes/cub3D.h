@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/01 15:10:16 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:01:41 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define SCHEIGHT 600
 # define SCWIDTH 960
-# define Wall_STRIP_WIDTH 1
+# define FOV_ANGLE  1.047197551
 
 # define K_A 97
 # define K_D 100
