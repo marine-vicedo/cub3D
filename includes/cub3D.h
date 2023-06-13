@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/01 16:07:20 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/13 17:05:23 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@
 # define TILE_SIZE 50
 
 #define ERR_FILE_NOT_CUB "Extension file is not .cub"
+#define ERR_FILE_NOT_XPM "Extension file is not .xpm"
 #define ERR_FILE_TOO_BIG "File is too big"
 #define ERR_FILE_TOO_SMALL "Not enough informations to start"
 #define ERR_MAP_WALLS "Map is not surrounded by walls"
@@ -234,9 +235,9 @@ void			draw_ray(t_data *data);
 
 //parsing/
 int	ft_parsing_map(char *av, t_data *data);
-void	ft_copy_fileinfo(char *av, t_file *file);
+void	ft_copy_fileinfo(char *av, t_data *data);
 int	ft_file_content(t_data *data, t_file *file);
-int	ft_count_lines(char *file);
+int	ft_count_lines(t_data *data, char *file);
 int	ft_check_fileinfo(t_data *data, t_file *file, char *str);
 int	get_map(t_data *data, t_file *file);
 void	ft_fd_error(void);
@@ -246,7 +247,7 @@ int set_rgb(char **line);
 int	check_format_numbers(char *str);
 size_t ft_strcspn(const char *s, const char *reject);
 char	*ft_strdup_no_nl(const char *s);
-int	ft_check_mapfile(t_data *data, t_file *file, char *str);
+int	ft_check_mapfile(t_data *data, t_file *file, char *str, int space);
 int	ft_is_valid_minimap(t_data *data, t_player *p, char *line);
 int	ft_fill_map(t_map *map, char **map_file, int index);
 void	ft_free_data(t_data *data);
@@ -255,6 +256,7 @@ int ft_check_walls(t_map *map, char **map_m);
 int	ft_check_empty_space(t_map *map, char **map_m);
 void	err_msg(char *msg);
 int exit_clean(t_data *data, char *msg, int code);
+int check_player_pos(int c);
 
 //libft
 // char	*get_next_line(int fd);

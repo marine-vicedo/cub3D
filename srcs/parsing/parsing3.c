@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:18 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/05/29 13:38:38 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:54:59 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_format_numbers(char *str)
 
 	i = 0;
 	if (!ft_isdigit(*str))
-		return (printf("rgb digit error\n"), 1);
+		return (err_msg("rgb digit error"), 1);
 	while (*str)
 	{
 		if (*str == ',')
@@ -29,11 +29,11 @@ int	check_format_numbers(char *str)
 				str++;
 		}
 		if (!ft_isdigit(*str))
-			return (printf("rgb error\n"), 1);
+			return (err_msg("Wrong rgb digit format"), 1);
 		str++;
 	}
 	if (i != 2)
-		return (printf("Error\nMissing rgb color\n"), 1);
+		return (err_msg("Missing rgb color"), 1);
 	return (0);
 }
 
@@ -65,12 +65,12 @@ int	ft_color_check(t_file *file, char *str, char c)
 	rgb.b = set_rgb(&str);
 	if (!(rgb.r >= 0 && rgb.r <= 255) || !(rgb.g >= 0 && rgb.g <= 255)
 		|| !(rgb.b >= 0 && rgb.b <= 255))
-		return (printf("Error\nInvalid RGB value (min: 0, max: 255)\n"), 1);
+		return (err_msg("Invalid RGB value (min: 0, max: 255)"), 1);
 	if (c == 'F' && file->floor == -1)
 		file->floor = (rgb.r << 16 | rgb.g << 8 | rgb.b);
 	else if (c == 'C' && file->ceiling == -1)
 		file->ceiling = (rgb.r << 16 | rgb.g << 8 | rgb.b);
 	else
-		printf("double F or C keyword error\n");
+		err_msg("double F or C keyword error");
 	return (0);
 }

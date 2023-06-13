@@ -17,7 +17,7 @@ int	ft_isspace(char c)
 // 	return (i);
 // }
 
-static int ft_strlen_m(const char *s)
+int ft_strlen_m(const char *s)
 {
 	int i = 0;
 	while (s && s[i])
@@ -35,7 +35,7 @@ char	*ft_strdup_no_nl(const char *s)
 	// while(ft_isspace(*s))
 	// 	s++;
 	len = ft_strlen_m((char *)s);
-	dest = malloc(sizeof(char) * (len));
+	dest = malloc(sizeof(char) * (len +  1));
 	if (dest == 0)
 		return (NULL);
 	while (s[i] && s[i] != '\n')
@@ -82,7 +82,6 @@ void	err_msg(char *msg)
 	ft_putstr_fd("cub3D: Error\n", 2);
 	if (msg)
 	{
-		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(msg, 2);
 		ft_putstr_fd("\n", 2);
 	}
@@ -94,5 +93,6 @@ int exit_clean(t_data *data, char *msg, int code)
 		err_msg(msg);
 	if (code)
 		ft_free_data(data);
-	return (1);
+	free(data);
+	exit (1);
 }

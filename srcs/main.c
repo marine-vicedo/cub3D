@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/05/31 18:06:33 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/13 16:09:54 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,6 @@ int	render(t_data *data)
 {
 	draw_minimap(data);
 	return (0);
-}
-
-void	ft_fd_error(void)
-{
-	printf("Error : %s\n", strerror(errno));
-	exit(EXIT_FAILURE);
-}
-
-void	ft_str_error(void)
-{
-	printf("Error : Empty map file\n");
-	exit(EXIT_FAILURE);
 }
 
 void	ft_init_data(t_data *data)
@@ -50,7 +38,7 @@ void	ft_init_data(t_data *data)
 	data->map.width = 0;
 }
 
-void	ft_filename_check(char *av)
+void	ft_filename_check(t_data *data, char *av)
 {
 	int	i;
 
@@ -60,22 +48,17 @@ void	ft_filename_check(char *av)
 	while (av[i])
 		i++;
 	if (i <= 4)
-	{
-		err_msg(ERR_FILE_NOT_CUB);
-		exit(EXIT_FAILURE);
-	}
+		exit_clean(data, ERR_FILE_NOT_CUB, 0);
+
 	i = i - 4;
 	if (av[i] != '.' || av[i + 1] != 'c' || av[i + 2] != 'u' \
 	|| av[i + 3] != 'b')
-	{
-		err_msg(ERR_FILE_NOT_CUB);
-		exit(EXIT_FAILURE);
-	}
+		exit_clean(data, ERR_FILE_NOT_CUB, 0);
 }
 
 void	ft_parsing(t_data *data, char *av)
 {
-	ft_filename_check(av);
+	ft_filename_check(data, av);
 	ft_init_data(data);
 	ft_parsing_map(av, data);
 }
@@ -119,6 +102,7 @@ int main(int ac, char **av)
 	// /* we will exit the loop if there's no window left, and execute this code */
 	// mlx_destroy_display(data->mlx);
 	// free(data->mlx);
+	ft_free_data(data);
 	free(data);
 	return (0);
 }
