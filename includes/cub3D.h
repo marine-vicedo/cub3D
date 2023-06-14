@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/13 17:05:23 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:23:21 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@
 # define K_D 100
 # define K_S 115
 # define K_W 119
-
-
 /*
 ** Keyboard ARROWS
 */
@@ -66,17 +64,16 @@
 # define MMAP_COLOR_FLOOR 0xE6E6E6
 # define MMAP_COLOR_SPACE 0x404040
 
-
 # define PI 3.14159
 # define TILE_SIZE 50
 
-#define ERR_FILE_NOT_CUB "Extension file is not .cub"
-#define ERR_FILE_NOT_XPM "Extension file is not .xpm"
-#define ERR_FILE_TOO_BIG "File is too big"
-#define ERR_FILE_TOO_SMALL "Not enough informations to start"
-#define ERR_MAP_WALLS "Map is not surrounded by walls"
+# define ERR_FILE_NOT_CUB "Extension file is not .cub"
+# define ERR_FILE_NOT_XPM "Extension file is not .xpm"
+# define ERR_FILE_TOO_BIG "File is too big"
+# define ERR_FILE_TOO_SMALL "Not enough informations to start"
+# define ERR_MAP_WALLS "Map is not surrounded by walls"
 
-#define FREE 1
+# define FREE 1
 
 typedef struct s_rgb
 {
@@ -120,8 +117,6 @@ typedef struct s_file
 	char		*east;
 	int			floor;
 	int			ceiling;
-	//int			mcount;
-	//int			start;
 	int			flag;
 }				t_file;
 
@@ -132,7 +127,7 @@ typedef struct s_map
 	int		x;
 	int		y;
 	int		width;
-	int 	height;
+	int		height;
 }				t_map;
 
 typedef struct s_player
@@ -141,14 +136,14 @@ typedef struct s_player
 	//char		dir;
 	double		pos_x;
 	double		pos_y;
-	//double		dir_x;
-	//double		dir_y;
-	//double		plane_x;
-	//double		plane_y;
-	//int			has_moved;
-	//int			move_x;
-	//int			move_y;
-	//int			rotation;
+	//double	dir_x;
+	//double	dir_y;
+	//double	plane_x;
+	//double	plane_y;
+	//int		has_moved;
+	//int		move_x;
+	//int		move_y;
+	//int		rotation;
 	int			radius;
 	int			turnDirection;
 	int			walkDirection;
@@ -213,56 +208,66 @@ int				exit_game(t_data *data);
 void			updata(t_data *data);
 int				hasWallAt(t_data *data, double x, double y);
 
-
 //init/
 //init_img
 void			init_img(t_data *data);
-void    		init_player(t_data *data);
-void    		init_newPosition(t_data *data);
+void			init_player(t_data *data);
+void			init_newPosition(t_data *data);
 
 //render/
 //minimap_image;
-void    		draw_minimap(t_data *data);
+void			draw_minimap(t_data *data);
 
 //utils/
 //position
-void    		get_position_player(t_data *data);
+void			get_position_player(t_data *data);
 //draw_pixel
 void			draw_circle(t_data *data);
 void			draw_line(t_data *data, double angle, double x, double y);
 void			draw_ray(t_data *data);
 
-
 //parsing/
-int	ft_parsing_map(char *av, t_data *data);
-void	ft_copy_fileinfo(char *av, t_data *data);
-int	ft_file_content(t_data *data, t_file *file);
-int	ft_count_lines(t_data *data, char *file);
-int	ft_check_fileinfo(t_data *data, t_file *file, char *str);
-int	get_map(t_data *data, t_file *file);
-void	ft_fd_error(void);
-void	ft_str_error(void);
-int	ft_color_check(t_file *file, char *str, char c);
-int set_rgb(char **line);
-int	check_format_numbers(char *str);
-size_t ft_strcspn(const char *s, const char *reject);
-char	*ft_strdup_no_nl(const char *s);
-int	ft_check_mapfile(t_data *data, t_file *file, char *str, int space);
-int	ft_is_valid_minimap(t_data *data, t_player *p, char *line);
-int	ft_fill_map(t_map *map, char **map_file, int index);
-void	ft_free_data(t_data *data);
-void	ft_free_map(char **tab);
-int ft_check_walls(t_map *map, char **map_m);
-int	ft_check_empty_space(t_map *map, char **map_m);
-void	err_msg(char *msg);
-int exit_clean(t_data *data, char *msg, int code);
-int check_player_pos(int c);
+//parsing_file
+int				ft_parsing_map(char *av, t_data *data);
+int				ft_file_content(t_data *data, t_file *file);
+void			ft_copy_fileinfo(char *av, t_data *data);
+int				ft_count_lines(t_data *data, char *file);
+//textures_colors_check
+int				ft_check_fileinfo(t_data *data, t_file *file, char *str);
+int				ft_direction_check(t_file *file, char *str);
+int				ft_color_check(t_file *file, char *str, char c);
+//textures_colors_utils
+char			*ft_direction_path(char *str);
+int				set_rgb(char **line);
+int				check_format_numbers(char *str);
+int				ft_is_xpm_file(char *path);
+//parsing_map
+int				ft_check_mapfile(t_data *data,
+					t_file *file, char *str, int space);
+int				ft_is_valid_minimap(t_data *data, t_player *p, char *line);
+//get_map
+int				ft_fill_map(t_map *map, char **map_file, int index);
+void			ft_free_map(char **tab);
+int				get_map(t_data *data, t_file *file);
+//walls_check
+int				ft_check_walls(t_map *map, char **map_m);
+int				ft_check_empty_space(t_map *map, char **map_m);
+int				ft_check_space_around(char **map_m, int i, int j);
+int				check_player_pos(int c);
+//parsing_utils
+char			*ft_strdup_no_nl(const char *s);
+int				ft_isspace(char c);
+int				ft_strlen_m(const char *s);
+//exit_error
+void			ft_free_data(t_data *data);
+void			ft_free_map(char **tab);
+void			err_msg(char *msg);
+int 			exit_clean(t_data *data, char *msg, int code);
 
 //libft
 // char	*get_next_line(int fd);
 // char	*ft_strdup(const char *s);
 // int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int 	ft_isspace(char c);
 int 	ft_isdigit(int c);
 // int		ft_atoi(const char *str);
 // size_t	ft_strlen(const char *s);

@@ -6,7 +6,7 @@
 #    By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/05/31 14:38:49 by mvicedo          ###   ########.fr        #
+#    Updated: 2023/06/14 12:04:39 by mvicedo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
-PARSING_FILES = parsing1 parsing2 parsing3 parsing4 parsing5 parsing_utils
+PARSING_FILES = parsing_file parsing_map parsing_utils textures_colors_check textures_colors_utils get_map walls_check exit_error
 UTILS_FILES = position draw_pixel
 UTILS_FOLDER = utils/
 
