@@ -3,18 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+         #
+#    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-<<<<<<< HEAD
-<<<<<<< HEAD
-#    Updated: 2023/06/14 11:32:40 by pmaimait         ###   ########.fr        #
-=======
-#    Updated: 2023/05/31 14:38:49 by mvicedo          ###   ########.fr        #
->>>>>>> Marine
-=======
-#    Updated: 2023/06/14 12:04:39 by mvicedo          ###   ########.fr        #
->>>>>>> Marine
+#    Updated: 2023/06/14 14:19:26 by pmaimait         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,16 +61,9 @@ RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
-<<<<<<< HEAD
-PARSING_FILES = parsing1 parsing2 parsing3 parsing4 parsing5 parsing_utils
-<<<<<<< HEAD
 UTILS_FILES = position exit
-=======
-=======
 PARSING_FILES = parsing_file parsing_map parsing_utils textures_colors_check textures_colors_utils get_map walls_check exit_error
->>>>>>> Marine
 UTILS_FILES = position draw_pixel
->>>>>>> Marine
 UTILS_FOLDER = utils/
 
 

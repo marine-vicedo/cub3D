@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/13 14:29:34 by pmaimait         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/13 16:09:54 by mvicedo          ###   ########.fr       */
->>>>>>> Marine
+/*   Updated: 2023/06/14 14:21:00 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +19,6 @@ int	render(t_data *data)
 	return (0);
 }
 
-<<<<<<< HEAD
-void	ft_fd_error(void)
-{
-	printf("Error : %s\n", strerror(errno));
-	exit(EXIT_FAILURE);
-}
-
-void	ft_str_error(void)
-{
-	printf("Error : Empty map file\n");
-	exit(EXIT_FAILURE);
-}
-
-=======
->>>>>>> Marine
 void	ft_init_data(t_data *data)
 {
 	data->file.line_count = 0;
@@ -57,11 +38,7 @@ void	ft_init_data(t_data *data)
 	data->map.width = 0;
 }
 
-<<<<<<< HEAD
-void	ft_filename_check(char *av)
-=======
 void	ft_filename_check(t_data *data, char *av)
->>>>>>> Marine
 {
 	int	i;
 
@@ -71,35 +48,17 @@ void	ft_filename_check(t_data *data, char *av)
 	while (av[i])
 		i++;
 	if (i <= 4)
-<<<<<<< HEAD
-	{
-		err_msg(ERR_FILE_NOT_CUB);
-		exit(EXIT_FAILURE);
-	}
-	i = i - 4;
-	if (av[i] != '.' || av[i + 1] != 'c' || av[i + 2] != 'u' \
-	|| av[i + 3] != 'b')
-	{
-		err_msg(ERR_FILE_NOT_CUB);
-		exit(EXIT_FAILURE);
-	}
-=======
 		exit_clean(data, ERR_FILE_NOT_CUB, 0);
 
 	i = i - 4;
 	if (av[i] != '.' || av[i + 1] != 'c' || av[i + 2] != 'u' \
 	|| av[i + 3] != 'b')
 		exit_clean(data, ERR_FILE_NOT_CUB, 0);
->>>>>>> Marine
 }
 
 void	ft_parsing(t_data *data, char *av)
 {
-<<<<<<< HEAD
-	ft_filename_check(av);
-=======
 	ft_filename_check(data, av);
->>>>>>> Marine
 	ft_init_data(data);
 	ft_parsing_map(av, data);
 }
@@ -107,7 +66,6 @@ void	ft_parsing(t_data *data, char *av)
 int main(int ac, char **av)
 {
 	t_data	*data;
-<<<<<<< HEAD
 
 	data = malloc(sizeof(t_data));
 	if (ac != 2)
@@ -145,45 +103,6 @@ int main(int ac, char **av)
 	/* we will exit the loop if there's no window left, and execute this code */
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-=======
-	if (ac != 2)
-		return (printf("Error\nCub3D need one argument (ex : map.cub)\n"), 1);
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	ft_parsing(data, av[1]);
-	// data->mlx= mlx_init();
-	// if (data->mlx== NULL || ac != 2)
-	// 	return (1);
-	// init_img(data);
-	// get_position_player(data);
-	
-    // data->win = mlx_new_window(data->mlx, 960, 600, "cub3D");
-	// data->win_mini = mlx_new_window(data->mlx, (data->map.width * TILE_SIZE), (data->map.height * TILE_SIZE), "mini_map");
-	// if (data->win_mini == NULL || data->win == NULL)
-	// {
-	// 	free(data->win_mini);
-	// 	free(data->win);
-	// 	return (1);
-	// }
-	// init_player(data);
-	// draw_minimap(data);
-	// updata(data);
-
-	
-	
-	// /* Setup hooks */ 
-	// //mlx_loop_hook(data->mlx, &render, data);
-	// mlx_hook(data->win_mini, 2, 1L << 0, &handle_keypress, data);
-	// //mlx_hook(data->win_mini, 3, 1L << 0, &handle_keyrelease, data);
-	// mlx_hook(data->win_mini, 17, 1L << 0, &exit_game, data);
-	// mlx_loop(data->mlx);
-
-	// /* we will exit the loop if there's no window left, and execute this code */
-	// mlx_destroy_display(data->mlx);
-	// free(data->mlx);
-	ft_free_data(data);
->>>>>>> Marine
 	free(data);
 	return (0);
 }

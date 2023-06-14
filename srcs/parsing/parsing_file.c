@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/14 14:00:31 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:15:37 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,25 @@ void	ft_copy_fileinfo(char *av, t_data *data)
 	close (fd);
 }
 
+int	ft_file_content(t_data *data, t_file *file)
+{
+	int	i;
+
+	i = 0;
+	if (!file->content)
+		return (1);
+	while (file->content[i])
+		if (ft_check_fileinfo(data, &data->file, file->content[i++]))
+			return (1);
+	ft_print_map(data->file.content);
+	if (!data->player.status)
+		return (err_msg("No player"), 1);
+	if (get_map(data, file))
+		return (1);
+	ft_print_map(data->map.map);
+	return (0);
+}
+
 int	ft_parsing_map(char *av, t_data *data)
 {
 	data->file.height = ft_count_lines(data, av);
@@ -97,8 +116,8 @@ int	ft_parsing_map(char *av, t_data *data)
 	if (ft_file_content(data, &data->file))
 		return (exit_clean(data, NULL, FREE));
 	if (ft_check_walls(&data->map, data->map.map))
-		return(exit_clean(data, ERR_MAP_WALLS, FREE));
+		return (exit_clean(data, ERR_MAP_WALLS, FREE));
 	if (ft_check_empty_space(&data->map, data->map.map))
-		return(exit_clean(data, ERR_MAP_WALLS, FREE));
+		return (exit_clean(data, ERR_MAP_WALLS, FREE));
 	return (0);
 }

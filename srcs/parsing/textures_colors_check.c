@@ -1,49 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_colors_check.c                            :+:      :+:    :+:   */
+/*   info_textures_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/14 14:08:24 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:44:34 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char	*ft_direction_path(char *str)
+int	ft_color_check(t_file *file, char *str, char c)
 {
-	int		fd;
-	char	*path;
+	t_rgb	rgb;
 
-	path = NULL;
 	str += 2;
 	while (ft_isspace(*str))
 		str++;
-	fd = open(str, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	close(fd);
-	path = ft_strdup(str);
-	return (path);
-}
-
-int	ft_is_xpm_file(char *path)
-{
-	int	i;
-
-	i = 0;
-	if (!path)
+	if (check_format_numbers(str))
 		return (1);
-	while (path[i])
-		i++;
-	if (i <= 4)
-		return (err_msg(ERR_FILE_NOT_XPM), 1);
-	i = i - 4;
-	if (path[i] != '.' || path[i + 1] != 'x' || path[i + 2] != 'p' \
-	|| path[i + 3] != 'm')
-		return (err_msg(ERR_FILE_NOT_XPM), 1);
+	rgb.r = set_rgb(&str);
+	rgb.g = set_rgb(&str);
+	rgb.b = set_rgb(&str);
+	if (!(rgb.r >= 0 && rgb.r <= 255) || !(rgb.g >= 0 && rgb.g <= 255)
+		|| !(rgb.b >= 0 && rgb.b <= 255))
+		return (err_msg("Invalid RGB value (min: 0, max: 255)"), 1);
+	if (c == 'F' && file->floor == -1)
+		file->floor = (rgb.r << 16 | rgb.g << 8 | rgb.b);
+	else if (c == 'C' && file->ceiling == -1)
+		file->ceiling = (rgb.r << 16 | rgb.g << 8 | rgb.b);
+	else
+		err_msg("double F or C keyword error");
 	return (0);
 }
 
@@ -53,7 +42,7 @@ int	ft_direction_check(t_file *file, char *str)
 
 	path = ft_direction_path(str);
 	if (!path)
-		return ((err_msg("Invalid direction texture"), 1));	
+		return ((err_msg("Invalid direction texture"), 1));
 	if (ft_is_xpm_file(path))
 		return (free(path), 1);
 	if (str[0] == 'N' && !file->north)
@@ -69,9 +58,18 @@ int	ft_direction_check(t_file *file, char *str)
 	return (0);
 }
 
+static int	check_valid_characters(char *str)
+{
+	if (*str != ' ' && *str != '0' && *str != '1' && *str != 'W'
+		&& *str != 'N' && *str != 'S' && *str != 'E'
+		&& *str != 'F' && *str != 'C')
+		return (1);
+	return (0);
+}
+
 int	ft_check_fileinfo(t_data *data, t_file *file, char *str)
 {
-	int space;
+	int	space;
 
 	space = 0;
 	while (ft_isspace(*str))
@@ -81,40 +79,18 @@ int	ft_check_fileinfo(t_data *data, t_file *file, char *str)
 	}
 	if (!ft_strncmp("NO ", str, 3) || !ft_strncmp("SO ", str, 3)
 		|| !ft_strncmp("WE ", str, 3) || !ft_strncmp("EA ", str, 3))
-		return(ft_direction_check(file, str));
+		return (ft_direction_check(file, str));
 	else if (!ft_strncmp("F ", str, 2) || !ft_strncmp("C ", str, 2))
-		return(ft_color_check(file, str, str[0]));
+		return (ft_color_check(file, str, str[0]));
 	else if (str[0] == '\0' && file->flag != 0)
 		return (err_msg("Empty line in map descriptor"), 1);
 	else if (ft_check_mapfile(data, file, str, space))
 		return (1);
-	while(*str)
+	while (*str)
 	{
-		if (*str != ' ' && *str != '0' && *str != '1' && *str != 'W'
-			&& *str != 'N' && *str != 'S' && *str != 'E' && *str != 'F' && *str != 'C')
-		{
-			return(err_msg("Invalid character in the map"), 1);
-		}
+		if (check_valid_characters(str))
+			return (err_msg("Invalid character in the map"), 1);
 		str++;
 	}
-	return (0);
-}
-
-int	ft_file_content(t_data *data, t_file *file)
-{
-	int	i;
-
-	i = 0;
-	if (!file->content)
-		return (1);
-	while (file->content[i])
-		if (ft_check_fileinfo(data, &data->file, file->content[i++]))
-			return (1);
-	ft_print_map(data->file.content);
-	if (!data->player.status)
-		return (err_msg("No player"), 1);
-	if (get_map(data, file))
-			return (1);
-	ft_print_map(data->map.map);
 	return (0);
 }
