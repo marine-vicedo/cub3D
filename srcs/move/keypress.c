@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/01 12:32:00 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:50:26 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,7 @@ int	handle_keyrelease(int keysym, t_data *data)
 	return (0);
 }
 
-int	exit_game(t_data *data)
-{
-	mlx_destroy_image(data->mlx, data->minimap.wall);
-	mlx_destroy_display(data->mlx);
-	mlx_destroy_window(data->mlx, data->win);
-	free(data->mlx);
-	free(data);
-	exit (0);
-	return (0);
-}
+
 
 void	updata(t_data *data)
 {

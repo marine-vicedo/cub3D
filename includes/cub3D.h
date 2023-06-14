@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/02 14:01:41 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:50:54 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ typedef struct s_img
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	int			img_width;
+	/* int			img_width;
 	int			img_height;
 	int			buffer[SCHEIGHT][SCWIDTH];
-	int			**arr_img;
+	int			**arr_img; */
 }				t_img;
 
 typedef struct s_move
@@ -192,7 +192,6 @@ typedef struct s_minimap
 	int		view_dist;
 	int		tile_size;
 	void	*wall;
-	void	*player;
 }	t_minimap;
 
 typedef struct s_data
@@ -214,13 +213,13 @@ typedef struct s_data
 //keypress
 int				handle_keypress(int keysym, t_data *data);
 int				handle_keyrelease(int keysym, t_data *data);
-int				exit_game(t_data *data);
 void			updata(t_data *data);
 int				hasWallAt(t_data *data, double x, double y);
 
 
 //init/
 //init_img
+void			init_img_clean(t_img *img);
 void			init_img(t_data *data);
 void    		init_player(t_data *data);
 void    		init_newPosition(t_data *data);
@@ -236,6 +235,10 @@ void    		get_position_player(t_data *data);
 void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
 void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data, int ray_id);
+//exit
+void			clean_exit(t_data *data, int code);
+int				quit_cub3d(t_data *data);
+int				exit_game(t_data *data);
 
 
 //parsing/

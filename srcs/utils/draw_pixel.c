@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/02 14:03:32 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:34:13 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	render3DProjectWall(t_data *data, int ray_id)
 		i = ray_id * Wall_STRIP_WIDTH;
 		while (i <= (ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
 		{
-			mlx_pixel_put(data->mlx, data->win, i, j, MMAP_COLOR_WALL);
+			//mlx_pixel_put(data->mlx, data->win, i, j, MMAP_COLOR_WALL);
+			draw_wall(data,i, j)
 			i++;
 		}
 		j++;

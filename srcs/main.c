@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/09 14:20:13 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/13 14:29:34 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int main(int ac, char **av)
 	data->mlx= mlx_init();
 	if (data->mlx== NULL || ac != 2)
 		return (free(data), 1);
-	//init_img(data);
+	init_img(data);
 	get_position_player(data);
 	
     data->win = mlx_new_window(data->mlx, SCWIDTH, SCHEIGHT, "cub3D");

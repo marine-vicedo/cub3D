@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/09 14:22:00 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/01 15:21:35 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	ft_direction_check(t_file *file, char *str)
 
 int	ft_check_fileinfo(t_data *data, t_file *file, char *str)
 {
+	int	i;
+
+	i = 0;
 	while (ft_isspace(*str))
 		str++;
 	if (!ft_strncmp("NO ", str, 3) || !ft_strncmp("SO ", str, 3)
