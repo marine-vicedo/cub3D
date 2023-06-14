@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/13 14:50:54 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:54:51 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ void    		get_position_player(t_data *data);
 void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
 void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data, int ray_id);
+void			draw_wall(t_data *data, double x, double y, int color);
 //exit
 void			clean_exit(t_data *data, int code);
 int				quit_cub3d(t_data *data);

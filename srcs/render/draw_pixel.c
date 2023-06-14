@@ -6,24 +6,20 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/13 15:34:13 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:43:06 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 
-/* void	draw_circle(t_data *data)
+void	draw_wall(t_data *data, double x, double y, int color)
 {
-	int	i;
-
-	i = 0;
-	while (i <= 360)
-	{
-		draw_arrow(data, i * PI / 180, data->player.pos_x, data->player.pos_y, 5);
-		i++;
-	}
-} */
+	int	pixel;
+	
+	pixel = x * y;
+	data->img.addr[pixel] = color;
+}
 
 void	render3DProjectWall(t_data *data, int ray_id)
 {
@@ -45,7 +41,7 @@ void	render3DProjectWall(t_data *data, int ray_id)
 		while (i <= (ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
 		{
 			//mlx_pixel_put(data->mlx, data->win, i, j, MMAP_COLOR_WALL);
-			draw_wall(data,i, j)
+			draw_wall(data,i, j, MMAP_COLOR_WALL);
 			i++;
 		}
 		j++;

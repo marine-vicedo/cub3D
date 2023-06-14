@@ -6,7 +6,7 @@
 #    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/06/13 14:46:37 by pmaimait         ###   ########.fr        #
+#    Updated: 2023/06/14 11:32:40 by pmaimait         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,13 +56,13 @@ MLX_FLAGS	= -L./mlx -lmlx -lm -lX11 -lXext
 ROOT_FILE = main
 INIT_FILES = init_img
 INIT_FOLDER = init/
-RENDER_FILES = minimap_image
+RENDER_FILES = minimap_image draw_pixel
 RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
 PARSING_FILES = parsing1 parsing2 parsing3 parsing4 parsing5 parsing_utils
-UTILS_FILES = position draw_pixel exit
+UTILS_FILES = position exit
 UTILS_FOLDER = utils/
 
 

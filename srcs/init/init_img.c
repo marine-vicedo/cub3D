@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/13 14:44:45 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:06:25 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    init_img(t_data *data)
 	data->img.img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
 	if (data->img.img == NULL)
 		clean_exit(data, 1);
-	data->img.addr = (int *)mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
 	return ;
 }
