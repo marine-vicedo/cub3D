@@ -6,12 +6,26 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:04:35 by mvicedo           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/30 19:02:10 by mvicedo          ###   ########.fr       */
+=======
+/*   Updated: 2023/06/13 16:31:50 by mvicedo          ###   ########.fr       */
+>>>>>>> Marine
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+<<<<<<< HEAD
+=======
+int check_player_pos(int c)
+{
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (1);
+	return (0);
+}
+
+>>>>>>> Marine
 static int	check_top_bottom(char **map, int i, int j)
 {
 	if (!map || !map[i] || !map[i][j])
@@ -20,7 +34,11 @@ static int	check_top_bottom(char **map, int i, int j)
 		j++;
 	while (map[i][j])
 	{
+<<<<<<< HEAD
 		if (map[i][j] == '0')
+=======
+		if (map[i][j] == '0' || check_player_pos(map[i][j]))
+>>>>>>> Marine
 			return (1);
 		j++;
 	}
@@ -48,6 +66,11 @@ int ft_check_walls(t_map *map, char **map_m)
 			j++;
 		if (map_m[i][j] == '0' || map_m[i][len] == '0')
 			return (1);
+<<<<<<< HEAD
+=======
+		if (check_player_pos(map_m[i][0]) || check_player_pos(map_m[i][len]))
+			return (1);
+>>>>>>> Marine
 		i++;
 	}
 	if (check_top_bottom(map_m, i, j))
