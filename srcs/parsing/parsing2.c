@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/13 17:10:11 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:00:41 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char	*ft_direction_path(char *str)
 		str++;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-	{
-		perror("Erreur lors de l'ouverture du fichier");
 		return (NULL);
-	}
 	close(fd);
 	path = ft_strdup(str);
 	return (path);
@@ -58,7 +55,7 @@ int	ft_direction_check(t_file *file, char *str)
 	if (!path)
 		return ((err_msg("Invalid direction texture"), 1));	
 	if (ft_is_xpm_file(path))
-		return (1);
+		return (free(path), 1);
 	if (str[0] == 'N' && !file->north)
 		file->north = path;
 	else if (str[0] == 'S' && !file->south)
