@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/14 14:15:37 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:43:05 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ int	ft_file_content(t_data *data, t_file *file)
 	while (file->content[i])
 		if (ft_check_fileinfo(data, &data->file, file->content[i++]))
 			return (1);
-	ft_print_map(data->file.content);
+	//ft_print_map(data->file.content);
 	if (!data->player.status)
 		return (err_msg("No player"), 1);
 	if (get_map(data, file))
 		return (1);
-	ft_print_map(data->map.map);
+	//ft_print_map(data->map.map);
 	return (0);
 }
 

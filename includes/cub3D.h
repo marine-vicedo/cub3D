@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/14 13:59:11 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:23:34 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 
 # define PI 3.14159
 # define TILE_SIZE 50
+# define TEX_SIZE  64
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"
 # define ERR_FILE_NOT_XPM "Extension file is not .xpm"
@@ -88,12 +89,12 @@ typedef struct s_img
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
-	int			line_length;
+	int			line_size;
 	int			endian;
-	/* int			img_width;
+	int			img_width;
 	int			img_height;
 	int			buffer[SCHEIGHT][SCWIDTH];
-	int			**arr_img; */
+	int			**arr_img;
 }				t_img;
 
 typedef struct s_move
@@ -212,29 +213,44 @@ int				handle_keyrelease(int keysym, t_data *data);
 void			updata(t_data *data);
 int				hasWallAt(t_data *data, double x, double y);
 
+
 //init/
 //init_img
 void			init_img_clean(t_img *img);
 void			init_img(t_data *data);
 void			init_player(t_data *data);
 void			init_newPosition(t_data *data);
+void			fill_arr_img(t_data *data, int i);
+void			image_load(t_data *data);
+//start_game
+void    		start_game(t_data *data);
+
 
 //render/
 //minimap_image;
 void			draw_minimap(t_data *data);
-
-//utils/
-//position
-void			get_position_player(t_data *data);
 //draw_pixel
 void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
 void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data, int ray_id);
 void			draw_wall(t_data *data, double x, double y, int color);
+//painting
+void			paint_floor(t_data *data);
+void			paint_img(t_data *data);
+
+
+//utils/
+//position
+void			get_position_player(t_data *data);
 //exit
 void			clean_exit(t_data *data, int code);
 int				quit_cub3d(t_data *data);
 int				exit_game(t_data *data);
+
+//main
+
+int			main_loop(t_data *data);
+
 
 //parsing/
 //parsing_file

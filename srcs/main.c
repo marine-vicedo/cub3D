@@ -6,18 +6,11 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/14 14:21:00 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:58:40 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"cub3D.h"
-
-
-int	render(t_data *data)
-{
-	draw_minimap(data);
-	return (0);
-}
 
 void	ft_init_data(t_data *data)
 {
@@ -63,7 +56,7 @@ void	ft_parsing(t_data *data, char *av)
 	ft_parsing_map(av, data);
 }
 
-int main(int ac, char **av)
+/* int main(int ac, char **av)
 {
 	t_data	*data;
 
@@ -89,21 +82,33 @@ int main(int ac, char **av)
 	init_player(data);
 	draw_minimap(data);
 	updata(data);
+} */
 
-	
-	
-	/* Setup hooks */ 
-	//mlx_loop_hook(data->mlx, render, data);
-	mlx_hook(data->win_mini, 2, 1L << 0, handle_keypress, data);
-	//mlx_hook(data->win_mini, 3, 1L << 0, handle_keyrelease, data);
-	mlx_hook(data->win_mini, 17, 1L << 0, exit_game, data);
-	mlx_hook(data->win, 17, 1L << 0, exit_game, data);
-	mlx_loop(data->mlx);
-
-	/* we will exit the loop if there's no window left, and execute this code */
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	free(data);
+int	main_loop(t_data *data)
+{
+	updata(data);
+	paint_floor(data);
+	draw_minimap(data);
+	paint_img(data);
 	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_data	data;
+	
+	if (ac == 2)
+	{
+		ft_parsing(&data, av[1]);
+		start_game(&data);
+		mlx_hook(&data.win_mini, 2, 1L << 0, handle_keypress, &data);
+		mlx_hook(data.win_mini, 3, 1L << 0, handle_keyrelease, &data);
+		mlx_hook(&data.win_mini, 17, 1L << 0, exit_game, &data);
+		mlx_hook(&data.win, 17, 1L << 0, exit_game, &data);
+		mlx_loop_hook(data.mlx, &main_loop, &data);
+		mlx_loop(&data.mlx);
+	}
+	else
+		exit(0);
 }
 

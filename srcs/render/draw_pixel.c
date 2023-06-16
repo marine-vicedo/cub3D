@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/14 11:43:06 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:08:03 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	draw_line(t_data *data, double angle, double x, double y, int ray_id)
 		i++;
 	}
 	data->ray.ray_distance = sqrt(square(fabs(x - data->player.pos_x)) + square(fabs(y - data->player.pos_y)));
-	//printf("ray_x = %f, ray_y = %f\nray_distance = %f\n", x, y, data->ray.ray_distance);
-	render3DProjectWall(data, ray_id);
-	//printf("ray_id = %d\n", ray_id);
+	(void)ray_id;
+	// render3DProjectWall(data, ray_id);
 }
 void	draw_ray(t_data *data)
 {

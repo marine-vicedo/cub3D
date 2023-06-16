@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/13 14:50:26 by pmaimait         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/31 15:05:17 by mvicedo          ###   ########.fr       */
->>>>>>> Marine
+/*   Updated: 2023/06/16 14:49:29 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +31,8 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == K_ESC)
 		exit_game(data);
 	//printf("Keypress: %d\n", keysym);
-	updata(data);
-	draw_minimap(data);
+	// updata(data);
+	// draw_minimap(data);
 	return (0);
 }
 
