@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/16 15:23:34 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:49:36 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ void			draw_minimap(t_data *data);
 void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
 void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data, int ray_id);
-void			draw_wall(t_data *data, double x, double y, int color);
+void			draw_wall(t_data *data, int x, int y, int color);
 //painting
 void			paint_floor(t_data *data);
 void			paint_img(t_data *data);
@@ -242,6 +242,8 @@ void			paint_img(t_data *data);
 //utils/
 //position
 void			get_position_player(t_data *data);
+void			set_image_pixel(t_img *image, int x, int y, int color);
+void			ft_my_mlx_pixel_put(t_img *data, int i, int j, int color);
 //exit
 void			clean_exit(t_data *data, int code);
 int				quit_cub3d(t_data *data);

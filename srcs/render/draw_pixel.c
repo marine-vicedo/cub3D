@@ -6,19 +6,16 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/16 15:08:03 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:41:56 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 
-void	draw_wall(t_data *data, double x, double y, int color)
+void	draw_wall(t_data *data, int x, int y, int color)
 {
-	int	pixel;
-	
-	pixel = x * y;
-	data->img.addr[pixel] = color;
+	data->img.buffer[x][y] = color;
 }
 
 void	render3DProjectWall(t_data *data, int ray_id)
@@ -35,18 +32,18 @@ void	render3DProjectWall(t_data *data, int ray_id)
     wallStripHeight  = (TILE_SIZE / correctionWallDistance) * distanceProjectionPlane;
 	j = (SCHEIGHT / 2) - (wallStripHeight / 2);
 	Wall_STRIP_WIDTH = 1.7;
-	while (j <= wallStripHeight)
+	if (j < 0)
+		j = 0;
+	while (j <= wallStripHeight && j != SCHEIGHT)
 	{
 		i = ray_id * Wall_STRIP_WIDTH;
 		while (i <= (ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
 		{
-			//mlx_pixel_put(data->mlx, data->win, i, j, MMAP_COLOR_WALL);
-			draw_wall(data,i, j, MMAP_COLOR_WALL);
+			ft_my_mlx_pixel_put(&data->img, (int)j, (int)i, MMAP_COLOR_WALL);
 			i++;
 		}
 		j++;
 	}
-	
 }
 static int	 square(int num) {
     return num * num;
@@ -69,8 +66,7 @@ void	draw_line(t_data *data, double angle, double x, double y, int ray_id)
 		i++;
 	}
 	data->ray.ray_distance = sqrt(square(fabs(x - data->player.pos_x)) + square(fabs(y - data->player.pos_y)));
-	(void)ray_id;
-	// render3DProjectWall(data, ray_id);
+	render3DProjectWall(data, ray_id);
 }
 void	draw_ray(t_data *data)
 {

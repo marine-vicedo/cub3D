@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:28:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/14 15:06:56 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:38:33 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ void	setting_img(t_data *data)
 void    draw_minimap(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->win_mini);
-	mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img.img);
+	data->img.img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
+	if (data->img.img == NULL)
+		clean_exit(data, 1);
     setting_img(data);
+	paint_floor(data);
 	draw_ray(data);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	// mlx_destroy_image(data->mlx, data->img.img);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	init_newPosition(data);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/16 15:26:02 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:42:21 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	fill_arr_img(t_data *data, int i)
 	int	y;
 	int	x;
 
-	y = 0;
+	y = 0; 
 	while (y < data->img.img_height)
 	{
 		x = 0;
@@ -41,7 +41,9 @@ void	fill_arr_img(t_data *data, int i)
 	}
 }
 
-void    init_img(t_data *data)
+void     
+
+init_img(t_data *data)
 {
     int i;
     int	j;
@@ -51,14 +53,19 @@ void    init_img(t_data *data)
 	if (data->img.img == NULL)
 		clean_exit(data, 1);
 	i = 0;
-	while (i < SCHEIGHT)
+/* 	while (i < SCHEIGHT)
 	{
 		j = 0;
 		while (j < SCWIDTH)
 			data->img.buffer[i][j++] = 0;
 		i++;
-	}
-	data->img.arr_img = (int **)malloc(5 * sizeof(int *));
+	} */
+	j = 0;
+	
+	data->img.addr = mlx_get_data_addr(data->img.img, \
+					&data->img.bits_per_pixel, &data->img.line_size, &data->img.endian);
+	
+	/* data->img.arr_img = (int **)malloc(5 * sizeof(int *));
 	if (!data->img.arr_img)
 		exit(1);
 	i = 0;
@@ -69,9 +76,8 @@ void    init_img(t_data *data)
 			exit(1);
 		ft_memset(data->img.arr_img[i], 0, (sizeof(int) * TEX_SIZE * TEX_SIZE));
 		i++;
-	}
+	} */
 	
- 
 	return ;
 }
 void	image_load(t_data *data)
@@ -102,6 +108,7 @@ void	image_load(t_data *data)
 		i++;
 	}
 }
+
 
 void    init_player(t_data *data)
 {

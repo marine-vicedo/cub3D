@@ -39,3 +39,19 @@ void    get_position_player(t_data *data)
         j++;
     }
 }
+
+void	set_image_pixel(t_img *image, int x, int y, int color)
+{
+	int	pixel;
+
+	pixel = y * SCWIDTH + x;
+	image->addr[pixel] = color;
+}
+
+void	ft_my_mlx_pixel_put(t_img *data, int i, int j, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (i * data->line_size + j * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}

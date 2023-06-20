@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:37:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/16 14:42:10 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:39:37 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,10 @@ void	paint_floor(t_data *data)
 		{
 			data->img.buffer[i][j] = celling;
 			data->img.buffer[SCHEIGHT - i - 1][j] = floor;
+			ft_my_mlx_pixel_put(&data->img, i, j, celling);
+			ft_my_mlx_pixel_put(&data->img, (SCHEIGHT - i - 1), j, floor);
 			j++;
 		}
 		i++;
 	}	
-}
-
-void	paint_img(t_data *data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < SCHEIGHT)
-	{
-		x = 0;
-		while (x < SCWIDTH)
-		{
-			data->img.addr[y * SCWIDTH + x] = data->img.buffer[y][x];
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }

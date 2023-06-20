@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:59:34 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/16 14:10:56 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:58:30 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    start_game(t_data *data)
     if (!data->win || !data->win_mini)
         exit(1);
     init_img(data);
-    image_load(data);
+    //image_load(data);
     init_player(data);
 	draw_minimap(data);
 	updata(data);   

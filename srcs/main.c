@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/16 14:58:40 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:52:59 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,18 @@ void	ft_parsing(t_data *data, char *av)
 	ft_parsing_map(av, data);
 }
 
-/* int main(int ac, char **av)
+
+
+void    test(t_data *data)
+{
+	mlx_pixel_put(data->mlx, data->win_mini, 10, 10, MMAP_COLOR_PLAYER);
+	// mlx_pixel_put(data->mlx, data->img.img, 10, 10, MMAP_COLOR_PLAYER);
+	ft_my_mlx_pixel_put(&data->img, 10, 10, MMAP_COLOR_PLAYER);
+	// set_image_pixel(&data->img, 10, 10, MMAP_COLOR_PLAYER);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+}
+
+int main(int ac, char **av)
 {
 	t_data	*data;
 
@@ -79,36 +90,27 @@ void	ft_parsing(t_data *data, char *av)
 		free(data);
 		return (1);
 	}
+	//image_load(data);
+	//test(data);
 	init_player(data);
 	draw_minimap(data);
 	updata(data);
-} */
 
-int	main_loop(t_data *data)
-{
-	updata(data);
-	paint_floor(data);
-	draw_minimap(data);
-	paint_img(data);
+	
+	
+	/* Setup hooks */ 
+	mlx_hook(data->win_mini, 2, 1L << 0, handle_keypress, data);
+	//mlx_hook(data->win_mini, 3, 1L << 0, handle_keyrelease, data);
+	mlx_hook(data->win_mini, 17, 1L << 0, exit_game, data);
+	mlx_hook(data->win, 17, 1L << 0, exit_game, data);
+	mlx_loop(data->mlx);
+
+	/* we will exit the loop if there's no window left, and execute this code */
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	free(data);
 	return (0);
 }
 
-int	main(int ac, char **av)
-{
-	t_data	data;
-	
-	if (ac == 2)
-	{
-		ft_parsing(&data, av[1]);
-		start_game(&data);
-		mlx_hook(&data.win_mini, 2, 1L << 0, handle_keypress, &data);
-		mlx_hook(data.win_mini, 3, 1L << 0, handle_keyrelease, &data);
-		mlx_hook(&data.win_mini, 17, 1L << 0, exit_game, &data);
-		mlx_hook(&data.win, 17, 1L << 0, exit_game, &data);
-		mlx_loop_hook(data.mlx, &main_loop, &data);
-		mlx_loop(&data.mlx);
-	}
-	else
-		exit(0);
-}
+
 
