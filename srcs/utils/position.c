@@ -12,6 +12,18 @@
 
 #include"cub3D.h"
 
+static void player_direction(t_data *data, char c)
+{
+    if (c == 'N')
+        data->player.rotationAngle = PI / 2;
+    if (c == 'E')
+        data->player.rotationAngle = PI;
+    if (c == 'S')
+        data->player.rotationAngle = PI * 3 / 2;
+    if (c == 'W')
+        data->player.rotationAngle = 0;
+}
+
 void    get_position_player(t_data *data)
 {
     t_player    *player;
@@ -27,15 +39,14 @@ void    get_position_player(t_data *data)
         i = 0;
         while (i < map->width)
         {
-			//printf("%c", minimap->map[j][i]);
             if (map->map[j][i] == 'N' || map->map[j][i] == 'S' || map->map[j][i] == 'E' || map->map[j][i] == 'W')
             {
                 player->pos_x = (i * TILE_SIZE) + TILE_SIZE / 2;
                 player->pos_y = (j * TILE_SIZE) + TILE_SIZE / 2;
+                player_direction(data, map->map[j][i]);
             }
             i++;
         }
-		//printf("\n");
         j++;
     }
 }

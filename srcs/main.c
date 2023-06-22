@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/20 14:52:59 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 09:59:35 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,6 @@ void	ft_parsing(t_data *data, char *av)
 }
 
 
-
-void    test(t_data *data)
-{
-	mlx_pixel_put(data->mlx, data->win_mini, 10, 10, MMAP_COLOR_PLAYER);
-	// mlx_pixel_put(data->mlx, data->img.img, 10, 10, MMAP_COLOR_PLAYER);
-	ft_my_mlx_pixel_put(&data->img, 10, 10, MMAP_COLOR_PLAYER);
-	// set_image_pixel(&data->img, 10, 10, MMAP_COLOR_PLAYER);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-}
-
 int main(int ac, char **av)
 {
 	t_data	*data;
@@ -79,6 +69,7 @@ int main(int ac, char **av)
 	if (data->mlx== NULL || ac != 2)
 		return (free(data), 1);
 	init_img(data);
+	init_player(data);
 	get_position_player(data);
 	
     data->win = mlx_new_window(data->mlx, SCWIDTH, SCHEIGHT, "cub3D");
@@ -91,13 +82,11 @@ int main(int ac, char **av)
 		return (1);
 	}
 	//image_load(data);
-	//test(data);
-	init_player(data);
-	draw_minimap(data);
+	draw_window(data);
 	updata(data);
 
-	
-	
+
+
 	/* Setup hooks */ 
 	mlx_hook(data->win_mini, 2, 1L << 0, handle_keypress, data);
 	//mlx_hook(data->win_mini, 3, 1L << 0, handle_keyrelease, data);

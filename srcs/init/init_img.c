@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/20 15:42:21 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 10:13:05 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,8 @@ void    init_player(t_data *data)
     player->radius = 3;
     player->turnDirection = 0;  // -1 if left, +1 if right
     player->walkDirection = 0;  // -1 if back, +1 if front
-    player->rotationAngle = PI / 2;
     player->moveSpeed = 5;
-    player->rotationSpeed = 1 * (PI / 180);
+    player->rotationSpeed = 5 * (PI / 180);
 }
 
 void    init_newPosition(t_data *data)

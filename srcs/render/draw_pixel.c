@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/20 15:41:56 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:48:17 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	render3DProjectWall(t_data *data, int ray_id)
     distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
     wallStripHeight  = (TILE_SIZE / correctionWallDistance) * distanceProjectionPlane;
 	j = (SCHEIGHT / 2) - (wallStripHeight / 2);
-	Wall_STRIP_WIDTH = 1.7;
+	Wall_STRIP_WIDTH = 1.6;
 	if (j < 0)
 		j = 0;
 	while (j <= wallStripHeight && j != SCHEIGHT)

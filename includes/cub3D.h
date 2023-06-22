@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/20 14:49:36 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:46:39 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <limits.h>
 # include <unistd.h>
 # include <string.h>
+
+# ifndef BONUS
+#  define BONUS 1
+# endif
 
 # define SCHEIGHT 600
 # define SCWIDTH 960
@@ -228,7 +232,7 @@ void    		start_game(t_data *data);
 
 //render/
 //minimap_image;
-void			draw_minimap(t_data *data);
+void			draw_window(t_data *data);
 //draw_pixel
 void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
 void			draw_ray(t_data *data);
