@@ -6,7 +6,7 @@
 /*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 20:37:59 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/22 23:41:36 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@
 # define PI 3.14159
 # define TILE_SIZE 64
 # define TEX_SIZE  64
+# define Wall_STRIP_WIDTH 1.6
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"
 # define ERR_FILE_NOT_XPM "Extension file is not .xpm"
@@ -170,13 +171,13 @@ typedef struct s_ray
 	// double		sidedist_x;
 	// double		sidedist_y;
 	// double		deltadist_x;
-	// double		deltadist_y;
-	// double		wall_dist;
-	// double		wall_x;
+	double			wallStripHeight;
+	double			correctionWallDistance;
+	double			distanceProjectionPlane;
 	int				side;
-	// int			line_height;
-	// int			draw_start;
-	// int			draw_end;
+	int				ray_id;
+	double			draw_start_x;
+	double			draw_start_y;
 	double			ray_x;
 	double			ray_y;
 	double			ray_angle;
@@ -237,9 +238,11 @@ void			draw_window(t_data *data);
 //draw_pixel
 void			draw_line(t_data *data, double angle, double x, double y);
 void			draw_ray(t_data *data);
-void			render3DProjectWall(t_data *data, int ray_id);
+void			render3DProjectWall(t_data *data);
 void			draw_wall(t_data *data, int x, int y, int color);
 void			wall_side(t_data *data, double x, double y);
+int				get_pixel(t_data *data);
+
 
 //painting
 void			paint_floor(t_data *data);

@@ -6,37 +6,50 @@
 /*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 20:59:57 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/22 23:48:07 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	render3DProjectWall(t_data *data, int ray_id)
+static int	 square(int num) {
+    return num * num;
+}
+
+int	get_pixel(t_data *data)
 {
-	double correctionWallDistance;
-	double distanceProjectionPlane;
-	double	wallStripHeight;
-	double	Wall_STRIP_WIDTH;
-	double	i;
-	double	j;
+	int	color;
 	
-	correctionWallDistance = data->ray.ray_distance * cos(data->ray.ray_angle - data->player.rotationAngle);
-    distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
-    wallStripHeight  = (TILE_SIZE / correctionWallDistance) * distanceProjectionPlane;
-	j = (SCHEIGHT / 2) - (wallStripHeight / 2);
-	Wall_STRIP_WIDTH = 1.6;
-	if (j < 0)
-		j = 0;
-	while (j <= wallStripHeight && j != SCHEIGHT)
+	// double	ratio_y = TILE_SIZE / data->ray.wallStripHeight;
+	// double 	ratio_x = square(TILE_SIZE) * SCWIDTH / data->ray.wallStripHeight / SCHEIGHT;
+	int		tex_start;
+	
+	if (data->ray.side == 2 || data->ray.side == 3)
+		tex_start = (int)round(data->ray.ray_x) % TILE_SIZE;
+	else
+		tex_start = (int)round(data->ray.ray_y) % TILE_SIZE;
+	color = data->texture[data->ray.side].addr[tex_start * TILE_SIZE + tex_start];
+	return (color);
+}
+
+void	render3DProjectWall(t_data *data)
+{
+	data->ray.correctionWallDistance = data->ray.ray_distance * cos(data->ray.ray_angle - data->player.rotationAngle);
+    data->ray.distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
+    data->ray.wallStripHeight  = (TILE_SIZE / data->ray.correctionWallDistance) * data->ray.distanceProjectionPlane;
+	data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2);
+	if (data->ray.draw_start_y < 0)
+		data->ray.draw_start_y = 0;
+	while (data->ray.draw_start_y <= data->ray.wallStripHeight && data->ray.draw_start_y != SCHEIGHT)
 	{
-		i = ray_id * Wall_STRIP_WIDTH;
-		while (i <= (ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
+		data->ray.draw_start_x = data->ray.ray_id * Wall_STRIP_WIDTH;
+		while (data->ray.draw_start_x <= (data->ray.ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
 		{
-			ft_my_mlx_pixel_put(&data->img, (int)j, (int)i, MMAP_COLOR_WALL);
-			i++;
+			// ft_my_mlx_pixel_put(&data->img, (int)data->ray.draw_start_y, (int)data->ray.draw_start_x, MMAP_COLOR_WALL);
+			ft_my_mlx_pixel_put(&data->img, (int)data->ray.draw_start_y, (int)data->ray.draw_start_x, get_pixel(data));
+			data->ray.draw_start_x++;
 		}
-		j++;
+		data->ray.draw_start_y++;
 	}
 }
 
@@ -68,10 +81,6 @@ void	wall_side(t_data *data, double x, double y)
 	if (n == 1)
 		data->ray.side = 3;
 }
-static int	 square(int num) {
-    return num * num;
-}
-
 
 void	draw_line(t_data *data, double angle, double x, double y)
 {
@@ -95,7 +104,7 @@ void	draw_line(t_data *data, double angle, double x, double y)
 }
 void	draw_ray(t_data *data)
 {
-	int	ray_id = 0;
+	data->ray.ray_id = 0;
 	
 	data->ray.ray_angle = (data->player.rotationAngle - FOV_ANGLE / 2);
 	while (data->ray.ray_angle <= (data->player.rotationAngle + FOV_ANGLE / 2))
@@ -103,8 +112,8 @@ void	draw_ray(t_data *data)
 		data->ray.ray_x = data->player.pos_x;
 		data->ray.ray_y = data->player.pos_y;
 		draw_line(data, data->ray.ray_angle, data->ray.ray_x, data->ray.ray_y);
-		render3DProjectWall(data, ray_id);
+		render3DProjectWall(data);
 		data->ray.ray_angle += 0.1 * (PI / 180);
-		ray_id++;
+		data->ray.ray_id++;
 	}
 }
