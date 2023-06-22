@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/21 13:46:45 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:21:41 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	updata(t_data *data)
 		player->pos_y = newPlayerY;
 	}
 }
+
+
 
 int	hasWallAt(t_data *data, double x, double y)
 {

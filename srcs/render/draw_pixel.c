@@ -6,17 +6,11 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/21 13:48:17 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:34:00 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-
-void	draw_wall(t_data *data, int x, int y, int color)
-{
-	data->img.buffer[x][y] = color;
-}
 
 void	render3DProjectWall(t_data *data, int ray_id)
 {
@@ -45,12 +39,41 @@ void	render3DProjectWall(t_data *data, int ray_id)
 		j++;
 	}
 }
+
+void	wall_side(t_data *data, double x, double y)
+{
+	int	n;
+	int e;
+	int w;
+	int s;
+	/* east = 0, west = 1, south = 2, north = 3 */
+	n = 1;
+	e = 1;
+	w = 1;
+	s = 1;
+	if(hasWallAt(data, (x + 1), y))
+		e = 0;
+	if(hasWallAt(data, (x - 1), y))
+		w = 0;
+	if(hasWallAt(data, x, (y + 1)))
+		s = 0;
+	if(hasWallAt(data, x, (y - 1)))
+		n = 0;
+	if (e == 1)
+		data->ray.side = 0;
+	if (w == 1)
+		data->ray.side = 1;
+	if (s == 1)
+		data->ray.side = 2;
+	if (n == 1)
+		data->ray.side = 3;
+}
 static int	 square(int num) {
     return num * num;
 }
 
 
-void	draw_line(t_data *data, double angle, double x, double y, int ray_id)
+void	draw_line(t_data *data, double angle, double x, double y)
 {
 	double i = 0;
 
@@ -66,7 +89,9 @@ void	draw_line(t_data *data, double angle, double x, double y, int ray_id)
 		i++;
 	}
 	data->ray.ray_distance = sqrt(square(fabs(x - data->player.pos_x)) + square(fabs(y - data->player.pos_y)));
-	render3DProjectWall(data, ray_id);
+	data->ray.ray_x = x;
+	data->ray.ray_y = y;
+	wall_side(data, x, y);
 }
 void	draw_ray(t_data *data)
 {
@@ -77,7 +102,8 @@ void	draw_ray(t_data *data)
 	{
 		data->ray.ray_x = data->player.pos_x;
 		data->ray.ray_y = data->player.pos_y;
-		draw_line(data, data->ray.ray_angle, data->ray.ray_x, data->ray.ray_y, ray_id);
+		draw_line(data, data->ray.ray_angle, data->ray.ray_x, data->ray.ray_y);
+		render3DProjectWall(data, ray_id);
 		data->ray.ray_angle += 0.1 * (PI / 180);
 		ray_id++;
 	}

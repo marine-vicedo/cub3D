@@ -6,11 +6,30 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/20 11:57:32 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:39:57 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	clean_texture(t_data *data)
+{
+	if (data->texture[0].img)
+	{
+		printf("i am here1");
+		mlx_destroy_image(data->mlx, data->texture[0].img);
+	}
+	if (data->texture[1].img)
+	{
+		printf("i am here2");
+		mlx_destroy_image(data->mlx, data->texture[1].img);
+	}
+	if (data->texture[2].img)
+		mlx_destroy_image(data->mlx, data->texture[2].img);
+	if (data->texture[3].img)
+		mlx_destroy_image(data->mlx, data->texture[3].img);
+	free(data->texture);
+}
 
 void	clean_exit(t_data *data, int code)
 {
@@ -50,6 +69,7 @@ int	exit_game(t_data *data)
 		free(data->mlx);
 	}
 	ft_free_data(data);
+	//clean_texture(data);
 	free(data);
 	exit (0);
 	return (0);

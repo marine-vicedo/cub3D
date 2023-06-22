@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/21 10:46:39 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:27:41 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef struct s_ray
 	// double		deltadist_y;
 	// double		wall_dist;
 	// double		wall_x;
-	// int			side;
+	int				side;
 	// int			line_height;
 	// int			draw_start;
 	// int			draw_end;
@@ -204,6 +204,7 @@ typedef struct s_data
 	t_map		map;
 	t_rgb		rgb;
 	t_img		img;
+	t_img		*texture;
 	t_player	player;
 	t_ray		ray;
 	t_move		move;
@@ -224,8 +225,8 @@ void			init_img_clean(t_img *img);
 void			init_img(t_data *data);
 void			init_player(t_data *data);
 void			init_newPosition(t_data *data);
-void			fill_arr_img(t_data *data, int i);
-void			image_load(t_data *data);
+void			init_textures(t_data *data);
+void			init_texture(t_data *data);
 //start_game
 void    		start_game(t_data *data);
 
@@ -234,10 +235,12 @@ void    		start_game(t_data *data);
 //minimap_image;
 void			draw_window(t_data *data);
 //draw_pixel
-void			draw_line(t_data *data, double angle, double x, double y, int ray_id);
+void			draw_line(t_data *data, double angle, double x, double y);
 void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data, int ray_id);
 void			draw_wall(t_data *data, int x, int y, int color);
+void			wall_side(t_data *data, double x, double y);
+
 //painting
 void			paint_floor(t_data *data);
 void			paint_img(t_data *data);
@@ -252,6 +255,7 @@ void			ft_my_mlx_pixel_put(t_img *data, int i, int j, int color);
 void			clean_exit(t_data *data, int code);
 int				quit_cub3d(t_data *data);
 int				exit_game(t_data *data);
+void			clean_texture(t_data *data);
 
 //main
 
