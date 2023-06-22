@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:28:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/21 10:44:13 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:40:48 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	setting_img(t_data *data)
 	int	x;
 	int	y;
 
-	data->minimap.wall = mlx_xpm_file_to_image(data->mlx, "./image/test1.xpm", &x, &y);
+	data->minimap.wall = mlx_xpm_file_to_image(data->mlx, "./image/color_stone.xpm", &x, &y);
 	y = 0;
 	while (y < data->map.height)
 	{

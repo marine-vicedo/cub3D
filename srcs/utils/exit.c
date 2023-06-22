@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 15:39:57 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:17:22 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 void	clean_texture(t_data *data)
 {
 	if (data->texture[0].img)
-	{
-		printf("i am here1");
 		mlx_destroy_image(data->mlx, data->texture[0].img);
-	}
 	if (data->texture[1].img)
-	{
-		printf("i am here2");
 		mlx_destroy_image(data->mlx, data->texture[1].img);
-	}
 	if (data->texture[2].img)
 		mlx_destroy_image(data->mlx, data->texture[2].img);
 	if (data->texture[3].img)
@@ -57,6 +51,8 @@ int	exit_game(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->minimap.wall);
 	mlx_destroy_image(data->mlx, data->img.img);
+	clean_texture(data);
+	ft_free_data(data);
 	if (data->win && data->mlx && data->win_mini)
 	{
 		mlx_destroy_window(data->mlx, data->win);
@@ -68,8 +64,6 @@ int	exit_game(t_data *data)
 		mlx_loop_end(data->mlx);
 		free(data->mlx);
 	}
-	ft_free_data(data);
-	//clean_texture(data);
 	free(data);
 	exit (0);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 15:27:41 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:37:59 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 # define MMAP_COLOR_SPACE 0x404040
 
 # define PI 3.14159
-# define TILE_SIZE 50
+# define TILE_SIZE 64
 # define TEX_SIZE  64
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"

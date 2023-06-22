@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 15:40:51 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:43:59 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_texture(t_data *data)
 			path = data->file.north;
 		data->texture[i].img = \
 			mlx_xpm_file_to_image(data->mlx, path, &data->texture[i].img_width, &data->texture[i].img_height);
-		if (data->texture[i].img_width != TEX_SIZE || data->texture[i].img_height != TEX_SIZE
+		if (data->texture[i].img_width != TILE_SIZE || data->texture[i].img_height != TILE_SIZE
 			|| data->texture[i].img == NULL)
 			{
 				printf("there is no image in textue");
