@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 23:41:36 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:32:07 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@
 
 # define PI 3.14159
 # define TILE_SIZE 64
-# define TEX_SIZE  64
-# define Wall_STRIP_WIDTH 1.6
+# define Wall_STRIP_WIDTH 1
+# define NUM_RAY 960
+# define moveSpeed 5
+# define rotationSpeed 5 * (PI / 180)
+# define WINDOW 1
+# define MINI_MAP 2
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"
 # define ERR_FILE_NOT_XPM "Extension file is not .xpm"
@@ -89,6 +93,13 @@ typedef struct s_rgb
 	int	b;
 }				t_rgb;
 
+typedef struct s_pixel
+{
+	int				x;
+	int				y;
+	unsigned int	color;
+}			t_pixel;
+
 typedef struct s_img
 {
 	void		*img;
@@ -98,8 +109,7 @@ typedef struct s_img
 	int			endian;
 	int			img_width;
 	int			img_height;
-	int			buffer[SCHEIGHT][SCWIDTH];
-	int			**arr_img;
+	double		ratio;
 }				t_img;
 
 typedef struct s_move
@@ -155,8 +165,6 @@ typedef struct s_player
 	int			turnDirection;
 	int			walkDirection;
 	double		rotationAngle;
-	int			moveSpeed;
-	double		rotationSpeed;
 }				t_player;
 
 typedef struct s_ray
@@ -194,6 +202,7 @@ typedef struct s_minimap
 	int		view_dist;
 	int		tile_size;
 	void	*wall;
+	t_img	m_map;
 }	t_minimap;
 
 typedef struct s_data
@@ -228,6 +237,7 @@ void			init_player(t_data *data);
 void			init_newPosition(t_data *data);
 void			init_textures(t_data *data);
 void			init_texture(t_data *data);
+t_pixel			init_pixel(int x, int y, int color);
 //start_game
 void    		start_game(t_data *data);
 
@@ -241,7 +251,7 @@ void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data);
 void			draw_wall(t_data *data, int x, int y, int color);
 void			wall_side(t_data *data, double x, double y);
-int				get_pixel(t_data *data);
+int				get_color(t_data *data, int x, int y);
 
 
 //painting

@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 14:21:41 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:50:44 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	updata(t_data *data)
 	double		newPlayerY;
 
 	player = &data->player;
-	player->rotationAngle += (player->turnDirection * player->rotationSpeed);
-	movestep = (player->walkDirection  % 2) * player->moveSpeed;
+	player->rotationAngle += (player->turnDirection * rotationSpeed);
+	movestep = (player->walkDirection  % 2) * moveSpeed;
 	newPlayerX = player->pos_x + cos(player->rotationAngle) * movestep;
 	newPlayerY = player->pos_y + sin(player->rotationAngle) * movestep;
 	if (abs(player->walkDirection) == 3)
