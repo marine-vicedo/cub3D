@@ -66,3 +66,18 @@ void	ft_my_mlx_pixel_put(t_img *data, int i, int j, int color)
 	dst = data->addr + (i * data->line_size + j * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
+
+unsigned int    get_texture(t_data *data, unsigned int tex_i)
+{
+    int                res;
+    unsigned char    r;
+    unsigned char    g;
+    unsigned char    b;
+
+    // tex_i = i * data->line_size + j * (data->bits_per_pixel / 8);
+    r = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 2];
+    g = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 1];
+    b = (unsigned char)(data->texture[data->ray.side].addr)[tex_i];
+    res = ((int)r << 16) + ((int)g << 8) + (int)b;
+    return (res);
+}

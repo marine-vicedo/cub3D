@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/23 15:32:07 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:12:04 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ void			paint_img(t_data *data);
 void			get_position_player(t_data *data);
 void			set_image_pixel(t_img *image, int x, int y, int color);
 void			ft_my_mlx_pixel_put(t_img *data, int i, int j, int color);
+unsigned int    get_texture(t_data *data, unsigned int tex_i);
 //exit
 void			clean_exit(t_data *data, int code);
 int				quit_cub3d(t_data *data);

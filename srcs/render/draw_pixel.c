@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/23 15:41:53 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:12:45 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	draw_pixel(t_data *data, t_pixel p, int option)
 
 int	get_color(t_data *data, int x, int y)
 {
+	unsigned int	color_index;
 	unsigned int	color;
 	double	ratio = data->texture[data->ray.side].img_height / data->ray.wallStripHeight;
 	unsigned int		tex_start;
@@ -52,9 +53,10 @@ int	get_color(t_data *data, int x, int y)
 	else
 		tex_start = (int)round(data->ray.ray_y) % TILE_SIZE;
 	if (tex_start < (unsigned int)data->texture[data->ray.side].img_width && (y * ratio) < (unsigned int)data->texture[data->ray.side].img_height)
-		color = data->texture[data->ray.side].addr[tex_start + (int)(data->texture[data->ray.side].img_width * y * ratio)];
+		color_index = tex_start + (int)(data->texture[data->ray.side].img_width * y * ratio);
 	else
-		color = data->texture[data->ray.side].addr[(tex_start - 1) + (int)(data->texture[data->ray.side].img_width * y * ratio)];
+		color_index= (tex_start - 1) + (int)(data->texture[data->ray.side].img_width * y * ratio);
+	color = get_texture(data, color_index);
 	return (color);
 }
 
