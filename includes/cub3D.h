@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/26 19:12:04 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/27 14:39:53 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,10 +175,8 @@ typedef struct s_ray
 	// int			map_x;
 	// int			map_y;
 	// int			step_x;
-	// int			step_y;
-	// double		sidedist_x;
-	// double		sidedist_y;
-	// double		deltadist_x;
+	double			text_y;
+	double			text_x;
 	double			wallStripHeight;
 	double			correctionWallDistance;
 	double			distanceProjectionPlane;
@@ -251,7 +249,7 @@ void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data);
 void			draw_wall(t_data *data, int x, int y, int color);
 void			wall_side(t_data *data, double x, double y);
-int				get_color(t_data *data, int x, int y);
+int				get_color(t_data *data, int x, double y);
 
 
 //painting

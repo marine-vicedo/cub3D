@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/26 19:12:45 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/27 15:37:26 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_pixel(t_data *data, t_pixel p, int option)
 		img->addr[p.x + size * p.y] = p.color;
 }
 
-int	get_color(t_data *data, int x, int y)
+int	get_color(t_data *data, int x, double y)
 {
 	unsigned int	color_index;
 	unsigned int	color;
@@ -53,9 +53,9 @@ int	get_color(t_data *data, int x, int y)
 	else
 		tex_start = (int)round(data->ray.ray_y) % TILE_SIZE;
 	if (tex_start < (unsigned int)data->texture[data->ray.side].img_width && (y * ratio) < (unsigned int)data->texture[data->ray.side].img_height)
-		color_index = tex_start + (int)(data->texture[data->ray.side].img_width * y * ratio);
+		color_index = (tex_start * data->texture[data->ray.side].line_size) +  (y * ratio) * (data->texture[data->ray.side].bits_per_pixel / 8);
 	else
-		color_index= (tex_start - 1) + (int)(data->texture[data->ray.side].img_width * y * ratio);
+		color_index= (tex_start - 1) * data->texture[data->ray.side].line_size +  y * ratio * (data->texture[data->ray.side].bits_per_pixel / 8);
 	color = get_texture(data, color_index);
 	return (color);
 }
@@ -69,20 +69,6 @@ void	render3DProjectWall(t_data *data)
     data->ray.distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
     data->ray.wallStripHeight  = (TILE_SIZE / data->ray.correctionWallDistance) * data->ray.distanceProjectionPlane;
 	data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2);
- 	/* if (data->ray.draw_start_y < 0)
-		data->ray.draw_start_y = 0;
-	while (data->ray.draw_start_y <= data->ray.wallStripHeight && data->ray.draw_start_y != SCHEIGHT)
-	{
-		data->ray.draw_start_x = data->ray.ray_id * Wall_STRIP_WIDTH;
-		while (data->ray.draw_start_x <= (data->ray.ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
-		{
-			// ft_my_mlx_pixel_put(&data->img, (int)data->ray.draw_start_y, (int)data->ray.draw_start_x, MMAP_COLOR_WALL);
-			color = get_pixel(data, (int)data->ray.draw_start_x, (int)data->ray.draw_start_y);
-			ft_my_mlx_pixel_put(&data->img, (int)data->ray.draw_start_y, (int)data->ray.draw_start_x, color);
-			data->ray.draw_start_x++;
-		}
-		data->ray.draw_start_y++;
-	} */
 	
 	data->ray.draw_start_x = data->ray.ray_id * Wall_STRIP_WIDTH;
 	while (data->ray.draw_start_x <= (data->ray.ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
@@ -94,7 +80,7 @@ void	render3DProjectWall(t_data *data)
 		while (data->ray.draw_start_y < SCHEIGHT)
 		{
 			// draw_pixel(data, init_pixel(data->ray.draw_start_x, data->ray.draw_start_y, get_color(data, data->ray.draw_start_x, data->ray.draw_start_y)), WINDOW);
-			color = get_color(data, (int)data->ray.draw_start_x, (int)data->ray.draw_start_y);
+			color = get_color(data, (int)data->ray.draw_start_x, y);
 			ft_my_mlx_pixel_put(&data->img, (int)data->ray.draw_start_y, (int)data->ray.draw_start_x, color);
 			y += 1;
 			data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2) + y;
@@ -159,7 +145,6 @@ void	draw_ray(t_data *data)
 	data->ray.ray_id = 0;
 	
 	data->ray.ray_angle = (data->player.rotationAngle - FOV_ANGLE / 2);
-	//while (data->ray.ray_angle <= (data->player.rotationAngle + FOV_ANGLE / 2))
 	while(data->ray.ray_id < NUM_RAY)
 	{
 		data->ray.ray_x = data->player.pos_x;
