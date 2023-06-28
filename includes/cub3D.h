@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/27 14:39:53 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/28 23:11:14 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,8 @@ typedef struct s_ray
 	// int			map_x;
 	// int			map_y;
 	// int			step_x;
-	double			text_y;
-	double			text_x;
+	double			offset_y;
+	double			offset_x;
 	double			wallStripHeight;
 	double			correctionWallDistance;
 	double			distanceProjectionPlane;
@@ -211,7 +211,7 @@ typedef struct s_data
 	t_file		file;
 	t_map		map;
 	t_rgb		rgb;
-	t_img		img;
+	t_img		*img;
 	t_img		*texture;
 	t_player	player;
 	t_ray		ray;
@@ -249,7 +249,7 @@ void			draw_ray(t_data *data);
 void			render3DProjectWall(t_data *data);
 void			draw_wall(t_data *data, int x, int y, int color);
 void			wall_side(t_data *data, double x, double y);
-int				get_color(t_data *data, int x, double y);
+unsigned int	get_color(t_data *data, double x, double y);
 
 
 //painting
@@ -262,7 +262,8 @@ void			paint_img(t_data *data);
 void			get_position_player(t_data *data);
 void			set_image_pixel(t_img *image, int x, int y, int color);
 void			ft_my_mlx_pixel_put(t_img *data, int i, int j, int color);
-unsigned int    get_texture(t_data *data, unsigned int tex_i);
+void    		my_mlx_pixel_put(t_img *data, int x, int y, int color);
+unsigned int    get_texture(t_data *data);
 //exit
 void			clean_exit(t_data *data, int code);
 int				quit_cub3d(t_data *data);

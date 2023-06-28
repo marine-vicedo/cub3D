@@ -6,7 +6,7 @@
 /*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 20:17:22 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:15:30 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	quit_cub3d(t_data *data)
 int	exit_game(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->minimap.wall);
-	mlx_destroy_image(data->mlx, data->img.img);
+	mlx_destroy_image(data->mlx, data->img->img);
 	clean_texture(data);
 	ft_free_data(data);
 	if (data->win && data->mlx && data->win_mini)

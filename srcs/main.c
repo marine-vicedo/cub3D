@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/22 09:59:35 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/28 22:30:53 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(int ac, char **av)
 {
 	t_data	*data;
 
-	data = malloc(sizeof(t_data));
+	data = (t_data *)malloc(sizeof(t_data));
 	if (ac != 2)
 		return (free(data), printf("Error\nCub3D need one argument (ex : map.cub)\n"), 1);
 	ft_parsing(data, av[1]);
@@ -69,6 +69,7 @@ int main(int ac, char **av)
 	if (data->mlx== NULL || ac != 2)
 		return (free(data), 1);
 	init_img(data);
+	init_textures(data);
 	init_player(data);
 	get_position_player(data);
 	

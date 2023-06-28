@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/27 15:37:26 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/28 22:13:48 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,80 +16,92 @@ static int	 square(int num) {
     return num * num;
 }
 
-void	draw_pixel(t_data *data, t_pixel p, int option)
+unsigned int    get_texture(t_data *data)
 {
-	int		size;
-	int		window_width;
-	int		window_height;
-	t_img	*img;
-
-	if (option == WINDOW)
-	{
-		window_width = SCWIDTH;
-		window_height = SCHEIGHT;
-		img = data->img.img;
-	}
-	else
-	{
-		window_width = (data->map.width * TILE_SIZE);
-		window_height = (data->map.height * TILE_SIZE);
-		img = data->minimap.m_map.img;
-	}
-	size = window_width * img->ratio;
-	if ((p.x >= 0 && p.x < window_width * img->ratio) && \
-			(p.y >= 0 && p.y < window_height * img->ratio))
-		img->addr[p.x + size * p.y] = p.color;
+    int                res;
+    int                tex_i;
+    unsigned char    r;
+    unsigned char    g;
+    unsigned char    b;
+/* use offset_y and offset_x to find the good pixel in the texture. You have calculated these variables in "get_hor_texture_color" and "get_vert_texture_color" functions*/
+    tex_i = data->ray.offset_y * data->texture[data->ray.side].line_size + data->ray.offset_x \
+            * (data->texture[data->ray.side].bits_per_pixel / 8);
+    r = (unsigned char)(data->img->addr)[tex_i + 2];
+    g = (unsigned char)(data->img->addr)[tex_i + 1];
+    b = (unsigned char)(data->img->addr)[tex_i];
+    res = ((int)r << 16) + ((int)g << 8) + (int)b;
+    return (res);
 }
 
-int	get_color(t_data *data, int x, double y)
+
+static void	get_texture_color(t_data *data, int y)
 {
-	unsigned int	color_index;
-	unsigned int	color;
-	double	ratio = data->texture[data->ray.side].img_height / data->ray.wallStripHeight;
-	unsigned int		tex_start;
-	(void)x;
-	if (data->ray.side == 2 || data->ray.side == 3)
-		tex_start = (int)round(data->ray.ray_x) % TILE_SIZE;
-	else
-		tex_start = (int)round(data->ray.ray_y) % TILE_SIZE;
-	if (tex_start < (unsigned int)data->texture[data->ray.side].img_width && (y * ratio) < (unsigned int)data->texture[data->ray.side].img_height)
-		color_index = (tex_start * data->texture[data->ray.side].line_size) +  (y * ratio) * (data->texture[data->ray.side].bits_per_pixel / 8);
-	else
-		color_index= (tex_start - 1) * data->texture[data->ray.side].line_size +  y * ratio * (data->texture[data->ray.side].bits_per_pixel / 8);
-	color = get_texture(data, color_index);
-	return (color);
+	t_img    *tex;
+
+    tex = &data->texture[data->ray.side];
+    data->ray.offset_y = (y * tex->img_height) / floor(data->ray.wallStripHeight);
+    if (data->ray.offset_y > tex->img_height)
+        data->ray.offset_y = tex->img_height - 1;
+    if (data->ray.side == 2)
+		data->ray.offset_x = (int)round(data->ray.ray_x) % TILE_SIZE;
+	else if (data->ray.side == 3)
+		data->ray.offset_x = TILE_SIZE - (int)round(data->ray.ray_x) % TILE_SIZE;
+	else if (data->ray.side == 1)
+		data->ray.offset_x = (int)round(data->ray.ray_y) % TILE_SIZE;
+	else if (data->ray.side == 0)
+		data->ray.offset_x = TILE_SIZE - (int)round(data->ray.ray_y) % TILE_SIZE;
+    data->ray.offset_x = (data->ray.offset_x * tex->img_width) / TILE_SIZE;
+    if (data->ray.offset_x > tex->img_width)
+        data->ray.offset_x = tex->img_width - 1;
+}
+
+unsigned int    choose_color(t_data *data, double y)
+{
+    unsigned int    color;
+	
+	get_texture_color(data, y);
+    color = get_texture(data);
+    return (color);
+}
+static void	raycasting_draw_wall_texture(t_data *data, int x, double top_pxl)
+{
+	int		next;
+	double	y;
+	double	tmp_top_pxl;
+
+	y = 0;
+	next = x + Wall_STRIP_WIDTH;
+	tmp_top_pxl = top_pxl;
+	while (x < next)
+	{
+		y = 0;
+		top_pxl = tmp_top_pxl + y;
+		while (top_pxl < 0)
+            top_pxl = tmp_top_pxl + y++;
+		while (top_pxl < SCHEIGHT)
+		{
+			my_mlx_pixel_put(data->img->img, x, top_pxl, \
+						choose_color(data, y));
+			y += 1;
+			top_pxl = tmp_top_pxl + y;
+			if (y > data->ray.wallStripHeight)
+				break ;
+		}
+		x++;
+	}
 }
 
 void	render3DProjectWall(t_data *data)
 {
-	int	color;
-	double	y;
-	
+	int			pixel_index;
+
+	pixel_index = 0;
 	data->ray.correctionWallDistance = data->ray.ray_distance * cos(data->ray.ray_angle - data->player.rotationAngle);
     data->ray.distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
     data->ray.wallStripHeight  = (TILE_SIZE / data->ray.correctionWallDistance) * data->ray.distanceProjectionPlane;
 	data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2);
-	
-	data->ray.draw_start_x = data->ray.ray_id * Wall_STRIP_WIDTH;
-	while (data->ray.draw_start_x <= (data->ray.ray_id * Wall_STRIP_WIDTH + Wall_STRIP_WIDTH))
-	{
-		y = 0;
-		data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2) + y;
-		while (data->ray.draw_start_y < 0)
-			data->ray.draw_start_y = SCHEIGHT / 2 - (data->ray.wallStripHeight / 2) + y++;
-		while (data->ray.draw_start_y < SCHEIGHT)
-		{
-			// draw_pixel(data, init_pixel(data->ray.draw_start_x, data->ray.draw_start_y, get_color(data, data->ray.draw_start_x, data->ray.draw_start_y)), WINDOW);
-			color = get_color(data, (int)data->ray.draw_start_x, y);
-			ft_my_mlx_pixel_put(&data->img, (int)data->ray.draw_start_y, (int)data->ray.draw_start_x, color);
-			y += 1;
-			data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2) + y;
-			if (y >= data->ray.wallStripHeight)
-				break ;
-		}
-		data->ray.draw_start_x++;
-	}
-} 
+	raycasting_draw_wall_texture(data, pixel_index, data->ray.draw_start_y);
+}
 
 void	wall_side(t_data *data, double x, double y)
 {
@@ -142,8 +154,8 @@ void	draw_line(t_data *data, double angle, double x, double y)
 }
 void	draw_ray(t_data *data)
 {
+	//data->ray.draw_start_x = 0;
 	data->ray.ray_id = 0;
-	
 	data->ray.ray_angle = (data->player.rotationAngle - FOV_ANGLE / 2);
 	while(data->ray.ray_id < NUM_RAY)
 	{

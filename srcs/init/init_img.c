@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/23 15:29:01 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/28 23:12:20 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,21 @@ void	init_texture(t_data *data)
 
 void     init_img(t_data *data)
 {
-    init_img_clean(&data->img);
-	data->img.ratio = 1;
-	data->img.img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
-	if (data->img.img == NULL)
+	data->img = (t_img *)malloc(sizeof(t_img));
+	if(!data->img)
+	{
+		printf("error malloc data->img");
 		exit_game(data);
-	data->img.addr = mlx_get_data_addr(data->img.img, \
-					&data->img.bits_per_pixel, &data->img.line_size, &data->img.endian);
-	if (data->img.addr == NULL)
+	}
+    init_img_clean(data->img);
+	data->img->ratio = 1;
+	data->img->img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
+	if (data->img->img == NULL)
 		exit_game(data);
-	init_textures(data);
+	data->img->addr = mlx_get_data_addr(data->img->img, \
+					&data->img->bits_per_pixel, &data->img->line_size, &data->img->endian);
+	if (data->img->addr == NULL)
+		exit_game(data);
 	return ;
 }
 
@@ -82,7 +87,6 @@ void    init_player(t_data *data)
     t_player    *player;
 
     player = &data->player;
-    //player->radius = 3;
     player->turnDirection = 0;  // -1 if left, +1 if right
     player->walkDirection = 0;  // -1 if back, +1 if front
 }
