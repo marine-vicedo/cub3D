@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/29 11:21:54 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/29 20:57:58 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	init_texture(t_data *data)
 			mlx_xpm_file_to_image(data->mlx, path, &data->texture[i].img_width, &data->texture[i].img_height);
 		if (data->texture[i].img_width != TILE_SIZE || data->texture[i].img_height != TILE_SIZE
 			|| data->texture[i].img == NULL)
-			{
-				printf("there is no image in textue");
 				exit_game(data);
-			}
 		data->texture[i].addr = mlx_get_data_addr(data->texture[i].img, \
 					&data->texture[i].bits_per_pixel, &data->texture[i].line_size, &data->texture[i].endian);
 		if (!data->texture[i].addr)
@@ -66,13 +63,6 @@ void	init_texture(t_data *data)
 
 void     init_img(t_data *data)
 {
-	// data->img = (t_img *)malloc(sizeof(t_img));
-	// if(!data->img)
-	// {
-	// 	printf("error malloc data->img");
-	// 	exit_game(data);
-	// }
-    // init_img_clean(data->img);
     init_img_clean_data(data);
 	data->img.img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
 	if (data->img.img == NULL)

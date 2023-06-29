@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/29 13:07:06 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/29 22:43:23 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int    get_texture(t_data *data)
     unsigned char    r;
     unsigned char    g;
     unsigned char    b;
-/* use offset_y and offset_x to find the good pixel in the texture. You have calculated these variables in "get_hor_texture_color" and "get_vert_texture_color" functions*/
+	
     tex_i = data->ray.offset_y * data->texture[data->ray.side].line_size + data->ray.offset_x \
             * (data->texture[data->ray.side].bits_per_pixel / 8);
     r = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 2];
@@ -34,7 +34,7 @@ unsigned int    get_texture(t_data *data)
 }
 
 
-static void	get_texture_color(t_data *data, int y)
+static void	get_texture_pos(t_data *data, int y)
 {
 	t_img    *tex;
 
@@ -42,14 +42,20 @@ static void	get_texture_color(t_data *data, int y)
     data->ray.offset_y = (y * tex->img_height) / floor(data->ray.wallStripHeight);
     if (data->ray.offset_y > tex->img_height)
         data->ray.offset_y = tex->img_height - 1;
-    if (data->ray.side == 2)
-		data->ray.offset_x = data->ray.ray_x % TILE_SIZE;
-	else if (data->ray.side == 3)
-		data->ray.offset_x = TILE_SIZE - data->ray.ray_x % TILE_SIZE;
-	else if (data->ray.side == 1)
-		data->ray.offset_x = data->ray.ray_y % TILE_SIZE;
-	else if (data->ray.side == 0)
-		data->ray.offset_x = TILE_SIZE - data->ray.ray_y % TILE_SIZE;
+    if (data->ray.side == 2 || data->ray.side == 3)
+	{
+		data->ray.offset_x = data->ray.ray_x / TILE_SIZE * TILE_SIZE;
+		data->ray.offset_x = data->ray.ray_x  - data->ray.offset_x ;
+		if (data->ray.side == 3)
+			data->ray.offset_x = TILE_SIZE - data->ray.offset_x;
+	}
+	else if (data->ray.side == 1 || data->ray.side == 0)
+	{
+		data->ray.offset_x = data->ray.ray_y / TILE_SIZE * TILE_SIZE;
+		data->ray.offset_x = data->ray.ray_y  - data->ray.offset_x ;
+		if (data->ray.side == 0)
+			data->ray.offset_x = TILE_SIZE - data->ray.offset_x;
+	}
     data->ray.offset_x = (data->ray.offset_x * tex->img_width) / TILE_SIZE;
     if (data->ray.offset_x > tex->img_width)
         data->ray.offset_x = tex->img_width - 1;
@@ -59,11 +65,11 @@ unsigned int    choose_color(t_data *data, double y)
 {
     unsigned int    color;
 	
-	get_texture_color(data, y);
+	get_texture_pos(data, y);
     color = get_texture(data);
     return (color);
 }
-static void	raycasting_draw_wall_texture(t_data *data, int x, double top_pxl)
+static void	raycasting_draw_wall_texture(t_data *data, double x, double top_pxl)
 {
 	int		next;
 	double	y;
@@ -93,14 +99,12 @@ static void	raycasting_draw_wall_texture(t_data *data, int x, double top_pxl)
 
 void	render3DProjectWall(t_data *data)
 {
-	int			pixel_index;
-
-	pixel_index = data->ray.ray_id * Wall_STRIP_WIDTH;;
+	data->ray.draw_start_x = data->ray.ray_id * Wall_STRIP_WIDTH;;
 	data->ray.correctionWallDistance = data->ray.ray_distance * cos(data->ray.ray_angle - data->player.rotationAngle);
     data->ray.distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
     data->ray.wallStripHeight  = (TILE_SIZE / data->ray.correctionWallDistance) * data->ray.distanceProjectionPlane;
 	data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2);
-	raycasting_draw_wall_texture(data, pixel_index , data->ray.draw_start_y);
+	raycasting_draw_wall_texture(data, data->ray.draw_start_x , data->ray.draw_start_y);
 }
 
 void	wall_side(t_data *data, double x, double y)
