@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/28 23:11:14 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/29 13:06:03 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,8 @@ typedef struct s_ray
 	int				ray_id;
 	double			draw_start_x;
 	double			draw_start_y;
-	double			ray_x;
-	double			ray_y;
+	int			ray_x;
+	int			ray_y;
 	double			ray_angle;
 	double			ray_distance;
 	
@@ -211,7 +211,7 @@ typedef struct s_data
 	t_file		file;
 	t_map		map;
 	t_rgb		rgb;
-	t_img		*img;
+	t_img		img;
 	t_img		*texture;
 	t_player	player;
 	t_ray		ray;

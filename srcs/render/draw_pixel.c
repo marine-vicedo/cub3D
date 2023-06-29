@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/28 22:13:48 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/29 13:07:06 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ unsigned int    get_texture(t_data *data)
 /* use offset_y and offset_x to find the good pixel in the texture. You have calculated these variables in "get_hor_texture_color" and "get_vert_texture_color" functions*/
     tex_i = data->ray.offset_y * data->texture[data->ray.side].line_size + data->ray.offset_x \
             * (data->texture[data->ray.side].bits_per_pixel / 8);
-    r = (unsigned char)(data->img->addr)[tex_i + 2];
-    g = (unsigned char)(data->img->addr)[tex_i + 1];
-    b = (unsigned char)(data->img->addr)[tex_i];
+    r = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 2];
+    g = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 1];
+    b = (unsigned char)(data->texture[data->ray.side].addr)[tex_i];
     res = ((int)r << 16) + ((int)g << 8) + (int)b;
     return (res);
 }
@@ -43,13 +43,13 @@ static void	get_texture_color(t_data *data, int y)
     if (data->ray.offset_y > tex->img_height)
         data->ray.offset_y = tex->img_height - 1;
     if (data->ray.side == 2)
-		data->ray.offset_x = (int)round(data->ray.ray_x) % TILE_SIZE;
+		data->ray.offset_x = data->ray.ray_x % TILE_SIZE;
 	else if (data->ray.side == 3)
-		data->ray.offset_x = TILE_SIZE - (int)round(data->ray.ray_x) % TILE_SIZE;
+		data->ray.offset_x = TILE_SIZE - data->ray.ray_x % TILE_SIZE;
 	else if (data->ray.side == 1)
-		data->ray.offset_x = (int)round(data->ray.ray_y) % TILE_SIZE;
+		data->ray.offset_x = data->ray.ray_y % TILE_SIZE;
 	else if (data->ray.side == 0)
-		data->ray.offset_x = TILE_SIZE - (int)round(data->ray.ray_y) % TILE_SIZE;
+		data->ray.offset_x = TILE_SIZE - data->ray.ray_y % TILE_SIZE;
     data->ray.offset_x = (data->ray.offset_x * tex->img_width) / TILE_SIZE;
     if (data->ray.offset_x > tex->img_width)
         data->ray.offset_x = tex->img_width - 1;
@@ -80,7 +80,7 @@ static void	raycasting_draw_wall_texture(t_data *data, int x, double top_pxl)
             top_pxl = tmp_top_pxl + y++;
 		while (top_pxl < SCHEIGHT)
 		{
-			my_mlx_pixel_put(data->img->img, x, top_pxl, \
+			my_mlx_pixel_put(&data->img, x, top_pxl, \
 						choose_color(data, y));
 			y += 1;
 			top_pxl = tmp_top_pxl + y;
@@ -95,12 +95,12 @@ void	render3DProjectWall(t_data *data)
 {
 	int			pixel_index;
 
-	pixel_index = 0;
+	pixel_index = data->ray.ray_id * Wall_STRIP_WIDTH;;
 	data->ray.correctionWallDistance = data->ray.ray_distance * cos(data->ray.ray_angle - data->player.rotationAngle);
     data->ray.distanceProjectionPlane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
     data->ray.wallStripHeight  = (TILE_SIZE / data->ray.correctionWallDistance) * data->ray.distanceProjectionPlane;
 	data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wallStripHeight / 2);
-	raycasting_draw_wall_texture(data, pixel_index, data->ray.draw_start_y);
+	raycasting_draw_wall_texture(data, pixel_index , data->ray.draw_start_y);
 }
 
 void	wall_side(t_data *data, double x, double y)
@@ -154,7 +154,6 @@ void	draw_line(t_data *data, double angle, double x, double y)
 }
 void	draw_ray(t_data *data)
 {
-	//data->ray.draw_start_x = 0;
 	data->ray.ray_id = 0;
 	data->ray.ray_angle = (data->player.rotationAngle - FOV_ANGLE / 2);
 	while(data->ray.ray_id < NUM_RAY)

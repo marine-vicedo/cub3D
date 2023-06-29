@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/28 23:12:20 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:21:54 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ void	init_img_clean(t_img *img)
 	img->bits_per_pixel = 0;
 	img->line_size = 0;
 	img->endian = 0;
+}
+
+void	init_img_clean_data(t_data *data)
+{
+	// data->img = NULL;
+	data->img.img = NULL;
+	data->img.addr = NULL;
+	data->img.bits_per_pixel = 0;
+	data->img.line_size = 0;
+	data->img.endian = 0;
 }
 
 void	init_texture(t_data *data)
@@ -56,21 +66,22 @@ void	init_texture(t_data *data)
 
 void     init_img(t_data *data)
 {
-	data->img = (t_img *)malloc(sizeof(t_img));
-	if(!data->img)
-	{
-		printf("error malloc data->img");
+	// data->img = (t_img *)malloc(sizeof(t_img));
+	// if(!data->img)
+	// {
+	// 	printf("error malloc data->img");
+	// 	exit_game(data);
+	// }
+    // init_img_clean(data->img);
+    init_img_clean_data(data);
+	data->img.img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
+	if (data->img.img == NULL)
 		exit_game(data);
-	}
-    init_img_clean(data->img);
-	data->img->ratio = 1;
-	data->img->img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
-	if (data->img->img == NULL)
+	data->img.addr = mlx_get_data_addr(data->img.img, \
+					&data->img.bits_per_pixel, &data->img.line_size, &data->img.endian);
+	if (data->img.addr == NULL)
 		exit_game(data);
-	data->img->addr = mlx_get_data_addr(data->img->img, \
-					&data->img->bits_per_pixel, &data->img->line_size, &data->img->endian);
-	if (data->img->addr == NULL)
-		exit_game(data);
+	data->img.ratio = 1;
 	return ;
 }
 
