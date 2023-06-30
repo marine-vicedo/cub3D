@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/29 13:06:03 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:40:22 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,17 +150,8 @@ typedef struct s_map
 typedef struct s_player
 {
 	int			status;
-	//char		dir;
 	double		pos_x;
 	double		pos_y;
-	//double	dir_x;
-	//double	dir_y;
-	//double	plane_x;
-	//double	plane_y;
-	//int		has_moved;
-	//int		move_x;
-	//int		move_y;
-	//int		rotation;
 	int			radius;
 	int			turnDirection;
 	int			walkDirection;
@@ -169,12 +160,6 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	// double		camera_x;
-	// double		dir_x;
-	// double		dir_y;
-	// int			map_x;
-	// int			map_y;
-	// int			step_x;
 	double			offset_y;
 	double			offset_x;
 	double			wallStripHeight;

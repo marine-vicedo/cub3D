@@ -6,7 +6,7 @@
 /*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/29 22:43:23 by parida           ###   ########.fr       */
+/*   Updated: 2023/06/30 11:32:31 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,13 @@ void	wall_side(t_data *data, double x, double y)
 	w = 1;
 	s = 1;
 	if(hasWallAt(data, (x + 1), y))
-		e = 0;
-	if(hasWallAt(data, (x - 1), y))
 		w = 0;
+	if(hasWallAt(data, (x - 1), y))
+		e = 0;
 	if(hasWallAt(data, x, (y + 1)))
-		s = 0;
-	if(hasWallAt(data, x, (y - 1)))
 		n = 0;
+	if(hasWallAt(data, x, (y - 1)))
+		s = 0;
 	if (e == 1)
 		data->ray.side = 0;
 	if (w == 1)
