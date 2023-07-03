@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   painting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:37:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/06/29 11:23:05 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:20:58 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 void	paint_floor(t_data *data)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	celling;
 	int	floor;
 
-	i = 0;
+	y = 0;
 	celling = data->file.ceiling;
 	floor = data->file.floor;
-	while (i < SCHEIGHT)
+	while (y < SCHEIGHT)
 	{
-		j = 0;
-		while (j < SCWIDTH)
+		x = 0;
+		while (x < SCWIDTH)
 		{
-			if (i <= SCHEIGHT / 2)
-				ft_my_mlx_pixel_put(&data->img, i, j, celling);
+			if (y <= SCHEIGHT / 2)
+				my_mlx_pixel_put(&data->img, x, y, celling);
 			else
-				ft_my_mlx_pixel_put(&data->img, i, j, floor);
-			j++;
+				my_mlx_pixel_put(&data->img, x, y, floor);
+			x++;
 		}
-		i++;
+		y++;
 	}	
 }
