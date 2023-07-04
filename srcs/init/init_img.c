@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 14:44:48 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/04 21:43:13 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,29 @@ void	init_img(t_data *data)
 // 	p.color = color;
 // 	return (p);
 // }
+
+double	get_minimap_ratio(t_data *data)
+{
+	double	ratio;
+
+	if (data->map.width > data->map.height)
+		ratio = (SCWIDTH * 30) / data->map.width;
+	else
+		ratio = (SCHEIGHT * 30) / data->map.height;
+	return (ratio / 100);
+}
+
+void     init_img_mini(t_data *data)
+{
+	data->m_map.ratio = get_minimap_ratio(data);
+	data->m_map.img = NULL;
+    init_img_clean(&data->m_map);
+	data->m_map.img = mlx_new_image(data->mlx, (data->map.width  * data->m_map.ratio), (data->map.height * data->m_map.ratio));
+	if (data->m_map.img == NULL)
+		exit_game(data);
+	data->m_map.addr = mlx_get_data_addr(&data->m_map, \
+					&data->m_map.bits_per_pixel, &data->m_map.line_size, &data->m_map.endian);
+	if (data->m_map.addr == NULL)
+		exit_game(data);
+	return ;
+}

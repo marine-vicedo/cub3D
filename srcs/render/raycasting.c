@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:30:43 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 15:33:28 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/04 21:48:43 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	draw_line(t_data *data, double angle, double x, double y)
 	while (!has_wall_at(data, x, y))
 	{
 		mlx_pixel_put(data->mlx, data->win_mini, x, y, MMAP_COLOR_PLAYER);
+		//my_mlx_pixel_put(&data->m_map, (x * data->m_map.ratio), (y * data->m_map.ratio), MMAP_COLOR_PLAYER);
 		x += cos(angle);
 		y += sin(angle);
 	}

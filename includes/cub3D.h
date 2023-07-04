@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 15:34:38 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/04 21:44:00 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct s_data
 	t_map		map;
 	t_rgb		rgb;
 	t_img		img;
+	t_img		m_map;
 	t_img		*texture;
 	t_player	player;
 	t_ray		ray;
