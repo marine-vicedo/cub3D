@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/03 20:39:37 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/04 13:27:05 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ unsigned int    get_texture(t_data *data)
 	t_img	tex;
 	
 	tex = data->texture[data->ray.side];
-    tex_i = data->ray.offset_y * tex.line_size + data->ray.offset_x * tex.bits_per_pixel / 8 ;
+    // tex_i = (int)data->ray.offset_x * tex.line_size + (int)data->ray.offset_y * tex.bits_per_pixel / 8;
+    tex_i = (int)data->ray.offset_y * tex.line_size + (int)data->ray.offset_x * tex.bits_per_pixel / 8;
 	r = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 2];
     g = (unsigned char)(data->texture[data->ray.side].addr)[tex_i + 1];
     b = (unsigned char)(data->texture[data->ray.side].addr)[tex_i];
@@ -40,13 +41,13 @@ static void get_texture_pos(t_data *data, int y)
     if (data->ray.side == 2 || data->ray.side == 3)
     {
         data->ray.offset_x = fmod(data->ray.ray_x, TILE_SIZE);
-        if (data->ray.side == 3)
+        if (data->ray.side == 2)
             data->ray.offset_x = TILE_SIZE - data->ray.offset_x;
     }
     else if (data->ray.side == 1 || data->ray.side == 0)
     {
         data->ray.offset_x = fmod(data->ray.ray_y, TILE_SIZE);
-        if (data->ray.side == 0)
+        if (data->ray.side == 1)
             data->ray.offset_x = TILE_SIZE - data->ray.offset_x;
     }
     data->ray.offset_x = (data->ray.offset_x * tex->img_width) / TILE_SIZE;
@@ -70,6 +71,7 @@ static void	raycasting_draw_wall_texture(t_data *data, double x, double top_pxl)
 	y = 0;
 	next = x + Wall_STRIP_WIDTH;
 	tmp_top_pxl = top_pxl;
+	int i = 0;
 	while (x < next)
 	{
 		y = 0;
@@ -78,10 +80,16 @@ static void	raycasting_draw_wall_texture(t_data *data, double x, double top_pxl)
             top_pxl = tmp_top_pxl + y++;
 		while (top_pxl < SCHEIGHT && y <= data->ray.wallStripHeight)
 		{
+			// printf("Repair, next =%d, x=%f\n", next, x);
+			// dprintf(2, "x = %f et top_pxl=%f\n", x, top_pxl);
+			// if (x < 10)
     		my_mlx_pixel_put(&data->img, x, top_pxl, choose_color(data, y));
     		y += 1;
     		top_pxl = tmp_top_pxl + y;
+			i++;
+			// if (i == 20) break ;
 		}
+		// if (data->ray.ray_id == 10) break ;
 		x++;
 	}
 }
@@ -153,5 +161,6 @@ void	draw_ray(t_data *data)
 		render3DProjectWall(data);
 		data->ray.ray_angle += FOV_ANGLE / NUM_RAY;
 		data->ray.ray_id++;
+		// if (data->ray.ray_id == 1) break ;
 	}
 }
