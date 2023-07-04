@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:50:31 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/14 11:52:21 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/04 13:46:32 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ char	*ft_strdup_no_nl(const char *s)
 	dest[i] = '\0';
 	return (dest);
 }
-

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+         #
+#    By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/06/16 14:45:14 by pmaimait         ###   ########.fr        #
+#    Updated: 2023/07/04 15:35:22 by mvicedo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,15 +54,15 @@ MLX_FLAGS	= -L./mlx -lmlx -lm -lX11 -lXext
 
 # List of all .c source files
 ROOT_FILE = main
-INIT_FILES = init_img start_game
+INIT_FILES = init_img init_textures init_player
 INIT_FOLDER = init/
-RENDER_FILES = minimap_image draw_pixel painting
+RENDER_FILES = minimap_image draw_texture painting raycasting
 RENDER_FOLDER = render/
 MOVE_FILES = keypress
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
 UTILS_FILES = position exit
-PARSING_FILES = parsing_file parsing_map parsing_utils textures_colors_check textures_colors_utils get_map walls_check exit_error
+PARSING_FILES = parsing parsing_file parsing_map parsing_utils textures_colors_check textures_colors_utils get_map walls_check exit_error
 UTILS_FILES = position exit
 UTILS_FOLDER = utils/
 

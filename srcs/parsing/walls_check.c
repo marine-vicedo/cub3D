@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:04:35 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/14 13:19:49 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/04 13:47:40 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ft_check_walls(t_map *map, char **map_m)
 
 	i = 0;
 	j = 0;
-
 	if (check_top_bottom(map_m, i, j))
 		return (1);
 	i = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/01 22:54:22 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/04 15:34:38 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,18 +153,18 @@ typedef struct s_player
 	double		pos_x;
 	double		pos_y;
 	int			radius;
-	int			turnDirection;
-	int			walkDirection;
-	double		rotationAngle;
+	int			turn_dir;
+	int			walk_dir;
+	double		rotate_angle;
 }				t_player;
 
 typedef struct s_ray
 {
 	double			offset_y;
 	double			offset_x;
-	double			wallStripHeight;
-	double			correctionWallDistance;
-	double			distanceProjectionPlane;
+	double			wall_strip_h;
+	double			corr_wall_distance;
+	double			projection_plane ;
 	int				side;
 	int				ray_id;
 	double			draw_start_x;
@@ -208,8 +208,8 @@ typedef struct s_data
 //keypress
 int				handle_keypress(int keysym, t_data *data);
 int				handle_keyrelease(int keysym, t_data *data);
-void			updata(t_data *data);
-int				hasWallAt(t_data *data, double x, double y);
+void			update(t_data *data);
+int				has_wall_at(t_data *data, double x, double y);
 
 
 //init/
@@ -217,7 +217,7 @@ int				hasWallAt(t_data *data, double x, double y);
 void			init_img_clean(t_img *img);
 void			init_img(t_data *data);
 void			init_player(t_data *data);
-void			init_newPosition(t_data *data);
+void			init_new_position(t_data *data);
 void			init_textures(t_data *data);
 void			init_texture(t_data *data);
 t_pixel			init_pixel(int x, int y, int color);
@@ -231,10 +231,11 @@ void			draw_window(t_data *data);
 //draw_pixel
 void			draw_line(t_data *data, double angle, double x, double y);
 void			draw_ray(t_data *data);
-void			render3DProjectWall(t_data *data);
+void			render_3d_wall(t_data *data);
 void			draw_wall(t_data *data, int x, int y, int color);
 void			wall_side(t_data *data, double x, double y);
 unsigned int	get_color(t_data *data, double x, double y);
+void			draw_texture(t_data *data, double x, double top_pxl);
 
 
 //painting
@@ -262,6 +263,7 @@ int			main_loop(t_data *data);
 
 //parsing/
 //parsing_file
+void			ft_parsing(t_data *data, char *av);
 int				ft_parsing_map(char *av, t_data *data);
 int				ft_file_content(t_data *data, t_file *file);
 void			ft_copy_fileinfo(char *av, t_data *data);
