@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 21:44:00 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:40:43 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,14 +185,12 @@ typedef struct s_minimap
 	int		view_dist;
 	int		tile_size;
 	void	*wall;
-	t_img	m_map;
 }	t_minimap;
 
 typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
-	void		*win_mini;
 	t_file		file;
 	t_map		map;
 	t_rgb		rgb;
@@ -222,6 +220,8 @@ void			init_new_position(t_data *data);
 void			init_textures(t_data *data);
 void			init_texture(t_data *data);
 t_pixel			init_pixel(int x, int y, int color);
+void			init_img_mini(t_data *data);
+double			get_minimap_ratio(t_data *data);
 //start_game
 void    		start_game(t_data *data);
 
@@ -283,13 +283,15 @@ int				ft_check_mapfile(t_data *data,
 					t_file *file, char *str, int space);
 int				ft_is_valid_minimap(t_data *data, t_player *p, char *line);
 //get_map
-int				ft_fill_map(t_map *map, char **map_file, int index);
+int				ft_fill_map(t_map *map, char **map_file, int index, int i, int j);
+//int				ft_fill_map(t_map *map, char **map_file, int index);
 void			ft_free_map(char **tab);
 int				get_map(t_data *data, t_file *file);
 //walls_check
 int				ft_check_walls(t_map *map, char **map_m);
 int				ft_check_empty_space(t_map *map, char **map_m);
-int				ft_check_space_around(char **map_m, int i, int j);
+int				ft_check_space_around(char **map_m, int i, int j, int len);
+//int				ft_check_space_around(char **map_m, int i, int j);
 int				check_player_pos(int c);
 //parsing_utils
 char			*ft_strdup_no_nl(const char *s);

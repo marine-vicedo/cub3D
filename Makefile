@@ -6,7 +6,7 @@
 #    By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/07/04 15:35:22 by mvicedo          ###   ########.fr        #
+#    Updated: 2023/07/06 11:37:47 by mvicedo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,11 +109,11 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@printf "$(YELLOW). . . COMPILING CUB3D OBJECTS . . . $(GREY)%-33.33s\r$(DEF_COLOR)" $@
 
 lib:
-	@$(MAKE) --no-print-directory -C $(LIB_PATH)
+	@$(MAKE) --no-print-directory -s -C $(LIB_PATH)
 	@echo "\n$(GREEN)[ ✔ ] LIBFT$(DEF_COLOR)"
 
 mlib:
-	@$(MAKE) --no-print-directory -C $(MLIB_PATH)
+	@$(MAKE) --no-print-directory -s -C $(MLIB_PATH)
 	@echo "\n$(GREEN)[ ✔ ] MLIB$(DEF_COLOR)"
 	
 clean:

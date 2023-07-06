@@ -6,20 +6,20 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:04:35 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 13:47:40 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 16:51:40 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	check_player_pos(int c)
+int check_player_pos(int c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (1);
 	return (0);
 }
 
-static int	check_top_bottom(char **map, int i, int j)
+static int check_top_bottom(char **map, int i, int j)
 {
 	if (!map || !map[i] || !map[i][j])
 		return (1);
@@ -34,11 +34,11 @@ static int	check_top_bottom(char **map, int i, int j)
 	return (0);
 }
 
-int	ft_check_walls(t_map *map, char **map_m)
+int ft_check_walls(t_map *map, char **map_m)
 {
-	int	i;
-	int	j;
-	int	len;
+	int i;
+	int j;
+	int len;
 
 	i = 0;
 	j = 0;
@@ -62,32 +62,41 @@ int	ft_check_walls(t_map *map, char **map_m)
 	return (0);
 }
 
-int	ft_check_space_around(char **map_m, int i, int j)
+int ft_check_space_around(char **map_m, int i, int j, int len)
 {
-	if (map_m[i][j - 1] == ' ' || (map_m[i][j + 1] && map_m[i][j + 1] == ' '))
+	int len_prev;
+
+	if ((map_m[i][j - 1] && map_m[i][j - 1] == ' ') || ((map_m[i][j + 1] && map_m[i][j + 1] == ' ')))
 		return (1);
-	if (map_m[i - 1][j] == ' ' || (map_m[i + 1] && map_m[i + 1][j] == ' '))
-		return (1);
+	if (i > 0)
+	{
+		len_prev = ft_strlen(map_m[i - 1]);
+		if (len_prev < len)
+			return (1);
+		else if (map_m[i - 1][j] && map_m[i - 1][j] == ' ')
+			return (1);
+	}
 	return (0);
 }
 
-int	ft_check_empty_space(t_map *map, char **map_m)
+int ft_check_empty_space(t_map *map, char **map_m)
 {
-	int	i;
-	int	j;
-	int	len;
+	int i;
+	int j;
+	int len;
 
 	i = 0;
 	while (i < map->height)
 	{
 		j = 0;
 		len = ft_strlen(map_m[i]);
+		printf("len ft empty space = %d\n", len);
 		while (j < len)
 		{
 			while (ft_isspace(map_m[i][j]))
 				j++;
 			if (map_m[i][j] == '0')
-				if (ft_check_space_around(map_m, i, j))
+				if (ft_check_space_around(map_m, i, j, len))
 					return (1);
 			j++;
 		}
@@ -95,3 +104,5 @@ int	ft_check_empty_space(t_map *map, char **map_m)
 	}
 	return (0);
 }
+
+

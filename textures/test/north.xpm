@@ -21,11 +21,7 @@ static char * north_xpm[] = {
 "~ 	c #8B8B8B",
 "{ 	c #C8C8C8",
 "] 	c #333333",
-"^ 	c #393939",
-"/ 	c #D3D3D3",
-"( 	c #C9C9C9",
-"_ 	c #FAFAFA",
-": 	c #454545",
+
 "< 	c #3C3C3C",
 "[ 	c #F2F2F2",
 "} 	c #4C4C4C",

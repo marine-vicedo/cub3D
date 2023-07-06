@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:55:16 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/06/14 11:48:05 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 15:27:38 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_is_valid_map(t_data *data, t_player *p, char *line, int space)
 	}
 	if (data->map.width < i + space)
 		data->map.width = i + space;
+	printf("len map = %d\n", data->map.width);
 	return (0);
 }
 
@@ -60,6 +61,7 @@ int	ft_check_mapfile(t_data *data, t_file *file, char *str, int space)
 		if (ft_is_valid_map(data, &data->player, str, space))
 			return (1);
 	}
+	printf("map height = %d\n", data->map.height);
 	if (check_player_pos(str[0]))
 		return (err_msg(ERR_MAP_WALLS), 1);
 	return (0);

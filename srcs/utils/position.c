@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:41:40 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 15:42:11 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 15:08:07 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	get_position_player(t_data *data)
 	while (j < map->height)
 	{
 		i = 0;
-		while (i < map->width)
+		while (map->map[j][i] && i < map->width)
 		{
 			if (map->map[j][i] == 'N' || map->map[j][i] == 'S'
 				|| map->map[j][i] == 'E' || map->map[j][i] == 'W')

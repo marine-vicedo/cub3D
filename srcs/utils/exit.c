@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 15:38:40 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 11:36:19 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ int	quit_cub3d(t_data *data)
 
 int	exit_game(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->minimap.wall);
+	if (BONUS)
+		mlx_destroy_image(data->mlx, data->m_map.img);
 	mlx_destroy_image(data->mlx, data->img.img);
 	clean_texture(data);
 	ft_free_data(data);
-	if (data->win && data->mlx && data->win_mini)
-	{
+	if (data->win && data->mlx)
 		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_window(data->mlx, data->win_mini);
-	}
 	if (data->mlx)
 	{
 		mlx_destroy_display(data->mlx);

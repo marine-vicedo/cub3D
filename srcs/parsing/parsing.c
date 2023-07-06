@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:13:20 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 15:03:00 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 12:03:31 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	ft_init_data(t_data *data)
 	data->map.map = NULL;
 	data->map.height = 0;
 	data->map.width = 0;
+	data->win = NULL;
+	data->mlx = NULL;
+	data->texture = NULL;
 }
 
 void	ft_filename_check(t_data *data, char *av)

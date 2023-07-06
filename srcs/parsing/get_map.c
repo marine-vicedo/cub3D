@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:47:25 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 13:46:15 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 15:04:41 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int	get_map(t_data *data, t_file *file)
 {
-	int	i;
+	int	index;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (file->content[i])
+	index = 0;
+	while (file->content[index])
 	{
-		while (ft_isspace(file->content[i][j]))
+		j = 0;
+		while (ft_isspace(file->content[index][j]))
 			j++;
-		if (file->content[i][j] == '0' || file->content[i][j] == '1')
+		if (file->content[index][j] == '0' || file->content[index][j] == '1')
 			break ;
-		i++;
+		index++;
 	}
-	if (ft_fill_map(&data->map, file->content, i))
+	if (ft_fill_map(&data->map, file->content, index, 0, 0))
 		return (1);
 	return (0);
 }
@@ -43,11 +43,11 @@ int	free_map(t_map *map, int j)
 	return (1);
 }
 
-int	ft_fill_map(t_map *map, char **map_file, int index)
+int	ft_fill_map(t_map *map, char **map_file, int index, int i, int j)
 {
-	int		i;
-	int		j;
-
+	//int		len;
+	
+	printf("index = %d\n", index);
 	map->map = (char **)malloc((map->height + 1) * sizeof(char *));
 	if (!map->map)
 		return (1);
@@ -55,8 +55,9 @@ int	ft_fill_map(t_map *map, char **map_file, int index)
 	while (map_file[index])
 	{
 		i = 0;
-		map->map[j] = (char *)malloc
-			((ft_strlen(map_file[index]) + 1) * sizeof(char));
+		//len = ft_strlen(map_file[index]);
+		//printf("len fill map = %d\n", len);
+		map->map[j] = (char *)malloc((map->width + 1) * sizeof(char));
 		if (!map->map[j])
 			free_map(map, j);
 		while (map_file[index][i])

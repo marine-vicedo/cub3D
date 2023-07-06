@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:25:51 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 21:43:13 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/06 11:45:27 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ void	init_img_clean(t_img *img)
 	img->bits_per_pixel = 0;
 	img->line_size = 0;
 	img->endian = 0;
+	img->img_width = 0;
+	img->img_height = 0;
+	
 }
 
 void	init_img(t_data *data)
 {
+	data->img.ratio = 1;
 	init_img_clean(&data->img);
 	data->img.img = mlx_new_image(data->mlx, SCWIDTH, SCHEIGHT);
 	if (data->img.img == NULL)
@@ -32,7 +36,6 @@ void	init_img(t_data *data)
 			&data->img.endian);
 	if (data->img.addr == NULL)
 		exit_game(data);
-	data->img.ratio = 1;
 	return ;
 }
 
@@ -60,12 +63,11 @@ double	get_minimap_ratio(t_data *data)
 void     init_img_mini(t_data *data)
 {
 	data->m_map.ratio = get_minimap_ratio(data);
-	data->m_map.img = NULL;
-    init_img_clean(&data->m_map);
+	init_img_clean(&data->m_map);
 	data->m_map.img = mlx_new_image(data->mlx, (data->map.width  * data->m_map.ratio), (data->map.height * data->m_map.ratio));
 	if (data->m_map.img == NULL)
 		exit_game(data);
-	data->m_map.addr = mlx_get_data_addr(&data->m_map, \
+	data->m_map.addr = mlx_get_data_addr(data->m_map.img, \
 					&data->m_map.bits_per_pixel, &data->m_map.line_size, &data->m_map.endian);
 	if (data->m_map.addr == NULL)
 		exit_game(data);

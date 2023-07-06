@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 15:43:36 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/06 11:37:05 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	init_cub(t_data *data)
 {
 	init_img(data);
+	if (BONUS)
+		init_img_mini(data);
 	init_textures(data);
 	init_player(data);
 	get_position_player(data);
@@ -23,19 +25,15 @@ void	init_cub(t_data *data)
 void	start_cub(t_data *data)
 {
 	data->win = mlx_new_window(data->mlx, SCWIDTH, SCHEIGHT, "cub3D");
-	data->win_mini = mlx_new_window(data->mlx, (data->map.width * TILE_SIZE),
-			(data->map.height * TILE_SIZE), "mini_map");
-	if (data->win_mini == NULL || data->win == NULL)
+	if (data->win == NULL)
 	{
-		free(data->win_mini);
 		free(data->win);
 		free(data);
 		exit_game(data);
 	}
 	draw_window(data);
 	update(data);
-	mlx_hook(data->win_mini, 2, 1L << 0, handle_keypress, data);
-	mlx_hook(data->win_mini, 17, 1L << 0, exit_game, data);
+	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
 	mlx_hook(data->win, 17, 1L << 0, exit_game, data);
 	mlx_loop(data->mlx);
 }
