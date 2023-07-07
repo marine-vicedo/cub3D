@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/06 16:40:43 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 16:31:10 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@
 # define M_CLK_M 2
 # define M_SCR_U 4
 # define M_SCR_D 5
+# define MotionNotify		6
+# define PointerMotionMask		(1L<<6)
+# define ButtonPress	 4
+# define ButtonPressMask	(1L<<2)
 
 /* MINIMAP MACROS */
 # define MMAP_PIXEL_SIZE 128
@@ -73,10 +77,11 @@
 # define TILE_SIZE 64
 # define Wall_STRIP_WIDTH 1
 # define NUM_RAY 960
-# define moveSpeed 5
-# define rotationSpeed 5 * (PI / 180)
+# define moveSpeed 2
+# define rotationSpeed 2 * (PI / 180)
 # define WINDOW 1
 # define MINI_MAP 2
+# define DIST_EDGE_MOUSE_WRAP 20
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"
 # define ERR_FILE_NOT_XPM "Extension file is not .xpm"
@@ -210,6 +215,9 @@ int				handle_keyrelease(int keysym, t_data *data);
 void			update(t_data *data);
 int				has_wall_at(t_data *data, double x, double y);
 
+//mouse
+
+int				mouse_button_handler(int button, int x, int y, t_data *data);
 
 //init/
 //init_img
@@ -260,7 +268,7 @@ void			clean_texture(t_data *data);
 //main
 
 int			main_loop(t_data *data);
-
+void		start_cub(t_data *data);
 
 //parsing/
 //parsing_file
@@ -283,15 +291,15 @@ int				ft_check_mapfile(t_data *data,
 					t_file *file, char *str, int space);
 int				ft_is_valid_minimap(t_data *data, t_player *p, char *line);
 //get_map
-int				ft_fill_map(t_map *map, char **map_file, int index, int i, int j);
+int				ft_fill_map(t_map *map, char **map_file, int index, int i);
 //int				ft_fill_map(t_map *map, char **map_file, int index);
 void			ft_free_map(char **tab);
 int				get_map(t_data *data, t_file *file);
 //walls_check
 int				ft_check_walls(t_map *map, char **map_m);
 int				ft_check_empty_space(t_map *map, char **map_m);
-int				ft_check_space_around(char **map_m, int i, int j, int len);
-//int				ft_check_space_around(char **map_m, int i, int j);
+//int				ft_check_space_around(char **map_m, int i, int j, int len);
+int				ft_check_space_around(char **map_m, int i, int j);
 int				check_player_pos(int c);
 //parsing_utils
 char			*ft_strdup_no_nl(const char *s);

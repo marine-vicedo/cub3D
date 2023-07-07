@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:30:43 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/06 11:35:09 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 14:01:44 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	draw_line(t_data *data, double angle, double x, double y)
 	while (!has_wall_at(data, x, y))
 	{
 		if (BONUS)
-			my_mlx_pixel_put(&data->m_map, (x * data->m_map.ratio / TILE_SIZE), (y * data->m_map.ratio / TILE_SIZE), MMAP_COLOR_PLAYER);
+			my_mlx_pixel_put(&data->m_map, (x * data->m_map.ratio / TILE_SIZE),
+				(y * data->m_map.ratio / TILE_SIZE), MMAP_COLOR_PLAYER);
 		x += cos(angle);
 		y += sin(angle);
 	}

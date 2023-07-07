@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:47:25 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/06 15:04:41 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 15:57:27 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_map(t_data *data, t_file *file)
 			break ;
 		index++;
 	}
-	if (ft_fill_map(&data->map, file->content, index, 0, 0))
+	if (ft_fill_map(&data->map, file->content, index, 0))
 		return (1);
 	return (0);
 }
@@ -43,11 +43,11 @@ int	free_map(t_map *map, int j)
 	return (1);
 }
 
-int	ft_fill_map(t_map *map, char **map_file, int index, int i, int j)
+int	ft_fill_map(t_map *map, char **map_file, int index, int i)
 {
-	//int		len;
-	
-	printf("index = %d\n", index);
+	int	j;
+
+	j = 0;
 	map->map = (char **)malloc((map->height + 1) * sizeof(char *));
 	if (!map->map)
 		return (1);
@@ -55,8 +55,6 @@ int	ft_fill_map(t_map *map, char **map_file, int index, int i, int j)
 	while (map_file[index])
 	{
 		i = 0;
-		//len = ft_strlen(map_file[index]);
-		//printf("len fill map = %d\n", len);
 		map->map[j] = (char *)malloc((map->width + 1) * sizeof(char));
 		if (!map->map[j])
 			free_map(map, j);

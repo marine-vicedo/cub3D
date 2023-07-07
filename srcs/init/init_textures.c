@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:33:45 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/06 13:13:18 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 13:52:49 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ void	init_texture(t_data *data)
 		path = get_dir_path(data, i);
 		if (!path)
 			exit_game(data);
-			
 		data->texture[i].img = \
 			mlx_xpm_file_to_image(data->mlx, path, &data->texture[i].img_width,
 				&data->texture[i].img_height);
-		if (data->texture[i].img == NULL || data->texture[i].img_width != TILE_SIZE || data->texture[i].img_height != TILE_SIZE)
+		if (data->texture[i].img == NULL
+			|| data->texture[i].img_width != TILE_SIZE
+			|| data->texture[i].img_height != TILE_SIZE)
 			exit_game(data);
 		data->texture[i].addr = mlx_get_data_addr(data->texture[i].img, \
 				&data->texture[i].bits_per_pixel,

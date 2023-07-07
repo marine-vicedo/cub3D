@@ -6,7 +6,7 @@
 #    By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/13 13:19:56 by pmaimait          #+#    #+#              #
-#    Updated: 2023/07/06 11:37:47 by mvicedo          ###   ########.fr        #
+#    Updated: 2023/07/07 11:42:23 by mvicedo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ INIT_FILES = init_img init_textures init_player
 INIT_FOLDER = init/
 RENDER_FILES = minimap_image draw_texture painting raycasting
 RENDER_FOLDER = render/
-MOVE_FILES = keypress
+MOVE_FILES = keypress mouse
 MOVE_FOLDER = move/
 PARSING_FOLDER = parsing/
 UTILS_FILES = position exit

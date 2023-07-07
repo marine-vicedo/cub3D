@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/06 11:37:05 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 16:30:17 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	start_cub(t_data *data)
 	draw_window(data);
 	update(data);
 	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
+	if (BONUS)
+		mlx_hook(data->win, ButtonPress, ButtonPressMask, mouse_button_handler, data);
 	mlx_hook(data->win, 17, 1L << 0, exit_game, data);
 	mlx_loop(data->mlx);
 }

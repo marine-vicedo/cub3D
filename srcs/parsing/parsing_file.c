@@ -6,11 +6,12 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 13:46:53 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 16:34:57 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
 
 void	ft_print_map(char **tab)
 {
@@ -48,8 +49,8 @@ int	ft_count_lines(t_data *data, char *av)
 		exit_clean(data, "Empty map file", FREE);
 	while (line)
 	{
-		free(line);
 		line = get_next_line(fd);
+		free(line);
 		i++;
 	}
 	close(fd);

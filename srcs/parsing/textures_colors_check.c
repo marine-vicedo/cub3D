@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/04 13:47:21 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/07 13:53:37 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_direction_check(t_file *file, char *str)
 	else if (str[0] == 'E' && !file->east)
 		file->east = path;
 	else
-		err_msg("Duplicate texture(s)");
+		return (err_msg("Duplicate texture(s)"), free(path), 1);//free direction
 	return (0);
 }
 
