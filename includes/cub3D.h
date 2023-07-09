@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/07 16:31:10 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/09 23:21:17 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <limits.h>
 # include <unistd.h>
 # include <string.h>
+# include <time.h>
 
 # ifndef BONUS
 #  define BONUS 1
@@ -55,19 +56,13 @@
 ** Mouse
 */
 
-# define M_CLK_L 1
-# define M_CLK_R 3
-# define M_CLK_M 2
-# define M_SCR_U 4
-# define M_SCR_D 5
-# define MotionNotify		6
-# define PointerMotionMask		(1L<<6)
 # define ButtonPress	 4
 # define ButtonPressMask	(1L<<2)
 
+# define DOUBLE_CLICK_DELAY 300 // Time window in milliseconds for a double-click
+
+
 /* MINIMAP MACROS */
-# define MMAP_PIXEL_SIZE 128
-# define MMAP_VIEW_DIST 4
 # define MMAP_COLOR_PLAYER 0x00FF00
 # define MMAP_COLOR_WALL 0x808080
 # define MMAP_COLOR_FLOOR 0xE6E6E6
@@ -79,8 +74,6 @@
 # define NUM_RAY 960
 # define moveSpeed 2
 # define rotationSpeed 2 * (PI / 180)
-# define WINDOW 1
-# define MINI_MAP 2
 # define DIST_EDGE_MOUSE_WRAP 20
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"
@@ -98,13 +91,6 @@ typedef struct s_rgb
 	int	b;
 }				t_rgb;
 
-typedef struct s_pixel
-{
-	int				x;
-	int				y;
-	unsigned int	color;
-}			t_pixel;
-
 typedef struct s_img
 {
 	void		*img;
@@ -116,16 +102,6 @@ typedef struct s_img
 	int			img_height;
 	double		ratio;
 }				t_img;
-
-typedef struct s_move
-{
-	int			key_w;
-	int			key_s;
-	int			key_a;
-	int			key_d;
-	int			arr_l;
-	int			arr_r;
-}				t_move;
 
 typedef struct s_file
 {
@@ -157,7 +133,6 @@ typedef struct s_player
 	int			status;
 	double		pos_x;
 	double		pos_y;
-	int			radius;
 	int			turn_dir;
 	int			walk_dir;
 	double		rotate_angle;
@@ -174,23 +149,13 @@ typedef struct s_ray
 	int				ray_id;
 	double			draw_start_x;
 	double			draw_start_y;
-	int			ray_x;
-	int			ray_y;
+	int			    ray_x;
+	int			    ray_y;
 	double			ray_angle;
 	double			ray_distance;
 	
 }				t_ray;
 
-typedef struct s_minimap
-{
-	char	**map;
-	int		size;
-	int		offset_x;
-	int		offset_y;
-	int		view_dist;
-	int		tile_size;
-	void	*wall;
-}	t_minimap;
 
 typedef struct s_data
 {
@@ -204,20 +169,18 @@ typedef struct s_data
 	t_img		*texture;
 	t_player	player;
 	t_ray		ray;
-	t_move		move;
-	t_minimap	minimap;
 }				t_data;
 
 //move/
 //keypress
 int				handle_keypress(int keysym, t_data *data);
-int				handle_keyrelease(int keysym, t_data *data);
 void			update(t_data *data);
 int				has_wall_at(t_data *data, double x, double y);
 
 //mouse
 
 int				mouse_button_handler(int button, int x, int y, t_data *data);
+long long       get_current_time_ms();
 
 //init/
 //init_img
@@ -227,11 +190,9 @@ void			init_player(t_data *data);
 void			init_new_position(t_data *data);
 void			init_textures(t_data *data);
 void			init_texture(t_data *data);
-t_pixel			init_pixel(int x, int y, int color);
 void			init_img_mini(t_data *data);
 double			get_minimap_ratio(t_data *data);
-//start_game
-void    		start_game(t_data *data);
+
 
 
 //render/
@@ -241,7 +202,6 @@ void			draw_window(t_data *data);
 void			draw_line(t_data *data, double angle, double x, double y);
 void			draw_ray(t_data *data);
 void			render_3d_wall(t_data *data);
-void			draw_wall(t_data *data, int x, int y, int color);
 void			wall_side(t_data *data, double x, double y);
 unsigned int	get_color(t_data *data, double x, double y);
 void			draw_texture(t_data *data, double x, double top_pxl);
@@ -249,26 +209,23 @@ void			draw_texture(t_data *data, double x, double top_pxl);
 
 //painting
 void			paint_floor(t_data *data);
-void			paint_img(t_data *data);
 
 
 //utils/
 //position
 void			get_position_player(t_data *data);
 void			set_image_pixel(t_img *image, int x, int y, int color);
-void			ft_my_mlx_pixel_put(t_img *data, int i, int j, int color);
 void    		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 unsigned int    get_texture(t_data *data);
 //exit
 void			clean_exit(t_data *data, int code);
-int				quit_cub3d(t_data *data);
 int				exit_game(t_data *data);
 void			clean_texture(t_data *data);
 
 //main
 
-int			main_loop(t_data *data);
 void		start_cub(t_data *data);
+void	    init_cub(t_data *data);
 
 //parsing/
 //parsing_file
@@ -312,13 +269,7 @@ void			err_msg(char *msg);
 int 			exit_clean(t_data *data, char *msg, int code);
 
 //libft
-// char	*get_next_line(int fd);
-// char	*ft_strdup(const char *s);
-// int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int 	ft_isdigit(int c);
-// int		ft_atoi(const char *str);
-// size_t	ft_strlen(const char *s);
 void	ft_print_map(char **tab);
-// void	ft_putstr_fd(char *s, int fd);
 
 #endif

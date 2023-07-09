@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:28:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/07 14:01:06 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/09 10:48:15 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	setting_img(t_data *data)
 
 void	draw_window(t_data *data)
 {
-	// mlx_clear_window(data->mlx, data->win_mini);
 	if (BONUS)
 	{
 		mlx_destroy_image(data->mlx, data->m_map.img);

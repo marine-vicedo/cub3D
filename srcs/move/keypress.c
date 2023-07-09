@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 15:02:04 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/09 23:01:23 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,6 @@ int	handle_keypress(int keysym, t_data *data)
 		exit_game(data);
 	update(data);
 	draw_window(data);
-	return (0);
-}
-
-int	handle_keyrelease(int keysym, t_data *data)
-{
-	if (keysym == K_W)
-		data->player.walk_dir = 0;
-	else if (keysym == K_S)
-		data->player.walk_dir = 0;
-	else if (keysym == K_AR_R)
-		data->player.turn_dir = 0;
-	else if (keysym == K_AR_L)
-		data->player.turn_dir = 0;
 	return (0);
 }
 

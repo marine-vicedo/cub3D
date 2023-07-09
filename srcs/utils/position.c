@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:41:40 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/06 15:08:07 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/09 23:07:50 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ void	get_position_player(t_data *data)
 		}
 		j++;
 	}
-}
-
-void	set_image_pixel(t_img *image, int x, int y, int color)
-{
-	int	pixel;
-
-	pixel = x + y * SCWIDTH;
-	image->addr[pixel] = color;
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)

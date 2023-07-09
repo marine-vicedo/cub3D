@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/06 11:36:19 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/09 23:10:04 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ void	clean_exit(t_data *data, int code)
 	exit(code);
 }
 
-int	quit_cub3d(t_data *data)
-{
-	clean_exit(data, 0);
-	return (0);
-}
 
 int	exit_game(t_data *data)
 {

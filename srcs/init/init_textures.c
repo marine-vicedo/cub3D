@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:33:45 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/07 13:52:49 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/09 23:30:42 by parida           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	init_textures(t_data *data)
 {
 	data->texture = (t_img *)malloc(sizeof(t_img) * 4);
 	if (!data->texture)
-		exit(1);//exit_game
+		exit_game(data);//exit_game
 	init_texture(data);
 }
