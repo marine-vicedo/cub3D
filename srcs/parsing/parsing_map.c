@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:55:16 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/07 16:33:43 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:58:04 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_is_valid_map(t_data *data, t_player *p, char *line, int space)
 		c = line[i];
 		if (!(c == ' ') && c != '0' && c != '1' && c != 'W'
 			&& c != 'N' && c != 'S' && c != 'E')
-			return (err_msg("Map argv error"), 1);
+			return (err_msg("Invalid char in the map"), 1);
 		else if (c == 'W' || c == 'N' || c == 'S' || c == 'E')
 		{
 			if (p->status != 0)
@@ -60,7 +60,7 @@ int	ft_check_mapfile(t_data *data, t_file *file, char *str, int space)
 		if (ft_is_valid_map(data, &data->player, str, space))
 			return (1);
 	}
-	if (check_player_pos(str[0]))
-		return (err_msg(ERR_MAP_WALLS), 1);
+	else
+		return (err_msg("Invalid character in the map"), 1);
 	return (0);
 }

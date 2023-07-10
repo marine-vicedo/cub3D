@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/10 10:08:27 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:04:31 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	clean_texture(t_data *data)
 		mlx_destroy_image(data->mlx, data->texture[2].img);
 	if (data->texture[3].img)
 		mlx_destroy_image(data->mlx, data->texture[3].img);
-	free(data->texture);
 }
 
 void	clean_exit(t_data *data, int code)
@@ -46,7 +45,10 @@ int	exit_game(t_data *data)
 	if (BONUS)
 		mlx_destroy_image(data->mlx, data->m_map.img);
 	mlx_destroy_image(data->mlx, data->img.img);
-	clean_texture(data);
+	if (data->texture->img)
+		clean_texture(data);
+	if (data->texture)
+		free(data->texture);
 	ft_free_data(data);
 	if (data->win && data->mlx)
 		mlx_destroy_window(data->mlx, data->win);

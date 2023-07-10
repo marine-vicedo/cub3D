@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/10 10:15:51 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:08:07 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@
 # define ERR_FILE_TOO_BIG "File is too big"
 # define ERR_FILE_TOO_SMALL "Not enough informations to start"
 # define ERR_MAP_WALLS "Map is not surrounded by walls"
+# define ERR_TEXT "Textures error\n"
+# define ERR_FILE "Infos are not correct"
 
 # define FREE 1
 
@@ -115,6 +117,7 @@ typedef struct s_file
 	int			floor;
 	int			ceiling;
 	int			flag;
+	int flag2;
 }				t_file;
 
 typedef struct s_map
@@ -179,7 +182,7 @@ int				has_wall_at(t_data *data, double x, double y);
 //mouse
 
 int				mouse_button_handler(int button, int x, int y, t_data *data);
-long long       get_current_time_ms();
+long long		get_current_time_ms();
 
 //init/
 //init_img

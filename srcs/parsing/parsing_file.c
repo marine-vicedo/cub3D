@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/10 10:09:42 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:07:38 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,17 @@ int	ft_count_lines(t_data *data, char *av)
 		exit_clean(data, strerror(errno), 0);
 	line = get_next_line(fd);
 	if (!line)
+	{
+		close(fd);
 		exit_clean(data, "Empty map file", FREE);
+	}
 	while (line)
 	{
-		line = get_next_line(fd);
 		free(line);
+		line = get_next_line(fd);
 		i++;
 	}
+	free(line);
 	close(fd);
 	if (i > INT_MAX)
 		i = INT_MAX;

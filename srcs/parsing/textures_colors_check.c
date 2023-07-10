@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/07 13:53:37 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/10 16:43:12 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,7 @@ int	ft_direction_check(t_file *file, char *str)
 	else if (str[0] == 'E' && !file->east)
 		file->east = path;
 	else
-		return (err_msg("Duplicate texture(s)"), free(path), 1);//free direction
-	return (0);
-}
-
-static int	check_valid_characters(char *str)
-{
-	if (*str != ' ' && *str != '0' && *str != '1' && *str != 'W'
-		&& *str != 'N' && *str != 'S' && *str != 'E'
-		&& *str != 'F' && *str != 'C')
-		return (1);
+		return (err_msg("Duplicate texture(s)"), free(path), 1);
 	return (0);
 }
 
@@ -82,15 +73,13 @@ int	ft_check_fileinfo(t_data *data, t_file *file, char *str)
 		return (ft_direction_check(file, str));
 	else if (!ft_strncmp("F ", str, 2) || !ft_strncmp("C ", str, 2))
 		return (ft_color_check(file, str, str[0]));
-	else if (str[0] == '\0' && file->flag != 0)
-		return (err_msg("Empty line in map descriptor"), 1);
+	else if (str[0] == '\0')
+	{
+		if (file->flag != 0)
+			return (err_msg("Empty line in map descriptor"), 1);
+		return (0);
+	}
 	else if (ft_check_mapfile(data, file, str, space))
 		return (1);
-	while (*str)
-	{
-		if (check_valid_characters(str))
-			return (err_msg("Invalid character in the map"), 1);
-		str++;
-	}
 	return (0);
 }

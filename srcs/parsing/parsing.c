@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:13:20 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/09 23:26:50 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/10 18:08:01 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_init_data(t_data *data)
 	data->file.floor = -1;
 	data->file.ceiling = -1;
 	data->file.flag = 0;
+	data->file.flag2 = 0;
 	data->player.status = 0;
 	data->map.map = NULL;
 	data->map.height = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:33:45 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/10 11:02:12 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:04:53 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ static char	*get_dir_path(t_data *data, int i)
 	return (path);
 }
 
+void	textures_error(t_data *data, int i)
+{
+	if (data->texture[i].img == NULL
+		|| data->texture[i].img_width != TILE_SIZE
+		|| data->texture[i].img_height != TILE_SIZE)
+	{
+		ft_putstr_fd("cub3D: Error\n", 2);
+		ft_putstr_fd(ERR_TEXT, 2);
+		exit_game(data);
+	}
+	data->texture[i].addr = mlx_get_data_addr(data->texture[i].img, \
+		&data->texture[i].bits_per_pixel, &data->texture[i].line_size, \
+		&data->texture[i].endian);
+	if (!data->texture[i].addr)
+	{
+		ft_putstr_fd("cub3D: Error\n", 2);
+		ft_putstr_fd(ERR_TEXT, 2);
+		exit_game(data);
+	}
+}
+
 void	init_texture(t_data *data)
 {
 	char	*path;
@@ -42,15 +63,7 @@ void	init_texture(t_data *data)
 		data->texture[i].img = \
 			mlx_xpm_file_to_image(data->mlx, path, &data->texture[i].img_width,
 				&data->texture[i].img_height);
-		if (data->texture[i].img == NULL
-			|| data->texture[i].img_width != TILE_SIZE
-			|| data->texture[i].img_height != TILE_SIZE)
-			exit_game(data);
-		data->texture[i].addr = mlx_get_data_addr(data->texture[i].img, \
-			&data->texture[i].bits_per_pixel, &data->texture[i].line_size, \
-			&data->texture[i].endian);
-		if (!data->texture[i].addr)
-			exit_game(data);
+		textures_error(data, i);
 		i++;
 	}
 }
