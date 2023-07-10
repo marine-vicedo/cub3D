@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:14 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/09 23:10:04 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:08:27 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	clean_exit(t_data *data, int code)
 	exit(code);
 }
 
-
 int	exit_game(t_data *data)
 {
 	if (BONUS)
@@ -58,6 +57,6 @@ int	exit_game(t_data *data)
 		free(data->mlx);
 	}
 	free(data);
-	exit (0);
+	exit(0);
 	return (0);
 }

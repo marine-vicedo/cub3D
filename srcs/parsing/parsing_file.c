@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:06 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/07 16:34:57 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/10 10:09:42 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
 
 void	ft_print_map(char **tab)
 {
@@ -84,7 +83,7 @@ void	ft_copy_fileinfo(char *av, t_data *data)
 	}
 	data->file.content[i] = NULL;
 	free(line);
-	close (fd);
+	close(fd);
 }
 
 int	ft_file_content(t_data *data, t_file *file)

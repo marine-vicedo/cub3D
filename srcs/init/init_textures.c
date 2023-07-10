@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:33:45 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/09 23:30:42 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/10 11:02:12 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_texture(t_data *data)
 
 	i = 0;
 	while (i < 4)
-	{	
+	{
 		path = get_dir_path(data, i);
 		if (!path)
 			exit_game(data);
@@ -47,8 +47,8 @@ void	init_texture(t_data *data)
 			|| data->texture[i].img_height != TILE_SIZE)
 			exit_game(data);
 		data->texture[i].addr = mlx_get_data_addr(data->texture[i].img, \
-				&data->texture[i].bits_per_pixel,
-				&data->texture[i].line_size, &data->texture[i].endian);
+			&data->texture[i].bits_per_pixel, &data->texture[i].line_size, \
+			&data->texture[i].endian);
 		if (!data->texture[i].addr)
 			exit_game(data);
 		i++;
@@ -59,6 +59,6 @@ void	init_textures(t_data *data)
 {
 	data->texture = (t_img *)malloc(sizeof(t_img) * 4);
 	if (!data->texture)
-		exit_game(data);//exit_game
+		exit_game(data);
 	init_texture(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/09 23:21:17 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:15:51 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@
 
 # define ButtonPress	 4
 # define ButtonPressMask	(1L<<2)
-
 # define DOUBLE_CLICK_DELAY 300 // Time window in milliseconds for a double-click
 
 
@@ -72,8 +71,8 @@
 # define TILE_SIZE 64
 # define Wall_STRIP_WIDTH 1
 # define NUM_RAY 960
-# define moveSpeed 2
-# define rotationSpeed 2 * (PI / 180)
+# define moveSpeed 5
+# define rotationSpeed 5 * (PI / 180)
 # define DIST_EDGE_MOUSE_WRAP 20
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:30:43 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/07 14:01:44 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/10 10:56:12 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render_3d_wall(t_data *data)
 		* cos(data->ray.ray_angle - data->player.rotate_angle);
 	data->ray.projection_plane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);
 	data->ray.wall_strip_h = (TILE_SIZE / data->ray.corr_wall_distance)
-		* data->ray.projection_plane ;
+		* data->ray.projection_plane;
 	data->ray.draw_start_y = (SCHEIGHT / 2) - (data->ray.wall_strip_h / 2);
 	draw_texture(data, data->ray.draw_start_x, data->ray.draw_start_y);
 }
@@ -64,13 +64,12 @@ void	draw_line(t_data *data, double angle, double x, double y)
 		x += cos(angle);
 		y += sin(angle);
 	}
-	data->ray.ray_distance = sqrt(pow(x - data->player.pos_x, 2)
-			+ pow(y - data->player.pos_y, 2));
+	data->ray.ray_distance = sqrt(pow(x - data->player.pos_x, 2) + pow(y
+				- data->player.pos_y, 2));
 	data->ray.ray_x = x;
 	data->ray.ray_y = y;
 	wall_side(data, x, y);
 }
-
 
 void	draw_ray(t_data *data)
 {

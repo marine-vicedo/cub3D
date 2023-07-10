@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parida <parida@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/09 23:27:03 by parida           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:57:36 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	start_cub(t_data *data)
 	update(data);
 	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
 	if (BONUS)
-		mlx_hook(data->win, ButtonPress, ButtonPressMask, mouse_button_handler, data);
+		mlx_hook(data->win, ButtonPress, ButtonPressMask, mouse_button_handler,
+			data);
 	mlx_hook(data->win, 17, 1L << 0, exit_game, data);
 	mlx_loop(data->mlx);
 }
@@ -47,7 +48,8 @@ int	main(int ac, char **av)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (ac != 2)
 		return (free(data),
-			printf("Error\nCub3D need one argument (ex : map.cub)\n"), 1);
+			printf("Error\nCub3D need one argument (ex : map.cub)\n"),
+			1);
 	ft_parsing(data, av[1]);
 	data->mlx = mlx_init();
 	if (data->mlx == NULL || ac != 2)

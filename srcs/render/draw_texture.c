@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/04 15:37:56 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/10 10:34:09 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,15 @@ unsigned int	choose_color(t_data *data, double y)
 void	draw_texture(t_data *data, double x, double top_pxl)
 {
 	int		next;
-	int		i;
 	double	y;
 	double	tmp_top_pxl;
 
-	i = 0;
 	y = 0;
 	next = x + Wall_STRIP_WIDTH;
 	tmp_top_pxl = top_pxl;
 	while (x < next)
 	{
 		y = 0;
-		top_pxl = tmp_top_pxl + y;
 		while (top_pxl < 0)
 			top_pxl = tmp_top_pxl + y++;
 		while (top_pxl < SCHEIGHT && y <= data->ray.wall_strip_h)
@@ -81,7 +78,6 @@ void	draw_texture(t_data *data, double x, double top_pxl)
 			my_mlx_pixel_put(&data->img, x, top_pxl, choose_color(data, y));
 			y += 1;
 			top_pxl = tmp_top_pxl + y;
-			i++;
 		}
 		x++;
 	}
