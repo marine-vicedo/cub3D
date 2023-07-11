@@ -6,7 +6,7 @@
 /*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:45:10 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/10 16:43:12 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/11 14:17:37 by mvicedo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_color_check(t_file *file, char *str, char c)
 	else if (c == 'C' && file->ceiling == -1)
 		file->ceiling = (rgb.r << 16 | rgb.g << 8 | rgb.b);
 	else
-		err_msg("double F or C keyword error");
+		return (err_msg("double F or C keyword error"), 1);
 	return (0);
 }
 

@@ -1,10 +1,10 @@
 F 139,99,58
 
-NO textures/simonkraft/bookshelf.xpm
-SO textures/simonkraft/bookshelf_01.xpm
+NO textures/wolfenstein/bookshelf.xpm
+SO textures/wolfenstein/bookshelf_01.xpm
 C 171,154,137
-WE textures/simonkraft/bookshelf_02.xpm
-EA textures/simonkraft/bookshelf_03.xpm
+WE textures/wolfenstein/bookshelf_02.xpm
+EA textures/wolfenstein/bookshelf_03.xpm
 
 
 1111111111111111111
