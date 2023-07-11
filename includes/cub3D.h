@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 13:30:58 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/10 18:08:07 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/11 10:13:49 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../minilibx-linux/mlx.h"
 # include "../libft/includes/get_next_line.h"
 # include "../libft/includes/libft.h"
-# include <fcntl.h>  /*for open */
-# include <errno.h>  /*for perror strerror */
+# include "../minilibx-linux/mlx.h"
+# include <errno.h> /*for perror strerror */
+# include <fcntl.h> /*for open */
+# include <limits.h>
 # include <math.h>   /*for sin, cos, aqrt, etc...*/
 # include <stdio.h>  /* for printf , open, read, write */
 # include <stdlib.h> /*for malloc, free, exit */
-# include <limits.h>
-# include <unistd.h>
 # include <string.h>
 # include <time.h>
+# include <unistd.h>
 
 # ifndef BONUS
 #  define BONUS 1
@@ -32,7 +32,7 @@
 
 # define SCHEIGHT 600
 # define SCWIDTH 960
-# define FOV_ANGLE  1.047197551
+# define FOV_ANGLE 1.047197551
 
 # define K_A 97
 # define K_D 100
@@ -56,10 +56,9 @@
 ** Mouse
 */
 
-# define ButtonPress	 4
-# define ButtonPressMask	(1L<<2)
-# define DOUBLE_CLICK_DELAY 300 // Time window in milliseconds for a double-click
-
+# define BUTTONPRESS 4
+# define DOUBLE_CLICK_DELAY 300
+// Time window in milliseconds for a double-click
 
 /* MINIMAP MACROS */
 # define MMAP_COLOR_PLAYER 0x00FF00
@@ -67,12 +66,12 @@
 # define MMAP_COLOR_FLOOR 0xE6E6E6
 # define MMAP_COLOR_SPACE 0x404040
 
-# define PI 3.14159
+# define PI 3.141592654
 # define TILE_SIZE 64
-# define Wall_STRIP_WIDTH 1
+# define WALL_STRIP_WIDTH 1
 # define NUM_RAY 960
-# define moveSpeed 5
-# define rotationSpeed 5 * (PI / 180)
+# define MOVESPEED 5
+# define ROTATIONSPEED 0.087266463
 # define DIST_EDGE_MOUSE_WRAP 20
 
 # define ERR_FILE_NOT_CUB "Extension file is not .cub"
@@ -87,9 +86,9 @@
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
+	int			r;
+	int			g;
+	int			b;
 }				t_rgb;
 
 typedef struct s_img
@@ -117,17 +116,17 @@ typedef struct s_file
 	int			floor;
 	int			ceiling;
 	int			flag;
-	int flag2;
+	int			flag2;
 }				t_file;
 
 typedef struct s_map
 {
-	char	**map;
-	int		size;
-	int		x;
-	int		y;
-	int		width;
-	int		height;
+	char		**map;
+	int			size;
+	int			x;
+	int			y;
+	int			width;
+	int			height;
 }				t_map;
 
 typedef struct s_player
@@ -142,22 +141,21 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double			offset_y;
-	double			offset_x;
-	double			wall_strip_h;
-	double			corr_wall_distance;
-	double			projection_plane ;
-	int				side;
-	int				ray_id;
-	double			draw_start_x;
-	double			draw_start_y;
-	int			    ray_x;
-	int			    ray_y;
-	double			ray_angle;
-	double			ray_distance;
-	
-}				t_ray;
+	double		offset_y;
+	double		offset_x;
+	double		wall_strip_h;
+	double		corr_wall_distance;
+	double		projection_plane;
+	int			side;
+	int			ray_id;
+	double		draw_start_x;
+	double		draw_start_y;
+	int			ray_x;
+	int			ray_y;
+	double		ray_angle;
+	double		ray_distance;
 
+}				t_ray;
 
 typedef struct s_data
 {
@@ -182,7 +180,7 @@ int				has_wall_at(t_data *data, double x, double y);
 //mouse
 
 int				mouse_button_handler(int button, int x, int y, t_data *data);
-long long		get_current_time_ms();
+long long		get_current_time_ms(void);
 
 //init/
 //init_img
@@ -195,8 +193,6 @@ void			init_texture(t_data *data);
 void			init_img_mini(t_data *data);
 double			get_minimap_ratio(t_data *data);
 
-
-
 //render/
 //minimap_image;
 void			draw_window(t_data *data);
@@ -208,17 +204,15 @@ void			wall_side(t_data *data, double x, double y);
 unsigned int	get_color(t_data *data, double x, double y);
 void			draw_texture(t_data *data, double x, double top_pxl);
 
-
 //painting
 void			paint_floor(t_data *data);
-
 
 //utils/
 //position
 void			get_position_player(t_data *data);
 void			set_image_pixel(t_img *image, int x, int y, int color);
-void    		my_mlx_pixel_put(t_img *data, int x, int y, int color);
-unsigned int    get_texture(t_data *data);
+void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
+unsigned int	get_texture(t_data *data);
 //exit
 void			clean_exit(t_data *data, int code);
 int				exit_game(t_data *data);
@@ -226,8 +220,8 @@ void			clean_texture(t_data *data);
 
 //main
 
-void		start_cub(t_data *data);
-void	    init_cub(t_data *data);
+void			start_cub(t_data *data);
+void			init_cub(t_data *data);
 
 //parsing/
 //parsing_file
@@ -247,7 +241,9 @@ int				check_format_numbers(char *str);
 int				ft_is_xpm_file(char *path);
 //parsing_map
 int				ft_check_mapfile(t_data *data,
-					t_file *file, char *str, int space);
+					t_file *file,
+					char *str,
+					int space);
 int				ft_is_valid_minimap(t_data *data, t_player *p, char *line);
 //get_map
 int				ft_fill_map(t_map *map, char **map_file, int index, int i);
@@ -268,10 +264,10 @@ int				ft_strlen_m(const char *s);
 void			ft_free_data(t_data *data);
 void			ft_free_map(char **tab);
 void			err_msg(char *msg);
-int 			exit_clean(t_data *data, char *msg, int code);
+int				exit_clean(t_data *data, char *msg, int code);
 
 //libft
-int 	ft_isdigit(int c);
-void	ft_print_map(char **tab);
+int				ft_isdigit(int c);
+void			ft_print_map(char **tab);
 
 #endif

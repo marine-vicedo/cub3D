@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:30:43 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/10 10:56:12 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/11 10:07:26 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	render_3d_wall(t_data *data)
 {
-	data->ray.draw_start_x = data->ray.ray_id * Wall_STRIP_WIDTH;
+	data->ray.draw_start_x = data->ray.ray_id * WALL_STRIP_WIDTH;
 	data->ray.corr_wall_distance = data->ray.ray_distance
 		* cos(data->ray.ray_angle - data->player.rotate_angle);
 	data->ray.projection_plane = (SCWIDTH / 2) / tan(FOV_ANGLE / 2);

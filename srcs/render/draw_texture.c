@@ -6,7 +6,7 @@
 /*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:27:44 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/10 10:34:09 by pmaimait         ###   ########.fr       */
+/*   Updated: 2023/07/11 10:06:56 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_texture(t_data *data, double x, double top_pxl)
 	double	tmp_top_pxl;
 
 	y = 0;
-	next = x + Wall_STRIP_WIDTH;
+	next = x + WALL_STRIP_WIDTH;
 	tmp_top_pxl = top_pxl;
 	while (x < next)
 	{

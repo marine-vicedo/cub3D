@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:29:33 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/10 12:21:53 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/11 10:13:36 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	start_cub(t_data *data)
 	update(data);
 	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
 	if (BONUS)
-		mlx_hook(data->win, ButtonPress, ButtonPressMask, mouse_button_handler,
+		mlx_hook(data->win, BUTTONPRESS, (1L << 2), mouse_button_handler,
 			data);
 	mlx_hook(data->win, 17, 1L << 0, exit_game, data);
 	mlx_loop(data->mlx);

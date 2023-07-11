@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:04:35 by mvicedo           #+#    #+#             */
-/*   Updated: 2023/07/10 18:09:17 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/11 11:52:23 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,19 @@ int	ft_check_space_around(char **map_m, int i, int j)
 	return (0);
 }
 
+int	ft_check_space_around2(char **map_m, int i, int j)
+{
+	if (ft_strlen(map_m[i - 1]) < (size_t)j)
+		return (1);
+	if (ft_strlen(map_m[i + 1]) < (size_t)j)
+		return (1);
+	if (!map_m[i][j - 1] || (!map_m[i][j + 1]))
+		return (1);
+	if (!map_m[i - 1][j] || !map_m[i + 1][j])
+		return (1);
+	return (0);
+}
+
 int	ft_check_empty_space(t_map *map, char **map_m)
 {
 	int	i;
@@ -93,10 +106,13 @@ int	ft_check_empty_space(t_map *map, char **map_m)
 		{
 			while (ft_isspace(map_m[i][j]))
 				j++;
-			if ((map_m[i][j] == '0') || check_player_pos((map_m[i][j])))
+			if (map_m[i][j] == '0')
 				if (ft_check_space_around(map_m, i, j))
 					return (1);
-			j++;
+			if (check_player_pos(map_m[i][j]))
+				if (ft_check_space_around2(map_m, i, j))
+					return (1);
+			j++; 
 		}
 		i++;
 	}

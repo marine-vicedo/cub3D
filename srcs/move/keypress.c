@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvicedo <mvicedo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pmaimait <pmaimait@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:29:30 by pmaimait          #+#    #+#             */
-/*   Updated: 2023/07/10 12:21:53 by mvicedo          ###   ########.fr       */
+/*   Updated: 2023/07/11 11:38:57 by pmaimait         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	update(t_data *data)
 	double		new_p_y;
 
 	p = &data->player;
-	p->rotate_angle += (p->turn_dir * rotationSpeed);
-	movestep = (p->walk_dir % 2) * moveSpeed;
+	p->rotate_angle += (p->turn_dir * ROTATIONSPEED);
+	movestep = (p->walk_dir % 2) * MOVESPEED;
 	new_p_x = p->pos_x + cos(p->rotate_angle) * movestep;
 	new_p_y = p->pos_y + sin(p->rotate_angle) * movestep;
 	if (abs(p->walk_dir) == 3)
@@ -69,6 +69,14 @@ int	has_wall_at(t_data *data, double x, double y)
 		return (1);
 	map_grid_x = floor(x / TILE_SIZE);
 	map_grid_y = floor(y / TILE_SIZE);
+	if (data->map.map[map_grid_y][map_grid_x] == '1')
+		return (1);
+	map_grid_x = floor((x + 1) / TILE_SIZE);
+	map_grid_y = floor((y + 1) / TILE_SIZE);
+	if (data->map.map[map_grid_y][map_grid_x] == '1')
+		return (1);
+	map_grid_x = floor((x + 1) / TILE_SIZE);
+	map_grid_y = floor((y - 1) / TILE_SIZE);
 	if (data->map.map[map_grid_y][map_grid_x] == '1')
 		return (1);
 	return (0);
