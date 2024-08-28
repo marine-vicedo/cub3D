@@ -19,7 +19,7 @@ Allowed libraries: libft, math (-lm), minilibx.
 ./cub3D path/to/scene.cub
 `
 
-2. Controls:
+2. Controls
    
 
 - **W, A, S, D**: Move the viewpoint through the maze.
