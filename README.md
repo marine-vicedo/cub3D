@@ -14,11 +14,13 @@ Allowed libraries: libft, math (-lm), minilibx.
 ### Usage Instructions
 
 1. Execution
+   
 `
 ./cub3D path/to/scene.cub
 `
 
-2. Controls:
+3. Controls:
+   
 
 - **W, A, S, D**: Move the viewpoint through the maze.
 - **Left/Right arrows**: Rotate the view.
