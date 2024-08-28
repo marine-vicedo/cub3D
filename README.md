@@ -1,9 +1,9 @@
 # cub3D
 
-###Description
+### Description
 cub3D is a project inspired by the historic game Wolfenstein 3D. The goal is to create a realistic 3D first-person graphical representation of a maze using ray-casting principles.
 
-###Objectives
+### Objectives
 Language: C
 Graphics Library: miniLibX
 Key Features: Player movement, wall textures display, floor and ceiling color management, window interactions (exit via ESC or the red cross).
@@ -47,10 +47,10 @@ C 225,30,0
 111111
 ```
 
-####Error Handling
+### Error Handling
 The program will return *Error\n* followed by a descriptive message if there is any misconfiguration in the .cub file.
 
-####Possible Bonuses
+### Possible Bonuses
 - Wall collisions
 - Minimap system
 - Doors that can open and close
